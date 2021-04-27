@@ -1,7 +1,15 @@
+import { Container } from "@chakra-ui/react"
+
 export default function Layout({ children }) {
   return (
     <>
-      <div className="wrapper">{children}</div>
+      <Container px={4} py={8}>
+        {children}
+      </Container>
+    </>
+  )
+}
+/*
       <style jsx>{`
         .wrapper {
           max-width: 36rem;
@@ -44,6 +52,4 @@ export default function Layout({ children }) {
           font-family: 'Menlo';
         }
       `}</style>
-    </>
-  )
-}
+*/

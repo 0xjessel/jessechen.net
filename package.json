@@ -8,12 +8,16 @@
     "start": "next start"
   },
   "dependencies": {
-    "gray-matter": "^4.0.2",
+    "@chakra-ui/react": "^1.6.0",
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.3.0",
+    "framer-motion": "^4.1.10",
+    "gray-matter": "^4.0.3",
     "next": "latest",
-    "next-mdx-remote": "^1.0.0",
-    "next-remote-watch": "0.2.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "next-mdx-remote": "^2.1.4",
+    "next-remote-watch": "1.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "license": "MIT"
 }

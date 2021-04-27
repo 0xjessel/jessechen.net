@@ -2,6 +2,11 @@ export default function TestComponent({ name = 'world' }) {
   return (
     <>
       <div>Hello, {name}!</div>
+    </>
+  )
+}
+
+/*
       <style jsx>{`
         div {
           background-color: #111;
@@ -11,6 +16,4 @@ export default function TestComponent({ name = 'world' }) {
           padding: 0.5em 0.75em;
         }
       `}</style>
-    </>
-  )
-}
+*/
