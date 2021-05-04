@@ -39,21 +39,11 @@ export default function PostPage({ source, frontMatter }) {
         {frontMatter.description && (
           <p className="description">{frontMatter.description}</p>
         )}
+        {frontMatter.publicationDate && (
+          <p className="publication-date">{new Date(frontMatter.publicationDate).toLocaleDateString()}</p>
+        )}
       </div>
       <main>{content}</main>
-
-      <style jsx>{`
-        .post-header h1 {
-          margin-bottom: 0;
-        }
-
-        .post-header {
-          margin-bottom: 2rem;
-        }
-        .description {
-          opacity: 0.6;
-        }
-      `}</style>
     </Layout>
   )
 }
