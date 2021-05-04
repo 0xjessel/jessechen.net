@@ -1,4 +1,5 @@
 import { Box, Button, ButtonGroup, Flex, Spacer } from "@chakra-ui/react"
+import Link from 'next/link'
 import { FiSun, FiTwitter } from 'react-icons/fi'
 
 export default function Header() {
@@ -6,24 +7,28 @@ export default function Header() {
     <Flex my="8">
       <ButtonGroup variant="">
         <Button 
-          href="/"
           border="1px"
           borderColor="gray.800"
           py="1"
           px="3">
-          jessel
+          <Link href="/">
+            <a>jessel</a>
+          </Link>
         </Button>
-        <Button
-          href="/projects">
-          Projects
+        <Button>
+          <Link href="/projects">
+            <a>Projects</a>
+          </Link>
         </Button>
-        <Button
-          href="/blog">
-          Blog
+        <Button>
+          <Link href="/blog">
+            <a>Blog</a>
+          </Link>
         </Button>
-        <Button
-          href="/about">
-          About
+        <Button>
+          <Link href="/about">
+            <a>About</a>
+          </Link>
         </Button>
       </ButtonGroup>
       <Spacer />
