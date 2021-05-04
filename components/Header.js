@@ -1,38 +1,39 @@
-import { Box, Button, ButtonGroup, Flex, Spacer } from "@chakra-ui/react"
-import Link from 'next/link'
+import NLink from 'next/link'
+import { Box, Button, ButtonGroup, Flex, Link, Spacer } from "@chakra-ui/react"
 import { FiSun, FiTwitter } from 'react-icons/fi'
 
 export default function Header() {
   return (
     <Flex my="8">
       <ButtonGroup variant="">
-        <Button 
-          border="1px"
-          borderColor="gray.800"
-          py="1"
-          px="3">
-          <Link href="/">
-            <a>jessel</a>
-          </Link>
-        </Button>
-        <Button>
-          <Link href="/projects">
-            <a>Projects</a>
-          </Link>
-        </Button>
-        <Button>
-          <Link href="/blog">
-            <a>Blog</a>
-          </Link>
-        </Button>
-        <Button>
-          <Link href="/about">
-            <a>About</a>
-          </Link>
-        </Button>
+        <NLink href="/">
+          <Button 
+            border="1px"
+            borderColor="gray.800">
+            jessel
+          </Button>
+        </NLink>
+        <NLink href="/projects">
+          <Button>
+            Projects
+          </Button>
+        </NLink>
+        <NLink href="/blog">
+          <Button>
+            Blog
+          </Button>
+        </NLink>
+        <NLink href="/about">
+          <Button>
+            About
+          </Button>
+        </NLink>
       </ButtonGroup>
       <Spacer />
       <Button 
+        as="a"
+        href="https://twitter.com/0xjessel"
+        target="_blank"
         backgroundColor="white"
         borderRadius="full">
         <FiTwitter />
