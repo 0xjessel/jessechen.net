@@ -1,0 +1,44 @@
+---
+title: "How to Maximize Your Android's Battery Life and Phone Responsiveness"
+date: "2010-12-29"
+categories: 
+  - "android-2"
+  - "how-to"
+tags: 
+  - "android"
+  - "battery"
+  - "droid-x"
+  - "google"
+  - "howto"
+  - "memory"
+  - "tips"
+coverImage: "howtoimproveandroidbatterylife.gif"
+---
+
+### Introduction
+
+I have explored many forum posts and the various attempts that people do to extend the battery life on their Android smart phone.  The battery life is an issue, for most people, their stock smart phone can barely last a day before it is out of juice.  Android is, in my opinion, is superior to iOS but the hardware that is packaged with the Android OS (and maybe a bit of the power management code in Android) is a huge flaw in an otherwise perfect smart phone.  The iPhone's battery life is better than the typical Android smartphone, and that is something I am here to fix.
+
+When I first got my Droid X, it came with the standard 1300mAh battery and it would usually last only about 6 hours after a full charge.  That is extremely low but that is because I would turn it on and play with it every few minutes since this was a new sexy smart phone.  Under normal circumstances, where an average person would probably be working from 9-5, thus, using the phone only to occasionally check email and calls, my battery life then would be about 8 hours.  That is still really sad because I was accustomed to my dumb phone that can usually last 2 full days without needing another charge.  Looking around the various forums like xda-developers, mydroidworld, and others, battery life is clearly an issue with Android.  I have been using my Droid X for almost half a year now, and I am confident to say that I have gathered the best set of tips that will maximize your battery life and make your phone faster and more smooth.
+
+### This is what to do
+
+**Step 1:** First things first, make sure you set your brightness as low as you can tolerate, I use auto brightness which works for me.  The display uses up the most battery life so lowering brightness as much as you can will play a significant role in increasing your battery life.  Set your screen timeout to as low as possible as well.  Keep in mind to turn off wifi and bluetooth when you can.  Those radios use a good amount of energy.  GPS you can leave enabled because unless an app is using the GPS radio, it will otherwise be off.  However, do keep in mind that the **fastest** way to drain your battery is probably by using the GPS.  You can configure all these in Menu > Settings > {Display | Wireless & networks}.  When you want to close an app, keep pressing "back" to fully exit an app - pressing "home" generally will save the state of the app in memory so you can go back to the way it was later.
+
+**Step 2:** Root your phone.  Technically, it breaks your warranty but it has been known that nobody really checks nor cares if you send it back in for repair.  Plus, rooting your phone gives you admin privileges - which allows you to do a lot more with your phone (wireless tethering, skinning/theming, use root-required apps).  [z4root](http://forum.xda-developers.com/showthread.php?t=833953) supports many phones and roots the phone for you, it's so simple anybody can do it.  Check to see if your phone is supported, otherwise, use Google to search how to root your phone.
+
+**Step 3:** Now that you have root, it always helps to remove bloatware that the carriers have put on the phone.  For the Droid X, there is a [list of apps](http://androidforums.com/droid-x-all-things-root/131207-full-list-apps-apks-removable-non-removable-root.html) that people have confirmed is safe to remove from your handset.  **However**, when there is a software update, it will most likely check to see if all the apps are installed, so usually you want to just rename the \*.apk file to \*.bak, such that it will remove the app, but later you can easily change all the \*.bak back to \*.apk when update time is due.  I don't recommend doing this because I did this prior to an update, but I was not smart and actually deleted the apks off my phone, so I had to figure out which apps I didn't have and reinstall them on my phone before updating.  I do not recommend this step, although some people might want to.
+
+**Step 4:** Do you ever feel like the default home launcher (main screen on your phone) is slow and sluggish?  Install [LauncherPro](http://www.appbrain.com/app/launcherpro/com.fede.launcher), it is the best home launcher out there.  It has so many customizable tweaks and is extremeley smooth and fast.  Make sure to: enable the setting that keeps LauncherPro in memory, minimize the amount of screens and widgets, use homescreen caches, prevent force-close, and twiddle with the memory usage presets.
+
+**Step 5:** [Autokiller](http://www.appbrain.com/app/autokiller-memory-optimizer/com.rs.autokiller) is a free app that allows you to tweak the memory settings on your phone.  In a nutshell, this app basically allows you to control how much memory can be used up before it starts freeing memory from apps.  Remember that memory unused is memory of no use, so freeing too much memory is _not necessarily a good thing_.  Android is designed to gobble memory because it allows apps to boot up faster and be more responsive.  However, sometimes having too many apps open and residing in memory slows the phone a bit.  With Autokiller, press Menu > Presets and choose one.  I use aggressive and it seems to work for me, those numbers mean the amount of memory each app category can use up before it starts killing apps.  Play around and choose one that fits you best.  It has been said 60MB remaining is when the phone begins to slow down.
+
+**Step 6:** One of the benefits of rooting your phone is having the ability to run apps that require root privileges.  [Autostarts](http://www.appbrain.com/app/autostarts/com.elsdoerfer.android.autostarts) is a 0.99$ app that allows you to see "what apps run on phone startup, and what other events trigger in the background. Root users can disable unwanted autostarts and speed up their phone boot".  Download this app, and give it a few seconds to populate the fields.  Think of msconfig and how you used it to disable crapware that forced itself to startup on boot.  Once it is done loading, you will want to go through the list and disable any unwanted apps, check out especially in the "After Startup" section.  Use common sense and go through the list disabling apps such as CityID, Blockbuster, and that Nascar game.  Please make sure not to disable a crucial system process.
+
+### Task Killers
+
+There has been endless debates about whether to use a Task Killer to kill tasks.  From what I get, before Android 2.2 - using a Task Killer to occasionally kill apps that weren't in use was somewhat beneficial and good.  However, with the 2.2 update there is no longer a need for that.  This [article](http://geekfor.me/faq/you-shouldnt-be-using-a-task-killer-with-android/) provides a very deep technical insight as to why you should not use Task Killers anymore.  I use [Android System Info](http://geekfor.me/faq/you-shouldnt-be-using-a-task-killer-with-android/) to monitor and sometime kill a rogue task that is slowing down the phone.
+
+### Conclusion
+
+I hope those tips help increase your battery life.  With my 1840mAh extended battery and those tips, my phone can last 2 days easily if I rarely use it (only for calls and checking email).  Otherwise, during a normal school day I would be using the phone on the bus to school, and browsing the web during class (oops), while eating, and time in between classes - quite a heavy user here.  I would take my phone off the charger at around 10am, and after school and work, my battery life would be about 60% around 7pm.  It has improved significantly and even though I have 141 apps installed on my phone, it is still as fast and smooth as the way it was when I first got the phone.

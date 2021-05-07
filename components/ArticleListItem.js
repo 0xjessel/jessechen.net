@@ -5,10 +5,10 @@ import Tags from './Tags';
 
 export default function ArticleListItem({ post }) {
   let timestamp = null;
-  if (post.data.publicationDate) {
+  if (post.data.date) {
     timestamp = 
       <Text fontSize="sm" color="gray.500">
-        {new Date(post.data.publicationDate)
+        {new Date(post.data.date)
           .toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric'})}
       </Text>
   }
@@ -18,7 +18,7 @@ export default function ArticleListItem({ post }) {
       <Heading as="h2" size="lg">
         <Link
           as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
-          href={`/posts/[slug]`}>
+          href={`/posts/[...slug]`}>
           {post.data.title}
         </Link>
       </Heading>
@@ -27,7 +27,7 @@ export default function ArticleListItem({ post }) {
         <Tags tags={post.data.tags} />
       </HStack>
       <Text>
-        {post.content}
+        {post.data.excerpt}
       </Text>
     </Stack>
   )

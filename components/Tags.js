@@ -9,7 +9,7 @@ export default function Tags({ tags }) {
   return (
     <HStack>
       {tags.map(tag => (
-        <Tag size="sm" key="tag">
+        <Tag size="sm" key={tag}>
           {tag}
         </Tag>
       ))}

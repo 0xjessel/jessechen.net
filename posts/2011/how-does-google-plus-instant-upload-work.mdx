@@ -1,0 +1,85 @@
+---
+title: "How Does Google Plus Instant Upload Work?"
+date: "2011-08-19"
+categories: 
+  - "android-2"
+  - "how-to"
+tags: 
+  - "android"
+  - "facebook"
+  - "google"
+  - "google-plus"
+  - "hackathon"
+  - "instant-upload"
+  - "internship"
+  - "stack-overflow"
+coverImage: "camera.png"
+---
+
+### Introduction
+
+When I first heard about Google Plus and their [Instant Upload feature](http://www.youtube.com/watch?v=6y_xKVSRAy8), my initial thought was "how does this work?".  I did a quick search on Google to see if there were any other people who were curious about how they do it.  I found only one useful result, [this stack overflow post](http://stackoverflow.com/questions/6639001/android-how-does-google-instant-upload-work) (stack overflow has been invaluable this summer), and it got me thinking about how cool it would be to try to do the same thing.  The words ContentProvider and ContentObserver was gibberish to me but I dedicated one night to see if I can figure this thing out.  Turned out, it was actually quite easy and not that hard to understand.
+
+This is _probably_ not the exact way that Google+ used to implement Instant Uploads, but it provides the same functionality, with a bonus that Google+ does not have - that it'll work with **any camera app**, not just the native camera app.  My hope is that this tutorial will help others that may be curious about how to do something similar.
+
+**Content Providers** are the only way to share data across different applications.  They can store and read data, and Android has a bunch of content providers already provided for you for common data types, such as video, audio, images and contacts.
+
+**Content Observers** are just that.  It's an abstract class that has a method that gets called when it _observes_ a change in a content provider.
+
+Hopefully you figured out now that what we simply have to do is register a **content observer** to the images **content provider**.
+
+### InstantUploadActivity
+
+Let's create a simple and useless Android project that will detect when a picture is taken and display the most recent picture's file name in a TextView.  The content provider that we want to observe is the one that Android provides for images, and the URI for that is `MediaStore.Images.Media.EXTERNAL_CONTENT_URI`.
+
+We start with the `onCreate` method in the Activity:
+
+\[java\] public class InstantuploadActivity extends Activity {
+
+private PhotosObserver instUploadObserver = new PhotosObserver(); private String saved; private TextView tv;
+
+/\*\* Called when the activity is first created. \*/ @Override public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.main); tv = (TextView)findViewById(R.id.textview);
+
+this.getApplicationContext() .getContentResolver() .registerContentObserver( MediaStore.Images.Media.EXTERNAL\_CONTENT\_URI, false, instUploadObserver); Log.d("INSTANT", "registered content observer"); } \[/java\]
+
+Upon creation of this Activity, we register our custom PhotosObserver (which extends ContentObserver) to the images content provider.
+
+Recall that the goal for this project is to simply take the most recent picture's file name and display it in our Activity's TextView, `tv`.  To get alerted when a new picture is taken, we have to create a class that extends ContentObserver and implement the `onChange` method:
+
+\[java\] private class PhotosObserver extends ContentObserver {
+
+public PhotosObserver() { super(null); }
+
+@Override public void onChange(boolean selfChange) { super.onChange(selfChange); Media media = readFromMediaStore(getApplicationContext(), MediaStore.Images.Media.EXTERNAL\_CONTENT\_URI); saved = "I detected " + media.file.getName(); Log.d("INSTANT", "detected picture"); } }
+
+private Media readFromMediaStore(Context context, Uri uri) { Cursor cursor = context.getContentResolver().query(uri, null, null, null, "date\_added DESC"); Media media = null; if (cursor.moveToNext()) { int dataColumn = cursor.getColumnIndexOrThrow(MediaColumns.DATA); String filePath = cursor.getString(dataColumn); int mimeTypeColumn = cursor .getColumnIndexOrThrow(MediaColumns.MIME\_TYPE); String mimeType = cursor.getString(mimeTypeColumn); media = new Media(new File(filePath), mimeType); } cursor.close(); return media; }
+
+private class Media { private File file; @SuppressWarnings("unused") private String type;
+
+public Media(File file, String type) { this.file = file; this.type = type; }
+
+public String getType() { return type; }
+
+public File getFile() { return file; } } \[/java\]
+
+In the `onChange` method we call `readFromMediaStore`, which will retrieve data about the most recent picture (the one that was just taken). `readFromMediaStore` initializes a Cursor on the same Images URI that we've been observing.  We then grab the filepath and the filetype from the first result (note: the cursor was sorted by "date\_added DESC") and create a new `Media` to return.  Keep in mind that this can be done when our Activity **is not running in the foreground**.  You can launch InstantUploadActivity, press "Home" to back out, then go to Camera and take a picture - and the `onChange` method will still get called.
+
+From here, we simply set the String variable `saved` to display the filename such that when you go back to the Activity, the filename of the picture you have just taken is displayed in the TextView via the `onResume` method:
+
+\[java\] @Override public void onResume() { super.onResume(); if (saved != null) { tv.setText(saved); } } \[/java\]
+
+Lastly, don't forget to unregister the content observer if `onDestroy` is called:
+
+\[java\] @Override public void onDestroy() { super.onDestroy(); this.getApplicationContext().getContentResolver() .unregisterContentObserver(instUploadObserver); Log.d("INSTANT", "unregistered content observer"); } \[/java\]
+
+You can do much better than just setting text on a TextView.  You can take that image and resize it, and then upload it somewhere, or you can automatically apply an image filter on each picture or do both!  There are many cool things you can do with this.
+
+Check out the [full source code on github here](https://github.com/meltedxice/InstantUpload).
+
+### Conclusion
+
+This was my second hackathon project at Facebook, and I was able to implement this functionality into the Android Facebook app successfully such that whenever you took a picture from any camera app, it would get uploaded to your Mobile Uploads album.  Instead of storing the filepath of the most recent picture like in the example above, I grabbed the URI of the picture that was just taken and sent it to an upload service in the Facebook app that took care of uploading the picture to your album.  I also built some preferences so that you can enable or disable it depending on if you're connected to wifi, roaming, or charging your phone.
+
+Unfortunately, my hackathon project is not going to be implemented but it was a fun learning experience.  It is also hard to describe the utter excitement when seeing this work for the first time at 5am, having a picture taken from your camera and onto Facebook in a matter of seconds.  Stay tuned for another tutorial on another hackathon project!
+
+EDIT: And here it is: [How to NFC on Android](http://www.jessechen.net/blog/how-to-nfc-on-the-android-platform/)

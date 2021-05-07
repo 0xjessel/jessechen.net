@@ -1,0 +1,146 @@
+---
+title: "Post-hoc Analysis of InstaWifi's Launch"
+date: "2012-07-27"
+categories: 
+  - "android-2"
+tags: 
+  - "android"
+  - "android-beam"
+  - "app-annie"
+  - "bootstrap"
+  - "development"
+  - "donate"
+  - "google"
+  - "in-app-billing"
+  - "instawifi"
+  - "mixpanel"
+  - "nfc"
+  - "qr-codes"
+  - "reddit"
+  - "youtube"
+coverImage: "high-resolution-instawifi-icon.png"
+---
+
+### Launching My First Android App Ever
+
+On July 24th, I launched [InstaWifi](http://www.instawifi.jessechen.net), my first Android app into the market. InstaWifi enables you to connect and share wifi networks instantly with the people who you care about. It was my first Android app that I released in the market, and I was pretty excited to see how it would turn out. It's quite amazing if you think about it, that a random guy (like me) behind a computer screen today in 2012, can reach out to an audience of thousands of people on the Internet to announce a new product. It's a random thought but a powerful one -- a thought that reminds us of how closely connected we are to other people in this world.
+
+My marketing strategy was simple for InstaWifi, generate viral growth on social networks, and reach out to several news sources online to get some big pageviews so that it will trickle down to smaller blogs, news sources, and social networks. The best strategy, however, is to just make a solid polished app and one that actually solves a problem for users. Without a good implementation, it doesn't matter how big your budget or effective your marketing strategy is.
+
+This article will be doing a deep dive on the numbers and stats of InstaWifi's launch for those people out there who are curious on what it's like to launch an Android app and how successful InstaWifi was.
+
+### First Up, YouTube
+
+http://www.youtube.com/watch?v=0PChSvKGIo8
+
+I uploaded this YouTube video to walk through how InstaWifi works at around 5am (I was slurring my words and barely able to talk. I'm surprised I actually made a successful recording without messing up too badly). The first day it had about 1,300 views. 97% male demographic (wow...where's the love ladies?) and 70% of the views were from an embedded video player from a third-party site (major news sources). As of now, about 2.5 days later, it is now at about 5,500 views and seems to still be increasing surprisingly. YouTube videos are a great way to explain how your product works to the end-user and it is important to keep it short, under 3 minutes max because they just want to know if your app is worth installing and don't want to hear you ramble. Also, the Android Market (I refuse to call it Google Play) has the option to include a YouTube video as part of the app description, so I say that if you are going to submit an app to the Market, then a YouTube video is a must. Some people prefer to read how it works, some people prefer to listen to how it works. Provide the option for both types of people by including a YouTube video in your app description [like you can see here](https://play.google.com/store/apps/details?id=net.jessechen.instawifi).
+
+### Narwhals and Bacon....midnight whatever
+
+Reddit is awesome. Why? The people at r/android are people who love all things Android and are early technology adopters. [When I announced the beta program](http://www.reddit.com/r/Android/comments/uqf8u/hi_randroid_im_about_to_release_my_first_android/) for InstaWifi about a month ago, I received hundreds of applications from r/android and I received a ton of feedback and critiques which helped make what InstaWifi is today. [I submitted a post on r/android](http://www.reddit.com/r/Android/comments/x2yve/a_month_ago_i_asked_randroid_to_help_beta_test_my/) the morning of, and it was a big hit. It was on the front page of r/android and it was #3 with 263 upvotes and 190 comments for the majority of the day. It is important that you interact and engage in the comments. Every person who commented has received a reply from me, and it makes people more comfortable and more likely to try your app if you are in the comments fixing their problems and explaining how it works.
+
+### Twitter bootstrap is awesome
+
+[The promotional website for InstaWifi](http://www.instawifi.jessechen.net/) was built in four hours. People have asked what I used to build the website and I wholly gladly admit that I use twitter bootstrap to build it. Some people might hate it for being a cookie-cutter template for making websites "look good". But I can't thank it enough for providing the scaffolding I need to quickly construct a website for people to learn more information about InstaWifi.
+
+I used [Mixpanel](http://mixpanel.com/) to track how users interact and engage on my website. With their platform, I am able to arbitrarily define custom events to track. For a simple website like mine, I simply just tracked each page load.
+
+[![](images/Screen-Shot-2012-07-26-at-10.43.02-PM.png "mixpanel instawifi chart")](http://www.jessechen.net/blog/wp-content/uploads/2012/07/Screen-Shot-2012-07-26-at-10.43.02-PM.png)
+
+As you can see, the order of most seen to least seen pages is Home page, Screenshots, Changelog, and Feedback. Mixpanel also provides a funnel view that shows you the flow and dropoff of how user engages on your site. As you can see in the picture below, most users only hit the home page. I foolishly forgot to add an event for clicking on the link to the Android Market, which I hope is what most people did upon hitting the home page. You can see that only 18 people actually clicked all 4 tabs on the site, in that order.
+
+[![](images/Screen-Shot-2012-07-26-at-11.03.34-PM.png "mixpanel instawifi funnel")](http://www.jessechen.net/blog/wp-content/uploads/2012/07/Screen-Shot-2012-07-26-at-11.03.34-PM.png)
+
+Overall my opinion on the results of the promotional webpage for InstaWifi seems to be that it was not crucial nor an important piece to have when launching a mobile app. The home page was only viewed by 443 visitors on the first day, so it was not a huge source of traffic or referral for the app, in my opinion. A youtube video and a simple image hosting site for news source to pull screenshots and assets from is probably good enough for independent developers.
+
+### App Downloads
+
+Time to bring out the real numbers that people care about. I use App Annie to help track how my app is doing on the Android market. [App Annie is a free analytics platform](http://www.appannie.com/) to track how well your app is doing on the market in a very friendly format. Although there isn't much data there since I just launched 2 days ago, I can see that it will be useful once it fleshes itself out. For example, it does a good job parsing the Android market to show you the breakdown of downloads/country/day as shown in the screenshot below.
+
+[![](images/Screen-Shot-2012-07-26-at-11.45.22-PM.png "app annie instawifi countries")](http://www.jessechen.net/blog/wp-content/uploads/2012/07/Screen-Shot-2012-07-26-at-11.45.22-PM.png)
+
+App Annie can also track your revenue in a friendly graph format, but it doesn't seem to be accurately pulling the data for me as of right now. The nice thing is that it can also track how well your app is doing on the market. For example, it showed that InstaWifi was featured under the "Trending Apps" category in 21 countries, rank #38.
+
+According to the Android Developer Console, InstaWifi was downloaded 1,823 times on the first day, and 4,709 times on the second day making it a total of 6,532 installs so far. I would like to consider that to be a decent success for an independent developer. If I was a startup, maybe this number would be disappointing haha.
+
+Here's an interesting stat:
+
+[![](images/Screen-Shot-2012-07-27-at-12.06.29-AM.png "instawifi android versions analytics")](http://www.jessechen.net/blog/wp-content/uploads/2012/07/Screen-Shot-2012-07-27-at-12.06.29-AM.png)
+
+Most of the installs were from devices running ICS with JB in 3rd place. Holy moly is that such a weird distribution. ICS (4.0) and JB (4.1) combined is only on about 12% of Android devices out there, but for InstaWifi they make up a whopping 65% of user downloads. Right away you can see that InstaWifi really jibed with technology enthusiasts and early adopters. It's really not that hard to guess that InstaWifi is definitely not a common household app that an average joe would be using, and so the stats mainly just reinforce that belief.
+
+I'm curious as to how long the downloads will hold up. From my experience, the initial spike in downloads is nice and encouraging, but its mainly what happens after all the news coverage that interests me. I wonder how other apps out there remain relevant and continue to increase their installs over time. It seems hard to do so without constantly launching new features or getting coverage in the press. I wouldn't be surprised to see the downloads eventually plateau or even stagnate/decline to zero. We'll see, I guess.
+
+### Money money money
+
+InstaWifi has a donation option for those who would like to support InstaWifi and the developer. I had some extra Android NFC tags so I thought that it'd be cool if I gave out NFC tags as a token of appreciation for those who sent a couple bucks to the developer. I did not know that it was going to be such a hit. I've had **over 30 people** donate money, and **over 230$ in donations**. That averaged out to be about an average donation of 7.66$. I definitely was not expecting such a large response, and talking to the people who donated, they said that they wanted to donate because they wanted to thank and support independent developers out there. It was awesome to see that there are good people out there, and that they are willing to donate.
+
+[![](images/Screen-Shot-2012-07-27-at-1.15.21-AM.png "instawifi donations")](http://www.jessechen.net/blog/wp-content/uploads/2012/07/Screen-Shot-2012-07-27-at-1.15.21-AM.png)
+
+I can only hypothesize why the donate option was so successful. Offering my surplus NFC stickers was probably the main incentive for people. There are people out there who wants to play with NFC but don't know where to get these stickers or what type of stickers are compatible with their Android device (e.g. Type 1, Type 2, Mifare Classic...etc.). Providing a simple way to donate was probably another huge factor. In-app billing through the Android market is extremely low friction. Tap a button to go straight to the market and authorize the purchase and you're back into the app in within 2 clicks. I thought long about using PayPal (launches a web page, smaller fee) vs. in-app billing (launches native market app, 30% fee). I believe I made the right decision because its user-friendly and more trustworthy.
+
+I also debated putting ads in. I'm glad I didn't and I'm sure as hell the users are glad I didn't. In my opinion, ads make an app feel really low quality. Sure there are some people who are willing to pay to get rid of ads, but most people won't and I feel like for an app like InstaWifi which won't have an extremely large userbase, profits from ads are hardly worth jeopardizing the user experience. I like that InstaWifi looks clean, and that it is also free for everyone to use. If there was a paid option for more exclusive features, it would create two different class of users which would make it really difficult and confusing to understand what features can be used by the free vs. the paid version. It was not worth it either, so I decided on a donation based system even though I heard that people generally do not donate. However, it turns out to be a win-win situation for users. I get paid, and users get to support the developer and get NFC stickers as well.
+
+### Notable Press Coverage
+
+Here were some of the biggest press coverages that InstaWifi has received the past two days.
+
+#### 7/24
+
+[Android Police](http://www.androidpolice.com/2012/07/24/new-app-instawifi-lets-you-easily-share-your-wi-fi-password-through-nfc-or-qr-codes/)
+
+[Droid-Life](http://www.droid-life.com/2012/07/24/instawifi-makes-joining-wifi-networks-easy-with-nfc-or-qr-codes/)
+
+[r/android](http://www.reddit.com/r/Android/comments/x2yve/a_month_ago_i_asked_randroid_to_help_beta_test_my/)
+
+[r/androiddev](http://www.reddit.com/r/androiddev/comments/x3aqb/instawifi_connect_to_wifi_networks_instantly_via/)
+
+[Speed Blog](http://www.speedblog.net/come-condividere-password-wi-fi/)
+
+[Google+](https://plus.google.com/s/instawifi)
+
+#### 7/25
+
+[cnet](http://howto.cnet.com/8301-11310_39-57478334-285/the-most-practical-creative-ways-to-use-nfc-with-your-android-device/)
+
+[Phones Review](http://www.phonesreview.co.uk/2012/07/25/instawifi-for-android-should-be-native-not-third-party/)
+
+[Clove Blog](http://blog.clove.co.uk/2012/07/25/instawifi-out-of-beta-available-in-play-store/)
+
+[Android Supernova](http://www.androidsupernova.com/2012/07/connect-to-wifi-networks-instantly-with.html)
+
+[Android HD Blog](http://android.hdblog.it/2012/07/25/instawifi-condividi-la-password-wi-fi-attraverso-barcode-scanner-e-nfc/)
+
+#### 7/26
+
+[Planeta Red](http://planetared.com/2012/07/comparte-rapidamente-tu-red-con-instawifi/)
+
+#### 7/27
+
+[cnet](http://howto.cnet.com/8301-11310_39-57481192-285/instawifi-for-android-shares-wi-fi-access-via-nfc-or-qr-code/)
+
+[OS Advices](http://osadvices.com/instawifi-android-app-to-connect-wifi-networks-instantly/)
+
+[Barcode Generator Free](http://barcodegeneratorfree.com/instawifi-makes-joining-wifi-networks-easy-with-nfc-or-qr-codes/)
+
+#### 7/30
+
+[Tested](http://www.tested.com/news/85357-google-play-roundup-july-30/)
+
+[QR Code Tracking](http://qrcodetracking.net/instawifi-app-allows-you-to-share-access-to-wifi-connection-via-qr-codes-and-nfc/)
+
+#### 8/3
+
+[Make Use Of](http://www.makeuseof.com/dir/instawifi-scan-qr-codes-to-connect-with-your-wi-fi-android-2-2/)
+
+#### 8/4
+
+[Android Police](http://www.androidpolice.com/2012/08/04/34-best-and-2-wtf-new-android-apps-from-the-last-2-weeks-72112-8412/)
+
+**1/26**
+
+[AppzRev](http://www.appzrev.com/give-internet-access-to-your-guest-with-instawifi/)
+
+### Takeaways
+
+Personally I was happy with the launch, overall in the community it was well-received as a new and cool way to connect and share wifi networks. InstaWifi's targeted audience was toward tech savvy people who like to play with new and obscure technologies such as NFC and QR codes. If I was to build another Android app, I would like to build one that is more mainstream and one that can impact a larger audience. The promotional website for InstaWifi didn't get much traffic so I have to evaluate and think about why that is the case. I'm not sure if it is because I didn't advertise is heavily enough, because its not really needed, or because the press coverages did a good job reviewing the app and only linking to the market for InstaWifi. The press coverage was decent but definitely could have been better, I think the fact that holds true is that this is for really tech savvy people so the target audience is really small, and thus there wouldn't be any super big news source writing about it. The donate option was a huge success and it was the right choice to make in terms of how to make money off of the app. For future Android apps, I would perhaps explore paid or ads options to see how that compares against InstaWifi's donate option.
