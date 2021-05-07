@@ -4,7 +4,7 @@ import Link from 'next/link'
 import path from 'path'
 import Layout from '../components/Layout'
 import { postFilePaths, POSTS_PATH } from '../utils/mdxUtils'
-import { Box, Container, Divider, Grid, GridItem, Heading, Image } from '@chakra-ui/react'
+import { Box, Container, Divider, Grid, GridItem, Heading, Image, Text } from '@chakra-ui/react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 
@@ -14,7 +14,7 @@ export default function Index({ posts }) {
       <Header />
       <Heading as="h1" mb="4">Hello, I'm Jesse Chen</Heading>
       <Container mb="8">
-        <p>
+        <Text>
           Hello, world!  This is my new and improved website.  Thanks for checking it out.  Lorem ipsum and all that jazz.  It’s been a long time since we saw a revamp here. 
           <br />
           <br />
@@ -24,7 +24,7 @@ export default function Index({ posts }) {
           </ol>
           <br />
           Experience scaling and supporting multiple fullstack product teams at both Facebook and Instagram.  
-        </p>
+        </Text>
       </Container>
       <Image 
         mb={8}
