@@ -1,14 +1,6 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react"
 
-export default function WorkExperience(props) {
-  const {
-    imgSource,
-    company,
-    role,
-    description,
-    dateRange,
-  } = props;
-
+export default function WorkExperience({ imgSource, company, role, description, dateRange }) {
   return (
     <Flex>
       <Box mt="1" mr="3">
@@ -22,7 +14,7 @@ export default function WorkExperience(props) {
         </Text>
       </Box>
       <Box ml="auto" mt="1">
-        <Text fontSize="sm">{dateRange}</Text>
+        <Text color="gray.500" fontSize="sm">{dateRange}</Text>
       </Box>
     </Flex>
   );

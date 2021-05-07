@@ -29,7 +29,7 @@ export default function About() {
         </Text>
       </Container>
       <Container>
-        <Heading as="h2" mb="4">Career</Heading>
+        <Heading as="h2" size="lg" mb="4">Career</Heading>
         <VStack spacing="8">
           <WorkExperience
             imgSource="/images/fb-logo.png"

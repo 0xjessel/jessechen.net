@@ -20,9 +20,9 @@ export default function Header() {
             Projects
           </Button>
         </NLink>
-        <NLink href="/blog">
+        <NLink href="/articles">
           <Button>
-            Blog
+            Articles
           </Button>
         </NLink>
         <NLink href="/about">
