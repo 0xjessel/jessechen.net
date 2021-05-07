@@ -4,7 +4,7 @@ import Link from 'next/link'
 import path from 'path'
 import Layout from '../components/Layout'
 import { postFilePaths, POSTS_PATH } from '../utils/mdxUtils'
-import { Box, Container, Grid, GridItem, Heading, Image } from '@chakra-ui/react'
+import { Box, Container, Divider, Grid, GridItem, Heading, Image } from '@chakra-ui/react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 
@@ -29,9 +29,10 @@ export default function Index({ posts }) {
       <Image 
         mb={8}
         borderRadius="4"
+        boxShadow="lg"
         src="/images/hero.jpg"
       />
-      <hr />
+      <Divider />
       <Grid 
         px="8"
         mt="8"

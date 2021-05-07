@@ -3,15 +3,16 @@ import { Box, Button, ButtonGroup, Flex, Link, Spacer, useColorMode } from "@cha
 import { FiSun, FiTwitter } from 'react-icons/fi'
 
 export default function Header() {
-  const { _, toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <Flex my="8">
       <ButtonGroup variant="">
         <NLink href="/">
           <Button 
             border="1px"
-            borderColor="gray.800">
-            jessel
+            borderColor={colorMode === 'light' ? 'gray.800' : 'gray.50'}>
+            𝚓𝚎𝚜𝚜𝚎𝚕 ⟠
           </Button>
         </NLink>
         <NLink href="/projects">
