@@ -16,14 +16,13 @@ export default function Index({ posts }) {
       <Container mb="8">
         <Text>
           Hello, world!  This is my new and improved website.  Thanks for checking it out.  Lorem ipsum and all that jazz.  It’s been a long time since we saw a revamp here. 
-        </Text>
-        <br />
-        <ol>
-          <li>I love building teams and helping engineering organizations scale</li>
-          <li>I love working on products that people care about</li>
-        </ol>
-        <br />
-        <Text>
+          <br />
+          <br />
+          1. I love building teams and helping engineering organizations scale
+          <br />
+          2. I love working on products that people care about
+          <br />
+          <br />
           Experience scaling and supporting multiple fullstack product teams at both Facebook and Instagram.  
         </Text>
       </Container>
