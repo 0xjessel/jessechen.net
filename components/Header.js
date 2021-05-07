@@ -1,8 +1,9 @@
 import NLink from 'next/link'
-import { Box, Button, ButtonGroup, Flex, Link, Spacer } from "@chakra-ui/react"
+import { Box, Button, ButtonGroup, Flex, Link, Spacer, useColorMode } from "@chakra-ui/react"
 import { FiSun, FiTwitter } from 'react-icons/fi'
 
 export default function Header() {
+  const { _, toggleColorMode } = useColorMode();
   return (
     <Flex my="8">
       <ButtonGroup variant="">
@@ -34,13 +35,13 @@ export default function Header() {
         as="a"
         href="https://twitter.com/0xjessel"
         target="_blank"
-        backgroundColor="white"
         borderRadius="full">
         <FiTwitter />
       </Button>
       <Button 
-        backgroundColor="white"
-        borderRadius="full">
+        ml={2}
+        borderRadius="full"
+        onClick={toggleColorMode}>
         <FiSun />
       </Button>
     </Flex>
