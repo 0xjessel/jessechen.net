@@ -28,9 +28,9 @@ export default function About() {
           I host a Wordpress blog on this website where I write reviews, how to's, and other various thoughts. My most popular article by far is the article about how Google Voice saved my phone interview. It has been featured on sites like Lifehacker.
         </Text>
       </Container>
-      <Container>
+      <Container mb="8">
         <Heading as="h2" size="lg" mb="4">Career</Heading>
-        <VStack spacing="8">
+        <VStack spacing="8" mb="8">
           <WorkExperience
             imgSource="/images/fb-logo.png"
             company="Facebook"
@@ -62,6 +62,13 @@ export default function About() {
             dateRange="2012 - 2016"
           />
         </VStack>
+        <Heading as="h2" size="lg" mb="4">Education</Heading>
+        <WorkExperience
+          imgSource="/images/cal-logo.png"
+          company="University of California, Berkeley"
+          role="Bachelor of Science (B.S.), Electrical Engineering and Computer Sciences"
+          dateRange="2008 - 2012"
+        />
       </Container>
       <Footer />
     </Layout>
