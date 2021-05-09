@@ -17,7 +17,8 @@ export default function Articles({ posts }) {
       <Heading as="h1" mb="8">Articles</Heading>
       <VStack spacing="16">
         {posts.map((post) => 
-          <ArticleListItem key={post.filePath} post={post} />)}
+          <ArticleListItem key={post.filePath} post={post} />
+        )}
       </VStack>
       <Footer />
     </Layout>
@@ -34,7 +35,7 @@ export function getStaticProps() {
       data,
       filePath,
     }
-  }).sort((postA, postB) => postA.date < postB.date ? 1 : -1)
+  }).sort((postA, postB) => postA.data.date < postB.data.date ? 1 : -1)
 
   return { props: { posts } }
 }
