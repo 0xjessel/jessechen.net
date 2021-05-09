@@ -27,7 +27,7 @@ export default function ArticleListItem({ post }) {
         <Tags tags={post.data.tags} />
       </HStack>
       <Text>
-        {post.data.excerpt}
+        {post.data.description}
       </Text>
     </Stack>
   )

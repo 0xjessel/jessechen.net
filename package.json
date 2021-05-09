@@ -2,8 +2,8 @@
   "name": "jessechen.net",
   "version": "1.0.0",
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev",
-    "dev:watch": "next-remote-watch ./posts",
+    "dev:inspect": "NODE_OPTIONS='--inspect' next dev",
+    "dev": "next-remote-watch ./posts",
     "build": "next build",
     "start": "next start"
   },
