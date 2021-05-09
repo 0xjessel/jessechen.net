@@ -2,42 +2,82 @@ import fs from 'fs'
 import matter from 'gray-matter'
 import hydrate from 'next-mdx-remote/hydrate'
 import renderToString from 'next-mdx-remote/render-to-string'
-import dynamic from 'next/dynamic'
-import Head from 'next/head'
-import Link from 'next/link'
 import path from 'path'
-import Layout from '../../components/Layout'
 import { getAllMDXPosts, POSTS_PATH } from '../../utils/mdxUtils'
 
-// Custom components/renderers to pass to MDX.
-// Since the MDX files aren't loaded by webpack, they have no knowledge of how
-// to handle import statements. Instead, you must include components in scope
-// here.
+import NLink from 'next/link'
+import Layout from '../../components/Layout'
+import { Box, Code, Divider, Heading, HStack, Kbd, Link, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/layout'
+import Header from '../../components/Header'
+import Tags from '../../components/Tags'
+import { useColorModeValue } from '@chakra-ui/color-mode'
+
 const components = {
-  Head,
+  h1: (p) => <Heading as="h1" fontSize="2xl" mb="4" {...p} />,
+  h2: (p) => <Heading as="h2" fontSize="xl" mb="4" {...p} />,
+  h3: (p) => <Heading as="h3" fontSize="lg" mb="4" {...p} />,
+  h4: (p) => <Heading as="h4" fontSize="md" mb="4" {...p} />,
+  h5: (p) => <Heading as="h5" fontSize="md" mb="4" {...p} />,
+  h6: (p) => <Heading as="h6" fontSize="md" mb="4" {...p} />,
+  p: (p) => <Text as="p" mb="8" lineHeight="tall" {...p} />,
+  strong: (p) => <Text as="strong" fontWeight="semibold" {...p} />,
+  a: (p) => <Link isExternal color={useColorModeValue("yellow.500", "yellow.400")} {...p} />,
+  ul: (p) => <UnorderedList mb="8" {...p} />,
+  ol: (p) => <OrderedList mb="8" {...p} />,
+  li: (p) => <ListItem {...p} />,
+  blockquote: (p) =>  <Box
+    as="blockquote"
+    position="relative"
+    mx={[-4, 0]}
+    pl={6}
+    pr={8}
+    py={2}
+    my={8}
+    fontSize="lg"
+    sx={{
+      '& p:last-child': {
+        mb: 0
+      }
+    }}
+    fontStyle="italic"
+    borderLeftWidth={4}
+    borderLeftColor={useColorModeValue('gray.400', 'gray.600')}
+    rounded={['none', 'sm']}
+    {...p}
+    _after={{
+      // opening: “
+      content: '"”"',
+      fontFamily: 'serif',
+      position: 'absolute',
+      color: useColorModeValue('gray.400', 'gray.600'),
+      fontSize: '5xl',
+      top: '-4px',
+      right: 3
+    }}
+  />,
+  inlineCode: (p) => <Code {...p} />,
+  hr: (p) => <Divider mb="8" {...p} />,
+  kbd: (p) => <Kbd {...p} />,
 }
 
 export default function PostPage({ source, frontMatter }) {
   const content = hydrate(source, { components })
+
   return (
     <Layout>
-      <header>
-        <nav>
-          <Link href="/">
-            <a>👈 Go back home</a>
-          </Link>
-        </nav>
-      </header>
-      <div className="post-header">
-        <h1>{frontMatter.title}</h1>
-        {frontMatter.description && (
-          <p className="description">{frontMatter.description}</p>
-        )}
-        {frontMatter.publicationDate && (
-          <p className="publication-date">{new Date(frontMatter.publicationDate).toLocaleDateString()}</p>
-        )}
-      </div>
-      <main>{content}</main>
+      <Header />
+      <Heading as="h1" mb="4">{frontMatter.title}</Heading>
+      <HStack mb="8">
+        <Text color="gray.500">
+          {'Jesse Chen • '}
+          {new Date(frontMatter.date)
+            .toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric'})}
+          {' • '}
+          9 mins
+        </Text>
+        <Tags tags={frontMatter.tags} />
+      </HStack>
+      {content}
     </Layout>
   )
 }
@@ -52,8 +92,20 @@ export const getStaticProps = async ({ params }) => {
     components,
     // Optionally pass remark/rehype plugins
     mdxOptions: {
-      remarkPlugins: [],
-      rehypePlugins: [],
+      remarkPlugins: [
+        require('remark-breaks'),
+        require('remark-slug'),
+        [ 
+          // TODO: this doesn't actually work
+          require('remark-autolink-headings'),
+          {
+            behavior: 'append',
+          },
+        ],
+      ],
+      rehypePlugins: [
+        require('mdx-prism'),
+      ],
     },
     scope: data,
   })

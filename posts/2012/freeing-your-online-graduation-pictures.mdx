@@ -1,13 +1,27 @@
 ---
 title: "Freeing Your Online Graduation Pictures"
-description: "A tutorial on basic web development tools and Photoshop for college students."
+description: "A basic tutorial on web development tools and Photoshop for college students."
 date: "2012-05-24"
 categories: 
   - "how-to"
+tags: 
+  - college
 coverImage: "stock-photo-handsome-young-african-american-man-holding-graduation-diploma-33875587.jpg"
 ---
 
 _This is a tutorial created by Jesse Chen and guest contributor [Jonathan Tien](http://www.ocf.berkeley.edu/~jotien/portfolio/).  Jonathan is a Product Manager at Glassdoor.com and a recent Cal grad, where he got his degree in Computer Science._
+
+Hi everyone,
+
+If you have found this 2-year old article (as of today), it is because you are either 1) looking for a way to get your graduation pictures without the watermarks or 2) found this from various blogs that've linked to this article.  This is a public apology to all the photographers out there who are outraged at the tutorial that taught non-tech savvy people how to remove watermarks from photos.  My friend and I wrote this article when we were still in school because we wanted an easy way to get the digital photo for free without shelling money out.  Yes, we were young and naive back then.  Yes, we did not feel like the photos were worth paying for back then.
+
+Let me explain the reasoning of why we wrote this article in the beginning.  We were both Computer Science majors and we have learned about web development, so when I saw the [animated watermarks on top of the previews](http://www2.gradimages.com/Proofs?PIN=17823395&LastName=CHEN), I was frustrated about it, and I thought of ways to get around it.  I thought it was clever that GradImages used javascript to disable right clicking among other efforts to circumvent people from trying to get to the raw photo.  I took it as a challenge to see if I can find a way to get to it, and found that it was trivial to get to the raw image.  Once I had the image, I approached Jon to teach me how one would be able to remove the giant yellow proof text overlayed on it.  He knew photoshop and he said it was easy to do (as you guys probably know).  Within minutes, he was able to show me the photo without any of the watermarks or proofs.  At this point, we were like hey, that's pretty cool!  Let's write a tutorial about it to show others how to do it as well!  And that's how it came to be.  Looking back, I regret the tone of the article and the lame sarcasm ("taking back what's yours") which is probably the main source of anger that you guys are having.
+
+
+
+If you are for some reason still interested in seeing the original content, you can still see it [here](http://fstoppers.com/facebook-software-engineer-teaches-you-how-to-steal-copyrighted-images)
+
+---
 
 ### Free pictures?  What?
 
@@ -27,7 +41,7 @@ Now, the hardest part.  What browser are you using?  Depending on your browser
 
 #### Chrome
 
-Press "CTRL  + SHIFT + i" to launch the WebKit Developer Tools.  If that doesn't work, go to the wrench icon on the top right, then Tools > Developer Tools.  If you see something like this, you're doing it right. 
+Press <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>i</kbd> to launch the WebKit Developer Tools.  If that doesn't work, go to the wrench icon on the top right, then Tools > Developer Tools.  If you see something like this, you're doing it right. 
 
 [![](images/2012-05-23_1834-1024x845.png "jesse chen creepy bear with webkit developer tools")](http://www.jessechen.net/blog/wp-content/uploads/2012/05/2012-05-23_1834.png)
 
@@ -39,7 +53,7 @@ From here, right click and "Save image as..." onto your computer.
 
 #### Firefox
 
-Cool.  Press "CTRL + SHIFT + i" or go to the menu and Web Developer > Inspect.  Move your mouse so that its over the large image in the middle.  The little bubble should say "div.OverlayZoom".  Now click on the second-to-the-right button so that the popup says div.Zoom.Vertical.  Click the "Style" button on the bottom right and click the background-image property.  Copy and paste the URL, make sure to get the whole thing!  It should start with "www2" and should not have any quotes or apostrophes at the end of the URL.
+Cool.  Press <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>i</kbd> or go to the menu and Web Developer > Inspect.  Move your mouse so that its over the large image in the middle.  The little bubble should say "div.OverlayZoom".  Now click on the second-to-the-right button so that the popup says div.Zoom.Vertical.  Click the "Style" button on the bottom right and click the background-image property.  Copy and paste the URL, make sure to get the whole thing!  It should start with "www2" and should not have any quotes or apostrophes at the end of the URL.
 
 [![](images/2012-05-23_1853-1024x751.png "jesse chen creepy bear firefox developer tools")](http://www.jessechen.net/blog/wp-content/uploads/2012/05/2012-05-23_1853.png)
 
@@ -47,7 +61,7 @@ Open the URL in a new tab, and "Save image as..." onto your computer.
 
 #### Internet Explorer
 
-Oh dear.  This is for Internet Explorer 8, instructions might vary for other versions of IE.  Press "F12", or go to Tools > Developer Tools.  A new window should pop up.  Type "zoomhandler" into the search bar, and grab the URL under the background-image property.
+Oh dear.  This is for Internet Explorer 8, instructions might vary for other versions of IE.  Press <kbd>F12</kbd>, or go to Tools > Developer Tools.  A new window should pop up.  Type "zoomhandler" into the search bar, and grab the URL under the background-image property.
 
 [![](images/2012-05-23_1911.png "internet explorer good god")](http://www.jessechen.net/blog/wp-content/uploads/2012/05/2012-05-23_1911.png)
 

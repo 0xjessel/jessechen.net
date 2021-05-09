@@ -28,43 +28,110 @@ Let's create a simple and useless Android project that will detect when a pictur
 
 We start with the `onCreate` method in the Activity:
 
-\[java\] public class InstantuploadActivity extends Activity {
+```java
+public class InstantUploadActivity extends Activity {
 
-private PhotosObserver instUploadObserver = new PhotosObserver(); private String saved; private TextView tv;
+private PhotosObserver instUploadObserver = new PhotosObserver(); 
+private String saved; 
+private TextView tv;
 
-/\*\* Called when the activity is first created. \*/ @Override public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.main); tv = (TextView)findViewById(R.id.textview);
+/** Called when the activity is first created. */ 
+@Override 
+public void onCreate(Bundle savedInstanceState) { 
+  super.onCreate(savedInstanceState); 
+  setContentView(R.layout.main); 
+  tv = (TextView)findViewById(R.id.textview);
 
-this.getApplicationContext() .getContentResolver() .registerContentObserver( MediaStore.Images.Media.EXTERNAL\_CONTENT\_URI, false, instUploadObserver); Log.d("INSTANT", "registered content observer"); } \[/java\]
+  this.getApplicationContext() 
+    .getContentResolver() 
+    .registerContentObserver( 
+      MediaStore.Images.Media.EXTERNAL_CONTENT_URI, false, 
+      instUploadObserver); 
+  Log.d("INSTANT", "registered content observer"); 
+} 
+```
 
 Upon creation of this Activity, we register our custom PhotosObserver (which extends ContentObserver) to the images content provider.
 
 Recall that the goal for this project is to simply take the most recent picture's file name and display it in our Activity's TextView, `tv`.  To get alerted when a new picture is taken, we have to create a class that extends ContentObserver and implement the `onChange` method:
 
-\[java\] private class PhotosObserver extends ContentObserver {
+```java
+private class PhotosObserver extends ContentObserver {
 
-public PhotosObserver() { super(null); }
+  public PhotosObserver() { 
+    super(null); 
+  }
 
-@Override public void onChange(boolean selfChange) { super.onChange(selfChange); Media media = readFromMediaStore(getApplicationContext(), MediaStore.Images.Media.EXTERNAL\_CONTENT\_URI); saved = "I detected " + media.file.getName(); Log.d("INSTANT", "detected picture"); } }
+  @Override 
+  public void onChange(boolean selfChange) { 
+    super.onChange(selfChange); 
+    Media media = readFromMediaStore(getApplicationContext(), 
+    MediaStore.Images.Media.EXTERNAL\_CONTENT\_URI); 
+    saved = "I detected " + media.file.getName(); 
+    Log.d("INSTANT", "detected picture"); 
+    } 
+  }
 
-private Media readFromMediaStore(Context context, Uri uri) { Cursor cursor = context.getContentResolver().query(uri, null, null, null, "date\_added DESC"); Media media = null; if (cursor.moveToNext()) { int dataColumn = cursor.getColumnIndexOrThrow(MediaColumns.DATA); String filePath = cursor.getString(dataColumn); int mimeTypeColumn = cursor .getColumnIndexOrThrow(MediaColumns.MIME\_TYPE); String mimeType = cursor.getString(mimeTypeColumn); media = new Media(new File(filePath), mimeType); } cursor.close(); return media; }
+  private Media readFromMediaStore(Context context, Uri uri) { 
+    Cursor cursor = context.getContentResolver().query(uri, null, null, 
+      null, "date\_added DESC"); 
+    Media media = null; 
+    if (cursor.moveToNext()) { 
+      int dataColumn = cursor.getColumnIndexOrThrow(MediaColumns.DATA); 
+      String filePath = cursor.getString(dataColumn); 
+      int mimeTypeColumn = cursor.getColumnIndexOrThrow(MediaColumns.MIME\_TYPE); 
+      String mimeType = cursor.getString(mimeTypeColumn); 
+      media = new Media(new File(filePath), mimeType); 
+    } 
+    cursor.close(); 
+    return media; 
+  }
 
-private class Media { private File file; @SuppressWarnings("unused") private String type;
+  private class Media { 
+    private File file; 
+    @SuppressWarnings("unused") 
+    private String type;
 
-public Media(File file, String type) { this.file = file; this.type = type; }
+    public Media(File file, String type) { 
+      this.file = file; 
+      this.type = type; 
+    }
 
-public String getType() { return type; }
+    public String getType() { 
+      return type; 
+    }
 
-public File getFile() { return file; } } \[/java\]
+    public File getFile() { 
+      return file; 
+    } 
+  } 
+```
 
 In the `onChange` method we call `readFromMediaStore`, which will retrieve data about the most recent picture (the one that was just taken). `readFromMediaStore` initializes a Cursor on the same Images URI that we've been observing.  We then grab the filepath and the filetype from the first result (note: the cursor was sorted by "date\_added DESC") and create a new `Media` to return.  Keep in mind that this can be done when our Activity **is not running in the foreground**.  You can launch InstantUploadActivity, press "Home" to back out, then go to Camera and take a picture - and the `onChange` method will still get called.
 
 From here, we simply set the String variable `saved` to display the filename such that when you go back to the Activity, the filename of the picture you have just taken is displayed in the TextView via the `onResume` method:
 
-\[java\] @Override public void onResume() { super.onResume(); if (saved != null) { tv.setText(saved); } } \[/java\]
+```java
+@Override 
+public void onResume() { 
+  super.onResume(); 
+  if (saved != null) { 
+    tv.setText(saved); 
+  } 
+}
+```
 
 Lastly, don't forget to unregister the content observer if `onDestroy` is called:
 
-\[java\] @Override public void onDestroy() { super.onDestroy(); this.getApplicationContext().getContentResolver() .unregisterContentObserver(instUploadObserver); Log.d("INSTANT", "unregistered content observer"); } \[/java\]
+```java
+@Override 
+public void onDestroy() { 
+  super.onDestroy(); 
+  this.getApplicationContext().getContentResolver() 
+    .unregisterContentObserver(instUploadObserver); 
+  Log.d("INSTANT", "unregistered content observer"); 
+} 
+```
 
 You can do much better than just setting text on a TextView.  You can take that image and resize it, and then upload it somewhere, or you can automatically apply an image filter on each picture or do both!  There are many cool things you can do with this.
 

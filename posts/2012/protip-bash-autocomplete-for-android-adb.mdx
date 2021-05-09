@@ -22,7 +22,9 @@ This protip will get you setup with bash autocomplete for ADB in less than 1 min
 - Use your favorite editor of choice (which should be vim) to edit your ~/.bashrc file.
 - Add the following lines (substitute your **own path** to the adb bash completion file) to the end of your ~/.bashrc file:
 
-\[bash\] if \[ -e /bin/adb.txt \] ; then source /bin/adb.txt fi \[/bash\]
+```bash 
+if \[ -e /bin/adb.txt \] ; then source /bin/adb.txt fi
+```
 
 - Save and quit.  In your terminal, type `source ~/.bashrc` to reload your bash.
 - Check if it works.  Type 'adb d' and press tab to see if it autocompletes to 'adb devices'.

@@ -4,15 +4,6 @@ import Link from 'next/link'
 import Tags from './Tags';
 
 export default function ArticleListItem({ post }) {
-  let timestamp = null;
-  if (post.data.date) {
-    timestamp = 
-      <Text fontSize="sm" color="gray.500">
-        {new Date(post.data.date)
-          .toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric'})}
-      </Text>
-  }
-
   return (
     <Stack as="article" minWidth="100%">
       <Heading as="h2" size="lg">
@@ -23,7 +14,10 @@ export default function ArticleListItem({ post }) {
         </Link>
       </Heading>
       <HStack>
-        {timestamp}
+        <Text fontSize="sm" color="gray.500">
+          {new Date(post.data.date)
+            .toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric'})}
+        </Text>
         <Tags tags={post.data.tags} />
       </HStack>
       <Text>
