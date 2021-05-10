@@ -17,6 +17,8 @@ export default function ArticleListItem({ post }) {
         <Text fontSize="sm" color="gray.500">
           {new Date(post.data.date)
             .toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric'})}
+          {' • '}
+          {post.data.readingTime.text}
         </Text>
         <Tags tags={post.data.tags} />
       </HStack>

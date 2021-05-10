@@ -76,7 +76,7 @@ export default function PostPage({ source, frontMatter }) {
           {new Date(frontMatter.date)
             .toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric'})}
           {' • '}
-          9 mins
+          {frontMatter.readingTime.text}
         </Text>
         <Tags tags={frontMatter.tags} />
       </HStack>
@@ -90,6 +90,8 @@ export const getStaticProps = async ({ params }) => {
   const source = fs.readFileSync(postFilePath)
 
   const { content, data } = matter(source)
+
+  data.readingTime = require('reading-time')(content)
 
   const mdxSource = await renderToString(content, {
     components,
