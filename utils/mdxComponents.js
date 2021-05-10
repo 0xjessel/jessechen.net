@@ -85,6 +85,10 @@ export const components = {
     }}
   />,
   inlineCode: (p) => <Code {...p} />,
+  pre: (p) =>
+    <Box mb="8">
+      <pre {...p} />
+    </Box>,
   hr: (p) => <Divider mb="8" {...p} />,
   kbd: (p) => <Kbd {...p} />,
   img: (p) => <Image {...p} />,
