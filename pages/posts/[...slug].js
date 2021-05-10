@@ -8,6 +8,7 @@ import { getAllMDXPosts, POSTS_PATH } from '../../utils/mdxUtils'
 import NLink from 'next/link'
 import Layout from '../../components/Layout'
 import { Box, Code, Divider, Heading, HStack, Kbd, Link, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/layout'
+import { Image } from '@chakra-ui/react'
 import Header from '../../components/Header'
 import Tags from '../../components/Tags'
 import { useColorModeValue } from '@chakra-ui/color-mode'
@@ -58,6 +59,7 @@ const components = {
   inlineCode: (p) => <Code {...p} />,
   hr: (p) => <Divider mb="8" {...p} />,
   kbd: (p) => <Kbd {...p} />,
+  img: (p) => <Image {...p} />,
 }
 
 export default function PostPage({ source, frontMatter }) {

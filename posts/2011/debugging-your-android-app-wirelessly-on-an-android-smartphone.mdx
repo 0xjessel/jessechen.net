@@ -7,7 +7,7 @@ categories:
   - "how-to"
 tags: 
   - android
-coverImage: "Bettertermpro.png"
+coverImage: "/images/posts/2011/better-term-pro.png"
 ---
 
 ### Introduction
@@ -31,25 +31,25 @@ I have a way that allows you to test your Android application on your Android sm
 
 Make sure you are connected to the same local network that your computer is on via WiFi.  You will then need an app called [adbWireless](https://market.android.com/details?id=siir.es.adbWireless&feature=search_result), it allows a rooted phone to allow adb connection to your phone as if it was connected by USB.  Once you install adbWireless and allow root privileges, press the giant red button to begin.
 
-[![](images/5568035211_7dcd1ed9ed.jpg "adbWireless")](http://www.jessechen.net/blog/wp-content/uploads/2011/03/5568035211_7dcd1ed9ed.jpg)
+![adbWireless](/images/posts/2011/adbwireless.jpg)
 
 It will provide you with a one-line command to run in your command prompt, something similar to "adb connect 192.168.1.106:5555".  You can type "adb devices" afterwards to verify that your device is successfully connected.  That is all you have to do on the phone.
 
-[![](images/2011-03-16_2103.png "Command Prompt and adb")](http://www.jessechen.net/blog/wp-content/uploads/2011/03/2011-03-16_2103.png)
+![Command Prompt and adb](/images/posts/2011/command-prompt-and-adb.png)
 
 ### What to do on your computer
 
 Go to Eclipse and click on the green play button so a drop-down list appears.  Press "Run Configurations".
 
-[![](images/2011-03-16_2043.png "Go to Run Configurations")](http://www.jessechen.net/blog/wp-content/uploads/2011/03/2011-03-16_2043.png)
+![Go to Run Configurations](/images/posts/2011/go-to-run-configurations.png)
 
 Next, press "Target".  Change the radio button from "Automatic" to "Manual".  Press "Apply" then "Run".
 
-[![](images/2011-03-16_2043_001.png "Change Automatic to Manual")](http://www.jessechen.net/blog/wp-content/uploads/2011/03/2011-03-16_2043_001.png)
+![Change Automatic to Manual](/images/posts/2011/change-automatic-to-manual.png)
 
 An Android Device Chooser window should appear and your device should be listed as a running Android device.  Select it and press OK.
 
-[![](images/2011-03-16_2044.png "Android Device should Appear")](http://www.jessechen.net/blog/wp-content/uploads/2011/03/2011-03-16_2044.png)
+![Android Device should Appear](/images/posts/2011/android-device-should-appear.png)
 
 Your phone should begin downloading the app and launching it as soon as it completes.  You can verify in the Console window on Eclipse that adb is running and uploading/installing the .apk on your phone.
 
@@ -59,7 +59,7 @@ It is pretty cool that you can wirelessly push your app to your phone to test. �
 
 **Make sure** in your AndroidManifest.xml that "android:debuggable=true" is there.  The easiest way to add this is to go to the "Application" tab in the manifest, and in "Application Attributes", find "Debuggable", set it to "true", and then save.  By default, my phone denies the app from being run in debug mode if the application did not explicitly declare themselves as debuggable in their manifest.  So, make sure debuggable is set to true in your AndroidManifest!
 
-[![](images/2011-03-16_2046.png "Set Application Attribute as Debuggable")](http://www.jessechen.net/blog/wp-content/uploads/2011/03/2011-03-16_2046.png)
+![Set Application Attribute as Debuggable](/images/posts/2011/set-application-attribute-as-debuggable.png)
 
 Once you do that, just create breakpoints, and begin the debug mode.  Step through your app on your phone, and Eclipse will automatically switch to the Debug perspective when it hits a breakpoint.  This is seriously really cool.
 

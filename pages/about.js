@@ -32,28 +32,28 @@ export default function About() {
         <Heading as="h2" size="lg" mb="4">Career</Heading>
         <VStack spacing="8" mb="8">
           <WorkExperience
-            imgSource="/images/fb-logo.png"
+            imgSource="/images/about/fb-logo.png"
             company="Facebook"
             role="Engineering Manager"
             description={'Facebook Communities (Groups/Events/Profile).  Supporting a team of ~50 Software Engineers and Engineering Managers.'}
             dateRange="2020 - Present"
           />
           <WorkExperience
-            imgSource="/images/ig-logo.png"
+            imgSource="/images/about/ig-logo.png"
             company="Instagram"
             role="Engineering Manager"
             description={'Instagram Live and Creators.  My teams are responsible for the millions of influencers that drive the majority of impressions and engagement on Instagram.'}
             dateRange="2018 - 2020"
           />
           <WorkExperience
-            imgSource="/images/fb-logo.png"
+            imgSource="/images/about/fb-logo.png"
             company="Facebook"
             role="Engineering Manager"
             description={'I supported 3 fullstack product teams of Android, iOS, and WWW engineers at Facebook. Experience supporting engineers and managers, I grew the team from 4 to 25 engineers (recursively).'}
             dateRange="2016 - 2018"
           />
           <WorkExperience
-            imgSource="/images/fb-logo.png"
+            imgSource="/images/about/fb-logo.png"
             company="Facebook"
             role="Software Engineer"
             description={`I wrote code that you see on www.facebook.com.
@@ -64,7 +64,7 @@ export default function About() {
         </VStack>
         <Heading as="h2" size="lg" mb="4">Education</Heading>
         <WorkExperience
-          imgSource="/images/cal-logo.png"
+          imgSource="/images/about/cal-logo.png"
           company="University of California, Berkeley"
           role="Bachelor of Science (B.S.), Electrical Engineering and Computer Sciences"
           dateRange="2008 - 2012"
