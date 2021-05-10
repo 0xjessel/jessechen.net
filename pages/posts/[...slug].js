@@ -60,6 +60,7 @@ const components = {
   hr: (p) => <Divider mb="8" {...p} />,
   kbd: (p) => <Kbd {...p} />,
   img: (p) => <Image {...p} />,
+  iframe: (p) => <Box my="8"><iframe {...p} /></Box>
 }
 
 export default function PostPage({ source, frontMatter }) {
