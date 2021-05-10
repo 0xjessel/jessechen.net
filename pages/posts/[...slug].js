@@ -5,63 +5,12 @@ import renderToString from 'next-mdx-remote/render-to-string'
 import path from 'path'
 import { getAllMDXPosts, POSTS_PATH } from '../../utils/mdxUtils'
 
-import NLink from 'next/link'
 import Layout from '../../components/Layout'
-import { Box, Code, Divider, Heading, HStack, Kbd, Link, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/layout'
-import { Image } from '@chakra-ui/react'
+import { Heading, HStack, Text } from '@chakra-ui/layout'
 import Header from '../../components/Header'
 import Tags from '../../components/Tags'
-import { useColorModeValue } from '@chakra-ui/color-mode'
 
-const components = {
-  h1: (p) => <Heading as="h1" fontSize="2xl" mb="4" {...p} />,
-  h2: (p) => <Heading as="h2" fontSize="xl" mb="4" {...p} />,
-  h3: (p) => <Heading as="h3" fontSize="lg" mb="4" {...p} />,
-  h4: (p) => <Heading as="h4" fontSize="md" mb="4" {...p} />,
-  h5: (p) => <Heading as="h5" fontSize="md" mb="4" {...p} />,
-  h6: (p) => <Heading as="h6" fontSize="md" mb="4" {...p} />,
-  p: (p) => <Text as="p" mb="8" lineHeight="tall" {...p} />,
-  strong: (p) => <Text as="strong" fontWeight="semibold" {...p} />,
-  a: (p) => <Link isExternal color={useColorModeValue("yellow.500", "yellow.400")} {...p} />,
-  ul: (p) => <UnorderedList mb="8" {...p} />,
-  ol: (p) => <OrderedList mb="8" {...p} />,
-  li: (p) => <ListItem {...p} />,
-  blockquote: (p) =>  <Box
-    as="blockquote"
-    position="relative"
-    mx={[-4, 0]}
-    pl={6}
-    pr={8}
-    py={2}
-    my={8}
-    fontSize="lg"
-    sx={{
-      '& p:last-child': {
-        mb: 0
-      }
-    }}
-    fontStyle="italic"
-    borderLeftWidth={4}
-    borderLeftColor={useColorModeValue('gray.400', 'gray.600')}
-    rounded={['none', 'sm']}
-    {...p}
-    _after={{
-      // opening: “
-      content: '"”"',
-      fontFamily: 'serif',
-      position: 'absolute',
-      color: useColorModeValue('gray.400', 'gray.600'),
-      fontSize: '5xl',
-      top: '-4px',
-      right: 3
-    }}
-  />,
-  inlineCode: (p) => <Code {...p} />,
-  hr: (p) => <Divider mb="8" {...p} />,
-  kbd: (p) => <Kbd {...p} />,
-  img: (p) => <Image {...p} />,
-  iframe: (p) => <Box my="8"><iframe {...p} /></Box>
-}
+import { components } from '../../utils/mdxComponents'
 
 export default function PostPage({ source, frontMatter }) {
   const content = hydrate(source, { components })
@@ -95,18 +44,10 @@ export const getStaticProps = async ({ params }) => {
 
   const mdxSource = await renderToString(content, {
     components,
-    // Optionally pass remark/rehype plugins
     mdxOptions: {
       remarkPlugins: [
         require('remark-breaks'),
         require('remark-slug'),
-        [ 
-          // TODO: this doesn't actually work
-          require('remark-autolink-headings'),
-          {
-            behavior: 'append',
-          },
-        ],
       ],
       rehypePlugins: [
         require('mdx-prism'),
