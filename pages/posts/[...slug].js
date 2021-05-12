@@ -23,7 +23,7 @@ export default function PostPage({ source, frontMatter, previous, next }) {
       <Header />
       <Heading as="h1" mb="2">{frontMatter.title}</Heading>
       <HStack mb="8">
-        <Text color="gray.500">
+        <Text fontSize="sm" color="gray.500">
           {'Jesse Chen • '}
           {new Date(frontMatter.date)
             .toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric'})}
