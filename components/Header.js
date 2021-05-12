@@ -7,7 +7,7 @@ export default function Header() {
 
   return (
     <Flex as="nav" my={[0, 8]} mb={[8, null]}>
-      <HStack spacing={[2, 8]}>
+      <HStack spacing={[4, 8]}>
         <NLink href="/">
           <Link
             fontSize={['sm', 'md']}

@@ -8,19 +8,14 @@ function Heading({ children, ...props }) {
       {...props} 
       mb="4"
       css={{
-        position: 'relative',
         '&:hover a': { opacity: 0.25 },
         '&:hover a:hover': { opacity: 1 }
       }}>
       {children}
       <Link 
         href={`#${props.id}`}
-        pr="2"
+        ml="1"
         opacity="0"
-        css={{
-          position: 'absolute',
-          left: '-1rem',
-        }}
         _hover={{
           opacity: 1,
           color: useLinkColor(),
