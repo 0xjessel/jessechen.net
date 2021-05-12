@@ -1,50 +1,53 @@
 import NLink from 'next/link'
-import { Box, Button, ButtonGroup, Flex, Link, Spacer, useColorMode } from "@chakra-ui/react"
+import { Center, Flex, HStack, Link, Spacer, useColorMode } from "@chakra-ui/react"
 import { FiSun, FiTwitter } from 'react-icons/fi'
 
 export default function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Flex my="8">
-      <ButtonGroup variant="">
+    <Flex as="nav" my={[0, 8]} mb={[8, null]}>
+      <HStack spacing={[2, 8]}>
         <NLink href="/">
-          <Button 
+          <Link
+            fontSize={['sm', 'md']}
             border="1px"
             borderColor={colorMode === 'light' ? 'gray.800' : 'gray.50'}>
-            𝚓𝚎𝚜𝚜𝚎𝚕 ⟠
-          </Button>
+            <Center px="2" py="1">
+              𝚓𝚎𝚜𝚜𝚎𝚕 ⟠
+            </Center>
+          </Link>
         </NLink>
         <NLink href="/projects">
-          <Button>
+          <Link fontSize={['sm', 'md']}>
             Projects
-          </Button>
+          </Link>
         </NLink>
         <NLink href="/articles">
-          <Button>
+          <Link fontSize={['sm', 'md']}>
             Articles
-          </Button>
+          </Link>
         </NLink>
         <NLink href="/about">
-          <Button>
+          <Link fontSize={['sm', 'md']}>
             About
-          </Button>
+          </Link>
         </NLink>
-      </ButtonGroup>
+      </HStack>
       <Spacer />
-      <Button 
-        as="a"
-        href="https://twitter.com/0xjessel"
-        target="_blank"
-        borderRadius="full">
-        <FiTwitter />
-      </Button>
-      <Button 
-        ml={2}
-        borderRadius="full"
-        onClick={toggleColorMode}>
-        <FiSun />
-      </Button>
+      <HStack spacing={[2, 8]}>
+        <Link
+          href="https://twitter.com/0xjessel"
+          target="_blank"
+          isExternal>
+          <FiTwitter />
+        </Link>
+        <Link
+          ml={2}
+          onClick={toggleColorMode}>
+          <FiSun />
+        </Link>
+      </HStack>
     </Flex>
   );
 };

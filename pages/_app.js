@@ -5,10 +5,18 @@ const theme = extendTheme({
   config: {
     useSystemColorMode: true,
   },
+  styles: {
+    global: {
+      'html': {
+        minWidth: '320px',
+      },
+    },
+  },
   components: {
     Container: {
       baseStyle: {
         maxW: '40rem',
+        px: 0,
       }
     }
   }
