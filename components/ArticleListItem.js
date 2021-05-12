@@ -1,17 +1,17 @@
 import { Container, Heading, HStack, Stack, Text } from '@chakra-ui/layout'
 import { Tag } from '@chakra-ui/tag';
-import Link from 'next/link'
+import NLink from 'next/link'
 import Tags from './Tags';
 
 export default function ArticleListItem({ post }) {
   return (
     <Stack as="article" minWidth="100%">
       <Heading as="h2" size="lg">
-        <Link
+        <NLink
           as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
           href={`/posts/[...slug]`}>
           {post.data.title}
-        </Link>
+        </NLink>
       </Heading>
       <HStack>
         <Text fontSize="sm" color="gray.500">

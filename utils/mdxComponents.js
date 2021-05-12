@@ -1,10 +1,6 @@
 import { Box, Code, Divider, Heading as CHeading, Kbd, Link, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/layout'
-import { Image } from '@chakra-ui/react'
-import { useColorModeValue } from '@chakra-ui/color-mode'
-
-function useLinkColor() {
-  return useColorModeValue('yellow.500', 'yellow.400')
-}
+import { Image, useColorModeValue } from '@chakra-ui/react'
+import { useLinkColor } from '../styles/links'
 
 function Heading({ children, ...props }) {
   return (
