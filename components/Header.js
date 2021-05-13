@@ -37,12 +37,6 @@ export default function Header() {
       <Spacer />
       <HStack spacing={[2, 8]}>
         <Link
-          href="https://twitter.com/0xjessel"
-          target="_blank"
-          isExternal>
-          <FiTwitter />
-        </Link>
-        <Link
           ml={2}
           onClick={toggleColorMode}>
           <FiSun />
