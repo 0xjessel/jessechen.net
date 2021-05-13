@@ -1,30 +1,12 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react"
+import { AppTheme } from "../styles/app-theme"
+import { FontsGlobal } from "../styles/fonts"
 import { PrismGlobal } from '../styles/prism'
-
-const theme = extendTheme({
-  config: {
-    useSystemColorMode: true,
-  },
-  styles: {
-    global: {
-      'html': {
-        minWidth: '320px',
-      },
-    },
-  },
-  components: {
-    Container: {
-      baseStyle: {
-        maxW: '40rem',
-        px: 0,
-      }
-    }
-  }
-})
 
 export default function App({ Component, pageProps }) {
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={AppTheme}>
+      <FontsGlobal />
       <PrismGlobal />
       <Component {...pageProps} /> 
     </ChakraProvider>

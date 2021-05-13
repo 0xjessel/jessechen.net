@@ -39,7 +39,7 @@ export const components = {
   h4: (p) => <Heading as="h4" fontSize="md" {...p} />,
   h5: (p) => <Heading as="h5" fontSize="md" {...p} />,
   h6: (p) => <Heading as="h6" fontSize="md" {...p} />,
-  p: (p) => <Text as="p" mb="8" lineHeight="tall" {...p} />,
+  p: (p) => <Text as="p" mb="8" {...p} />,
   strong: (p) => <Text as="strong" fontWeight="semibold" {...p} />,
   a: (p) => <Link isExternal color={useLinkColor()} {...p} />,
   ul: (p) => <UnorderedList mb="8" {...p} />,

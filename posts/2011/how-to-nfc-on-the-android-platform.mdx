@@ -56,7 +56,18 @@ private void enableNdefExchangeMode() {
 }
 ```
 
-These method calls are what allows our device to initiate p2p communiation via NFC.  `NfcUtils.getUidAsNdef` is the method that creates a NDEF message with mime type "text/plain" with the user's UID as the payload.  `enableForegroundNdefPush` will push this message to the other device.  `enableForegroundDispatch` will set up the listener for the intent that we are filtering for such that when it detects an intent matching the intent filter, it calls our activity's `onNewIntent` method: \[java\] @Override protected void onNewIntent(Intent intent) { // NDEF exchange mode if (!mWriteMode && NfcAdapter.ACTION\_NDEF\_DISCOVERED.equals(intent.getAction())) { NdefMessage\[\] msgs = NfcUtils.getNdefMessages(intent); fireFriendRequest(msgs\[0\]); Toast.makeText(this, "sent friend request via nfc!", Toast.LENGTH\_LONG).show(); } } \[/java\]
+These method calls are what allows our device to initiate p2p communiation via NFC.  `NfcUtils.getUidAsNdef` is the method that creates a NDEF message with mime type "text/plain" with the user's UID as the payload.  `enableForegroundNdefPush` will push this message to the other device.  `enableForegroundDispatch` will set up the listener for the intent that we are filtering for such that when it detects an intent matching the intent filter, it calls our activity's `onNewIntent` method: 
+```java
+@Override 
+protected void onNewIntent(Intent intent) { 
+  // NDEF exchange mode 
+  if (!mWriteMode && NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) { 
+    NdefMessage[] msgs = NfcUtils.getNdefMessages(intent); 
+    fireFriendRequest(msgs[0]); 
+    Toast.makeText(this, "sent friend request via nfc!", Toast.LENGTH_LONG).show(); 
+  } 
+} 
+```
 
 Here, it parses the received NDEF message and gets the payload which should be the other user's UID.  Then I call `fireFriendRequest` which is a method that we can assume sends a friend request to the UID that was given.
 

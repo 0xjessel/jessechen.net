@@ -5,7 +5,6 @@ import { useColorMode } from '@chakra-ui/react'
 const prismLightTheme = css`
 code[class*="language-"],
 pre[class*="language-"] {
-	font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
 	font-size: var(--chakra-fontSizes-sm);
 	line-height: 1.375;
 	direction: ltr;
@@ -177,7 +176,6 @@ code[class*="language-"],
 pre[class*="language-"] {
   color: #ABB2BF;
   background: none;
-  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 	font-size: var(--chakra-fontSizes-sm);
   text-align: left;
   white-space: pre;
