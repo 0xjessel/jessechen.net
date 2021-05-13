@@ -13,7 +13,7 @@ export default function Header() {
             fontSize={['sm', 'md']}
             border="1px"
             borderColor={colorMode === 'light' ? 'gray.800' : 'gray.50'}>
-            <Center px="2" py="1">
+            <Center fontSize={['md', 'lg']} px="2" py="1">
               𝚓𝚎𝚜𝚜𝚎𝚕 ⟠
             </Center>
           </Link>
