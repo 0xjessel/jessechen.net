@@ -29,6 +29,7 @@ export default function Index(props) {
         borderRadius="4"
         boxShadow="lg"
         src="/images/hero.jpg"
+        // hardcoded dimensions do not work for mobile
         fallback={<Skeleton mb={8} width={640} height={421} />}
       />
       <Divider />
@@ -44,6 +45,7 @@ export async function getServerSideProps() {
   
   if (!res.ok) {
     console.error(res.statusText)
+    console.error(res.url)
   }
 
   const igMedias = data.data ?? null;

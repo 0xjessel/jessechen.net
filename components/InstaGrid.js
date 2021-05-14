@@ -35,7 +35,7 @@ export default function InstaGrid({ medias, ...props }) {
             }>
             <Image
               width="100%"
-              css={{ 'aspect-ratio': '1' }}
+              css={{ 'aspectRatio': '1' }}
               objectFit="cover"
               src={isVideo ? media.thumbnail_url : media.media_url}
               alt="Instagram photo"
