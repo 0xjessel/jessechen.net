@@ -26,7 +26,9 @@ export default function InstaGrid({ medias, ...props }) {
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
                 }
-              } : {}
+              } : {
+                position: 'relative',
+              }
           }>
           <Image
             width="100%"
