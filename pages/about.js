@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Heading, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react'
+import { Box, Container, Flex, Heading, Image, SimpleGrid, Skeleton, Text, VStack } from '@chakra-ui/react'
 import Layout from '../components/Layout'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -15,6 +15,7 @@ export default function About() {
           borderRadius="4"
           boxShadow="lg"
           src="/images/hero.jpg"
+          fallback={<Skeleton mb={8} width={640} height={421} />}
         />
         <Text>
           My name is Jesse Chen and I am a software engineer at Facebook. I graduated from UC Berkeley in 2012 where I studied Electrical Engineering and Computer Sciences.
