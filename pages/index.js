@@ -29,7 +29,7 @@ export default function Index(props) {
         borderRadius="4"
         boxShadow="lg"
         src="/images/hero.jpg"
-        // hardcoded dimensions do not work for mobile
+        // hardcoded dimensions don't work for mobile
         fallback={<Skeleton mb={8} width={640} height={421} />}
       />
       <Divider />
@@ -40,7 +40,7 @@ export default function Index(props) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`https://graph.instagram.com/${process.env.IG_USER_ID}/media?fields=media_type%2Cmedia_url%2Cpermalink%2Cthumbnail_url&limit=9&access_token=${process.env.IG_ACCESS_TOKEN}`)
+  const res = await fetch(`https://graph.instagram.com/${process.env.IG_USER_ID}/mediaa?fields=media_type%2Cmedia_url%2Cpermalink%2Cthumbnail_url&limit=9&access_token=${process.env.IG_ACCESS_TOKEN}`)
   const data = await res.json()
   
   if (!res.ok) {
