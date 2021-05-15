@@ -3,6 +3,7 @@ import { Container, Divider, Grid, Heading, Image, Skeleton, Text } from '@chakr
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import InstaGrid from '../components/InstaGrid'
+import { useLinkColor } from '../styles/links'
 
 export default function Index(props) {
   const igMedias = props.igMedias
@@ -10,7 +11,7 @@ export default function Index(props) {
   return (
     <Layout>
       <Header />
-      <Heading as="h1" mb="4">Hello, I'm Jesse Chen</Heading>
+      <Heading as="h1" mb="4">Hello, I'm <Text as="span" color={useLinkColor()}>Jesse Chen</Text></Heading>
       <Container mb="8">
         <Text>
           Hello, world!  This is my new and improved website.  Thanks for checking it out.  Lorem ipsum and all that jazz.  It’s been a long time since we saw a revamp here. 
