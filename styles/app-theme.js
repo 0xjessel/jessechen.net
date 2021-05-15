@@ -5,8 +5,9 @@ export const AppTheme = extendTheme({
     useSystemColorMode: true,
   },
   fonts: {
-    heading: "Merriweather",
-    body: "Merriweather",
+    //heading: "Hoefler Text",
+    //heading: "Merriweather",
+    //heading: "Neue Haas Unica Pro",
     mono: "Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace",
   },
   styles: {
