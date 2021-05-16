@@ -1,9 +1,10 @@
 import Layout from '../components/Layout'
-import { Container, Divider, Grid, Heading, Image, Skeleton, Text } from '@chakra-ui/react'
+import { Box, Container, Divider, Heading, Skeleton, Text } from '@chakra-ui/react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import InstaGrid from '../components/InstaGrid'
 import { useLinkColor } from '../styles/links'
+import NImage from "next/image"
 
 export default function Index(props) {
   const igMedias = props.igMedias
@@ -25,14 +26,17 @@ export default function Index(props) {
           Experience scaling and supporting multiple fullstack product teams at both Facebook and Instagram.  
         </Text>
       </Container>
-      <Image 
+      <Box
         mb={8}
-        borderRadius="4"
-        boxShadow="lg"
-        src="/images/hero.jpg"
-        // hardcoded dimensions don't work for mobile
-        fallback={<Skeleton mb={8} width={640} height={421} />}
-      />
+        boxShadow="lg">
+        <NImage 
+          layout="intrinsic"
+          borderRadius="4"
+          src="/images/hero.jpg"
+          // hardcoded dimensions don't work for mobile
+          fallback={<Skeleton mb={8} width={640} height={421} />}
+        />
+      </Box>
       <Divider />
       <InstaGrid mt="8" px="8" medias={igMedias} />
       <Footer />
