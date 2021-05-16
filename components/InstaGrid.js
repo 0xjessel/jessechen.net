@@ -21,7 +21,7 @@ export default function InstaGrid({ medias, ...props }) {
           '&::before': {
             content: '""',
             display: "block",
-            "padding-bottom": "100%"
+            "paddingBottom": "100%"
           },
         }
 
