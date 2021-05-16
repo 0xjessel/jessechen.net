@@ -21,9 +21,9 @@ export default function InstaGrid({ medias, ...props }) {
             isExternal
             href={media.permalink}
             key={media.id}
+            position="relative"
             css={isVideo
               ? {
-                  position: "relative",
                   '& svg' : {
                     position: 'absolute',
                     top: '50%',
