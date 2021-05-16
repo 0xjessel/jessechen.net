@@ -75,6 +75,7 @@ export default function About() {
           imgSource="/images/about/cal-logo.png"
           company="University of California, Berkeley"
           role="Bachelor of Science (B.S.), Electrical Engineering and Computer Sciences"
+          description={`Center for Entrepreneurship and Technology, IEEE, Residential Computing, Computer Science Undergraduate Association, Intramural Basketball`}
           dateRange="2008 - 2012"
         />
       </Container>
