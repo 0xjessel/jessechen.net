@@ -1,5 +1,5 @@
 import Layout from '../components/Layout'
-import { Box, Container, Divider, Heading, Image, Skeleton, Text } from '@chakra-ui/react'
+import { Box, Container, Divider, Heading, Text } from '@chakra-ui/react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import InstaGrid from '../components/InstaGrid'
@@ -28,15 +28,15 @@ export default function Index(props) {
       </Container>
       <Box
         mb={8}
-        boxShadow="lg">
+        borderRadius="4"
+        maxHeight="421"
+        boxShadow="lg"
+        overflow="hidden">
         <NImage 
           width="640"
           height="421"
           layout="intrinsic"
-          borderRadius="4"
           src="/images/hero.jpg"
-          // hardcoded dimensions don't work for mobile
-          fallback={<Skeleton mb={8} width={640} height={421} />}
         />
       </Box>
       <Divider />
