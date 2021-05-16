@@ -1,6 +1,7 @@
-import { LinkOverlay, SimpleGrid } from "@chakra-ui/layout";
-import { Icon, Image } from "@chakra-ui/react";
+import { Box, LinkOverlay, SimpleGrid } from "@chakra-ui/layout";
+import { Icon } from "@chakra-ui/react";
 import { FaPlay } from "react-icons/fa"
+import NImage from "next/image"
 
 export default function InstaGrid({ medias, ...props }) {
   if (!medias) {
@@ -15,32 +16,42 @@ export default function InstaGrid({ medias, ...props }) {
       {medias.map((media) => {
         const isVideo = media.media_type === "VIDEO" 
 
+        const boxBaseCSS = {
+          position: 'relative',
+          '&::before': {
+            content: '""',
+            display: "block",
+            "padding-bottom": "100%"
+          },
+        }
+
         return (
           <LinkOverlay
             isExternal
             href={media.permalink}
             key={media.id}
-            css={isVideo
-              ? {
-                  position: 'relative',
-                  '& svg' : {
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                  }
-                } : {
-                  position: 'relative',
-                }
-            }>
-            <Image
-              width="100%"
-              css={{ 'aspectRatio': '1' }}
-              objectFit="cover"
-              src={isVideo ? media.thumbnail_url : media.media_url}
-              alt="Instagram photo"
-            />
-            {isVideo ? <Icon as={FaPlay} boxSize="8" /> : null}
+            position="relative">
+            <Box
+              css={isVideo
+                ? {
+                    ...boxBaseCSS,
+                    '& svg' : {
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                    }
+                  } 
+                : boxBaseCSS
+                }>
+              <NImage
+                layout="fill" 
+                objectFit="cover"
+                src={isVideo ? media.thumbnail_url : media.media_url}
+                alt="Instagram photo"
+              />
+              {isVideo ? <Icon as={FaPlay} boxSize="8" /> : null}
+            </Box>
           </LinkOverlay>
         )}
       )}
