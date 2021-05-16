@@ -1,5 +1,5 @@
 module.exports = {
   images: {
-    domains: ['cdn.instagram.com'],
+    domains: ['scontent.cdninstagram.com', 'scontent-iad3-2.cdninstagram.com'],
   },
 }
