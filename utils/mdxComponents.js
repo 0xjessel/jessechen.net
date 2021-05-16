@@ -1,4 +1,4 @@
-import { Box, Code, Divider, Heading as CHeading, Kbd, Link, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/layout'
+import { AspectRatio, Box, Code, Divider, Heading as CHeading, Kbd, Link, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/layout'
 import { Image, useColorModeValue } from '@chakra-ui/react'
 import { useLinkColor } from '../styles/links'
 
@@ -83,5 +83,5 @@ export const components = {
   hr: (p) => <Divider mb="8" {...p} />,
   kbd: (p) => <Kbd {...p} />,
   img: (p) => <Image {...p} />,
-  iframe: (p) => <Box my="8"><iframe {...p} /></Box>
+  iframe: (p) => <AspectRatio my="8" ratio="1.778"><iframe {...p} /></AspectRatio>
 }
