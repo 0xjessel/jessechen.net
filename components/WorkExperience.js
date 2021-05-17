@@ -7,14 +7,14 @@ export default function WorkExperience({ imgSource, company, role, description, 
         <Image maxWidth="32px" src={imgSource} />
       </Box>
       <Box flex="1">
-        <Text fontSize="lg" fontWeight="bold" maxWidth={["214px", "none"]}>{company}</Text>
-        <Text fontSize="md" mb="2">{role}</Text>
-        <Text fontSize="sm" whiteSpace="pre-line">
+        <Text fontSize="xl" fontWeight="bold" maxWidth={["214px", "none"]}>{company}</Text>
+        <Text fontSize="lg" mb="2">{role}</Text>
+        <Text fontSize="md" whiteSpace="pre-line" lineHeight="base">
           {description}
         </Text>
       </Box>
       <Box position="absolute" right="0">
-        <Text color="gray.500" fontSize="sm">{dateRange}</Text>
+        <Text color="gray.500" fontSize="md">{dateRange}</Text>
       </Box>
     </Flex>
   );
