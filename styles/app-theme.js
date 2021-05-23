@@ -19,6 +19,9 @@ export const AppTheme = extendTheme({
         fontSize: 'var(--chakra-fontSizes-md)',
         lineHeight: 'var(--chakra-lineHeights-7)',
       },
+      '::selection': {
+        background: 'yellow.400',
+      },
     },
   },
   components: {

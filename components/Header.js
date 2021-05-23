@@ -1,6 +1,6 @@
 import NLink from 'next/link'
 import { Center, Flex, HStack, Link, Spacer, useColorMode } from "@chakra-ui/react"
-import { FiSun, FiTwitter } from 'react-icons/fi'
+import { FiSun } from 'react-icons/fi'
 
 export default function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
