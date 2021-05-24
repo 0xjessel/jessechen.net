@@ -1,5 +1,6 @@
 import { extendTheme } from "@chakra-ui/react"
 import { mode } from "@chakra-ui/theme-tools"
+import { LINK_DARK, LINK_LIGHT } from "./links"
 
 export const AppTheme = extendTheme({
   config: {
@@ -21,7 +22,7 @@ export const AppTheme = extendTheme({
         lineHeight: 'var(--chakra-lineHeights-7)',
       },
       '::selection': {
-        background: mode('yellow.400', 'yellow.500')(props),
+        background: mode(LINK_LIGHT, LINK_DARK)(props),
       },
     }),
   },

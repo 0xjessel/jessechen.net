@@ -7,13 +7,7 @@ export default function Layout({ children }) {
         as="main" 
         maxW="2xl" 
         px={4} 
-        py={8}
-        css={{
-          '::selection': {
-            color: 'blue',
-            background: 'tomato',
-          },
-        }}>
+        py={8}>
         {children}
       </Container>
     </>
