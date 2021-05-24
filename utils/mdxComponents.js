@@ -45,36 +45,24 @@ export const components = {
   ul: (p) => <UnorderedList mb="8" {...p} />,
   ol: (p) => <OrderedList mb="8" {...p} />,
   li: (p) => <ListItem {...p} />,
-  blockquote: (p) =>  <Box
-    as="blockquote"
-    position="relative"
-    mx={[-4, 0]}
-    pl={6}
-    pr={8}
-    py={2}
-    my={8}
-    fontSize="lg"
-    sx={{
-      '& p:last-child': {
-        mb: 0
-      }
-    }}
-    fontStyle="italic"
-    borderLeftWidth={4}
-    borderLeftColor={useColorModeValue('gray.400', 'gray.600')}
-    rounded={['none', 'sm']}
-    {...p}
-    _after={{
-      // opening: “
-      content: '"”"',
-      fontFamily: 'serif',
-      position: 'absolute',
-      color: useColorModeValue('gray.400', 'gray.600'),
-      fontSize: '5xl',
-      top: '-4px',
-      right: 3
-    }}
-  />,
+  blockquote: (p) =>  
+    <Box
+      as="blockquote"
+      px={6}
+      py={2}
+      my={8}
+      fontSize="xl"
+      lineHeight="tall"
+      sx={{
+        '& p:last-child': {
+          mb: 0
+        }
+      }}
+      fontStyle="italic"
+      borderLeftWidth={4}
+      borderLeftColor={useColorModeValue('gray.400', 'gray.600')}
+      {...p}
+    />,
   inlineCode: (p) => <Code {...p} />,
   pre: (p) =>
     <Box mb="8">
