@@ -1,15 +1,24 @@
-import { Heading, HStack, Stack, Text } from '@chakra-ui/layout'
+import { Heading, HStack, LinkBox, LinkOverlay, Text } from '@chakra-ui/layout'
 import NLink from 'next/link'
+import { useLinkColor } from '../styles/links';
 import Tags from './Tags';
 
 export default function ArticleListItem({ post }) {
   return (
-    <Stack as="article" minWidth="100%">
+    <LinkBox 
+      as="article" 
+      minWidth="100%"
+      sx={{
+        '&:hover h2': { color: useLinkColor() }
+      }}>
       <Heading as="h2" size="lg">
         <NLink
           as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
-          href={`/posts/[...slug]`}>
-          {post.data.title}
+          href={`/posts/[...slug]`}
+          passHref>
+          <LinkOverlay>
+            {post.data.title}
+          </LinkOverlay>
         </NLink>
       </Heading>
       <HStack>
@@ -24,6 +33,6 @@ export default function ArticleListItem({ post }) {
       <Text>
         {post.data.description}
       </Text>
-    </Stack>
+    </LinkBox>
   )
 }
