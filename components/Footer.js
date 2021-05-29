@@ -6,24 +6,28 @@ export default function Footer() {
     <VStack py="12" spacing="2">
       <HStack spacing="1">
         <Link 
+          borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
           href="https://www.linkedin.com/in/0xjessel" isExternal>
           <FiLinkedin />
         </Link>
         <Link 
+          borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
           href="https://github.com/0xjessel" isExternal>
           <FiGithub />
         </Link>
         <Link 
+          borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
           href="https://twitter.com/0xjessel" isExternal>
           <FiTwitter />
         </Link>
         <Link 
+          borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
           href="mailto:contact@jessechen.net" isExternal>
