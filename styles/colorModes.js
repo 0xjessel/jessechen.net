@@ -1,5 +1,8 @@
 import { useColorModeValue } from '@chakra-ui/color-mode'
 
+export const SELECTION_LIGHT = 'gray.300'
+export const SELECTION_DARK = 'gray.600'
+
 export const LINK_LIGHT = 'yellow.500'
 export const LINK_DARK = 'yellow.400'
 
