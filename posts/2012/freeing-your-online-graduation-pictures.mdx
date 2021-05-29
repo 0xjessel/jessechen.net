@@ -2,9 +2,10 @@
 title: "Freeing Your Online Graduation Pictures"
 description: "A basic tutorial on web development tools and Photoshop for college students."
 date: "2012-05-24"
-categories: 
+isPublished: false
+categories:
   - "how-to"
-tags: 
+tags:
   - college
 coverImage: "/images/posts/2012/handsome-young-african-american-man-holding-graduation-diploma.jpg"
 ---
@@ -16,8 +17,6 @@ Hi everyone,
 If you have found this 2-year old article (as of today), it is because you are either 1) looking for a way to get your graduation pictures without the watermarks or 2) found this from various blogs that've linked to this article.  This is a public apology to all the photographers out there who are outraged at the tutorial that taught non-tech savvy people how to remove watermarks from photos.  My friend and I wrote this article when we were still in school because we wanted an easy way to get the digital photo for free without shelling money out.  Yes, we were young and naive back then.  Yes, we did not feel like the photos were worth paying for back then.
 
 Let me explain the reasoning of why we wrote this article in the beginning.  We were both Computer Science majors and we have learned about web development, so when I saw the [animated watermarks on top of the previews](http://www2.gradimages.com/Proofs?PIN=17823395&LastName=CHEN), I was frustrated about it, and I thought of ways to get around it.  I thought it was clever that GradImages used javascript to disable right clicking among other efforts to circumvent people from trying to get to the raw photo.  I took it as a challenge to see if I can find a way to get to it, and found that it was trivial to get to the raw image.  Once I had the image, I approached Jon to teach me how one would be able to remove the giant yellow proof text overlayed on it.  He knew photoshop and he said it was easy to do (as you guys probably know).  Within minutes, he was able to show me the photo without any of the watermarks or proofs.  At this point, we were like hey, that's pretty cool!  Let's write a tutorial about it to show others how to do it as well!  And that's how it came to be.  Looking back, I regret the tone of the article and the lame sarcasm ("taking back what's yours") which is probably the main source of anger that you guys are having.
-
-
 
 If you are for some reason still interested in seeing the original content, you can still see it [here](http://fstoppers.com/facebook-software-engineer-teaches-you-how-to-steal-copyrighted-images)
 
@@ -41,7 +40,7 @@ Now, the hardest part.  What browser are you using?  Depending on your browser
 
 #### Chrome
 
-Press <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>i</kbd> to launch the WebKit Developer Tools.  If that doesn't work, go to the wrench icon on the top right, then Tools > Developer Tools.  If you see something like this, you're doing it right. 
+Press <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>i</kbd> to launch the WebKit Developer Tools.  If that doesn't work, go to the wrench icon on the top right, then Tools > Developer Tools.  If you see something like this, you're doing it right.
 
 ![jesse chen creepy bear with webkit developer tools](/images/posts/2012/jesse-chen-creepy-bear-with-webkit-developer-tools.png)
 
@@ -71,7 +70,7 @@ Open the URL in a new tab, and "Save image as..." onto your computer.
 
 Once the image has been saved onto your computer, its time to use Photoshop to remove the watermark from the image.  Also, did you know [all UC Berkeley students get Photoshop for free](http://ist.berkeley.edu/software-central/adobe)?  Jon will take it from here.
 
-* * *
+---
 
 Now we have our picture. The only problem is the giant yellow text splayed across it. To get rid of it, we’ll have to use some Photoshop tricks, namely content-aware fill. (Note: this tutorial heavily relies on the use of content-aware fill, which is only available in Photoshop CS5. If you have an older version you’ll have to use an alternate method to remove the yellow text).
 

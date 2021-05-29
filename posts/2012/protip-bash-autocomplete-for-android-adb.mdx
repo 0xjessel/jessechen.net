@@ -2,9 +2,10 @@
 title: "Protip: Bash Autocomplete for Android ADB"
 description: "Set up autocomplete with ADB to make android development less painful."
 date: "2012-02-17"
-categories: 
+isPublished: true
+categories:
   - "android-2"
-tags: 
+tags:
   - android
 coverImage: "/images/posts/2012/bash.png"
 ---
@@ -22,7 +23,7 @@ This protip will get you setup with bash autocomplete for ADB in less than 1 min
 - Use your favorite editor of choice (which should be vim) to edit your ~/.bashrc file.
 - Add the following lines (substitute your **own path** to the adb bash completion file) to the end of your ~/.bashrc file:
 
-```bash 
+```bash
 if \[ -e /bin/adb.txt \] ; then source /bin/adb.txt fi
 ```
 

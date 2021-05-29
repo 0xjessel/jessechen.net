@@ -34,10 +34,14 @@ export function getAllMDXPosts() {
  return mdxFiles
 }
 
-export function getAllMDXPostsWithMetadataSorted() {
-  return getAllMDXPosts().map((filePath) => {
+export function getAllMDXPostsWithMetadata(sorted = true, includeUnpublished = false) {
+  const posts = getAllMDXPosts().map((filePath) => {
     const source = fs.readFileSync(path.join(POSTS_PATH, filePath))
     const { content, data } = matter(source)
+
+    if (!data.isPublished && !includeUnpublished) {
+      return {}
+    }
 
     data.readingTime = require('reading-time')(content)
 
@@ -46,5 +50,9 @@ export function getAllMDXPostsWithMetadataSorted() {
       data,
       filePath,
     }
-  }).sort((postA, postB) => postA.data.date < postB.data.date ? 1 : -1)
+  }).filter((post) => Object.keys(post).length !== 0)
+
+  return sorted 
+    ? posts.sort((postA, postB) => postA.data.date < postB.data.date ? 1 : -1)
+    : posts
 }

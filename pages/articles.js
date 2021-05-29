@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import ArticleListItem from '../components/ArticleListItem'
 
-import { getAllMDXPostsWithMetadataSorted } from '../utils/mdxUtils'
+import { getAllMDXPostsWithMetadata } from '../utils/mdxUtils'
 
 export default function Articles({ posts }) {
   return (
@@ -23,7 +23,7 @@ export default function Articles({ posts }) {
 }
 
 export function getStaticProps() {
-  const posts = getAllMDXPostsWithMetadataSorted()
+  const posts = getAllMDXPostsWithMetadata()
 
   return { props: { posts } }
 }

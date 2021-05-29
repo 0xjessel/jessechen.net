@@ -2,10 +2,11 @@
 title: "How to NFC on the Android Platform"
 description: "Let's pretend that you are an engineer at Facebook working on the Android app, when suddenly the PM tells you that they want to integrate NFC into the Facebook app. Some basic functionality that they want implemented to get started with is to be able to add friends, and check in to places instantly via NFC. This would be a simple way to get started..hypothetically, of course."
 date: "2011-08-30"
-categories: 
+isPublished: true
+categories:
   - "android-2"
   - "how-to"
-tags: 
+tags:
   - android
 coverImage: "/images/posts/2011/android-centurion.jpg"
 ---
@@ -16,7 +17,12 @@ Starting with Android 2.3, the platform includes an NFC stack and framework API 
 
 The only resource I used was the 2011 Google I/O NFC Talk:
 
-<iframe src="https://www.youtube.com/embed/49L7z3rxz4Q" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+<iframe
+  src="https://www.youtube.com/embed/49L7z3rxz4Q"
+  title="YouTube video player"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen></iframe>
 
 and the [Sticky Notes demo source code](http://nfc.android.com/StickyNotes.zip) from the NFC talk above.
 
@@ -30,79 +36,83 @@ Two NFC-enabled devices have the ability to transfer data to each other simultan
 
 To begin, both phones have to be running the same Activity in the foreground in order to work.  Let's call this Activity 'NfcAddFriendsActivity'.
 
-In NfcAddFriendsActivity's `onCreate` method, we have the following code: 
-```java 
-mNfcAdapter = NfcAdapter.getDefaultAdapter(this); 
-mNfcPendingIntent = PendingIntent.getActivity(this, 0, 
-  new Intent(this, getClass()).addFlags(Intent.FLAG\_ACTIVITY\_SINGLE\_TOP), 0); 
-// Intent filters for exchanging over p2p. 
-IntentFilter ndefDetected = new IntentFilter(NfcAdapter.ACTION\_NDEF\_DISCOVERED); 
-try { 
-  ndefDetected.addDataType("text/plain"); 
-} catch (MalformedMimeTypeException e) { 
-} 
-mNdefExchangeFilters = new IntentFilter[] { ndefDetected }; 
+In NfcAddFriendsActivity's `onCreate` method, we have the following code:
+
+```java
+mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+mNfcPendingIntent = PendingIntent.getActivity(this, 0,
+  new Intent(this, getClass()).addFlags(Intent.FLAG\_ACTIVITY\_SINGLE\_TOP), 0);
+// Intent filters for exchanging over p2p.
+IntentFilter ndefDetected = new IntentFilter(NfcAdapter.ACTION\_NDEF\_DISCOVERED);
+try {
+  ndefDetected.addDataType("text/plain");
+} catch (MalformedMimeTypeException e) {
+}
+mNdefExchangeFilters = new IntentFilter[] { ndefDetected };
 ```
 
 This sets up the different intents that are needed in order for p2p to work.  `mNfcPendingIntent` is a generic PendingIntent that will be delivered to this activity, Android fills the intent later with the details from the discovered tag before sending it to this activity.  The `nDefDetected` IntentFilter is set to filter for the intent `NfcAdapter.ACTION_NDEF_DISCOVERED` with the mime type "text/plain".  So there will be a dispatch to the foreground Activity when Android receives an intent matching the IntentFilter we just created.
 
-The next step is to enable pushing NDEF messages and receiving NDEF messages.  That means in our `onResume` method, we call `enableNdefExchangeMode` which looks like: 
+The next step is to enable pushing NDEF messages and receiving NDEF messages.  That means in our `onResume` method, we call `enableNdefExchangeMode` which looks like:
+
 ```java
-private void enableNdefExchangeMode() { 
-  mNfcAdapter.enableForegroundNdefPush(NfcAddFriendsActivity.this, 
-    NfcUtils.getUidAsNdef(mUserId)); 
-  mNfcAdapter.enableForegroundDispatch(this, mNfcPendingIntent, 
-    mNdefExchangeFilters, null); 
+private void enableNdefExchangeMode() {
+  mNfcAdapter.enableForegroundNdefPush(NfcAddFriendsActivity.this,
+    NfcUtils.getUidAsNdef(mUserId));
+  mNfcAdapter.enableForegroundDispatch(this, mNfcPendingIntent,
+    mNdefExchangeFilters, null);
 }
 ```
 
-These method calls are what allows our device to initiate p2p communiation via NFC.  `NfcUtils.getUidAsNdef` is the method that creates a NDEF message with mime type "text/plain" with the user's UID as the payload.  `enableForegroundNdefPush` will push this message to the other device.  `enableForegroundDispatch` will set up the listener for the intent that we are filtering for such that when it detects an intent matching the intent filter, it calls our activity's `onNewIntent` method: 
+These method calls are what allows our device to initiate p2p communiation via NFC.  `NfcUtils.getUidAsNdef` is the method that creates a NDEF message with mime type "text/plain" with the user's UID as the payload.  `enableForegroundNdefPush` will push this message to the other device.  `enableForegroundDispatch` will set up the listener for the intent that we are filtering for such that when it detects an intent matching the intent filter, it calls our activity's `onNewIntent` method:
+
 ```java
-@Override 
-protected void onNewIntent(Intent intent) { 
-  // NDEF exchange mode 
-  if (!mWriteMode && NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) { 
-    NdefMessage[] msgs = NfcUtils.getNdefMessages(intent); 
-    fireFriendRequest(msgs[0]); 
-    Toast.makeText(this, "sent friend request via nfc!", Toast.LENGTH_LONG).show(); 
-  } 
-} 
+@Override
+protected void onNewIntent(Intent intent) {
+  // NDEF exchange mode
+  if (!mWriteMode && NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
+    NdefMessage[] msgs = NfcUtils.getNdefMessages(intent);
+    fireFriendRequest(msgs[0]);
+    Toast.makeText(this, "sent friend request via nfc!", Toast.LENGTH_LONG).show();
+  }
+}
 ```
 
 Here, it parses the received NDEF message and gets the payload which should be the other user's UID.  Then I call `fireFriendRequest` which is a method that we can assume sends a friend request to the UID that was given.
 
-`NfcUtils.getNdefMessages` is below, exactly the same as the Sticky Notes demo: 
+`NfcUtils.getNdefMessages` is below, exactly the same as the Sticky Notes demo:
+
 ```java
-NdefMessage[] getNdefMessages(Intent intent) { 
-  // Parse the intent 
-  NdefMessage[] msgs = null; 
-  String action = intent.getAction(); 
-  if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action) 
-    || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) { 
-    Parcelable[] rawMsgs = 
-      intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES); 
-  if (rawMsgs != null) { 
-    msgs = new NdefMessage[rawMsgs.length]; 
-    for (int i = 0; i < rawMsgs.length; i++) { 
-      msgs[i] = (NdefMessage) rawMsgs[i]; 
-      } 
-    } else { 
-      // Unknown tag type 
-      byte[] empty = new byte[] {}; 
-      NdefRecord record = new NdefRecord(NdefRecord.TNF_UNKNOWN, empty, empty, empty); 
-      NdefMessage msg = new NdefMessage(new NdefRecord[] { 
-        record 
-      }); 
-      msgs = new NdefMessage[] { 
-        msg 
-      }; 
-    } 
-  } else { 
-    Log.d(TAG, "Unknown intent."); 
-    finish(); 
-  } 
-  return msgs; 
-} 
+NdefMessage[] getNdefMessages(Intent intent) {
+  // Parse the intent
+  NdefMessage[] msgs = null;
+  String action = intent.getAction();
+  if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
+    || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
+    Parcelable[] rawMsgs =
+      intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+  if (rawMsgs != null) {
+    msgs = new NdefMessage[rawMsgs.length];
+    for (int i = 0; i < rawMsgs.length; i++) {
+      msgs[i] = (NdefMessage) rawMsgs[i];
+      }
+    } else {
+      // Unknown tag type
+      byte[] empty = new byte[] {};
+      NdefRecord record = new NdefRecord(NdefRecord.TNF_UNKNOWN, empty, empty, empty);
+      NdefMessage msg = new NdefMessage(new NdefRecord[] {
+        record
+      });
+      msgs = new NdefMessage[] {
+        msg
+      };
+    }
+  } else {
+    Log.d(TAG, "Unknown intent.");
+    finish();
+  }
+  return msgs;
+}
 ```
 
 ### Writing to a NFC Tag - Checking into Places Example
@@ -116,106 +126,106 @@ Lets assume you have a list of Facebook Places, and when the user clicks on a Pl
 
 Place place = (Place) mListAdapter.getItem(position);
 
-// NFC: Write id to tag 
-placeidToWrite = place.mPlaceId; 
+// NFC: Write id to tag
+placeidToWrite = place.mPlaceId;
 enableTagWriteMode();
 
-new AlertDialog.Builder(NfcWriteCheckinActivity.this).setTitle("Touch tag to write") 
-  .setOnCancelListener(new DialogInterface.OnCancelListener() { 
-    @Override 
-    public void onCancel(DialogInterface dialog) { 
-      disableTagWriteMode(); 
-    } 
+new AlertDialog.Builder(NfcWriteCheckinActivity.this).setTitle("Touch tag to write")
+  .setOnCancelListener(new DialogInterface.OnCancelListener() {
+    @Override
+    public void onCancel(DialogInterface dialog) {
+      disableTagWriteMode();
+    }
   }).create().show();
 
-... 
+...
 ```
 
 I hold the placeid in `placeidToWrite`, and call `enableTagWriteMode`.  An alert dialog pops up prompting the user to tap the phone to the tag to write.  `enableTagWriteMode` below:
 
 ```java
-private void enableTagWriteMode() { 
-  mWriteMode = true; 
-  IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED); 
-  mWriteTagFilters = new IntentFilter[] { tagDetected }; 
-  mNfcAdapter.enableForegroundDispatch(this, mNfcPendingIntent, mWriteTagFilters, null); 
-} 
+private void enableTagWriteMode() {
+  mWriteMode = true;
+  IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
+  mWriteTagFilters = new IntentFilter[] { tagDetected };
+  mNfcAdapter.enableForegroundDispatch(this, mNfcPendingIntent, mWriteTagFilters, null);
+}
 ```
 
-I create a new IntentFilter for the intent `NFCAdapter.ACTION_TAG_DISCOVERED`, which is the intent to start an Activity when a NFC tag is discovered.  Then, like in the adding friends example, `enableForegroundDispatch` is called to dispatch a discovered tag to the foreground activity.  Once this is all set up, and the user taps the phone onto a tag, the ACTION\_TAG\_DISCOVERED intent is detected and `onNewIntent` is called:
+I create a new IntentFilter for the intent `NFCAdapter.ACTION_TAG_DISCOVERED`, which is the intent to start an Activity when a NFC tag is discovered.  Then, like in the adding friends example, `enableForegroundDispatch` is called to dispatch a discovered tag to the foreground activity.  Once this is all set up, and the user taps the phone onto a tag, the ACTION_TAG_DISCOVERED intent is detected and `onNewIntent` is called:
 
-```java 
-@Override 
-protected void onNewIntent(Intent intent) { 
-  // Tag writing mode 
-  if (mWriteMode && NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) { 
-    Tag detectedTag = intent.getParcelableExtra(NfcAdapter.EXTRA\_TAG); 
-    if (NfcUtils.writeTag(NfcUtils.getPlaceidAsNdef(placeidToWrite), detectedTag)) { 
-      Toast.makeText(this, "Success: Wrote placeid to nfc tag", Toast.LENGTH_LONG) 
-        .show(); 
-      NfcUtils.soundNotify(this); 
-    } else { 
-      Toast.makeText(this, "Write failed", Toast.LENGTH_LONG).show(); 
-    } 
-  } 
-} 
+```java
+@Override
+protected void onNewIntent(Intent intent) {
+  // Tag writing mode
+  if (mWriteMode && NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
+    Tag detectedTag = intent.getParcelableExtra(NfcAdapter.EXTRA\_TAG);
+    if (NfcUtils.writeTag(NfcUtils.getPlaceidAsNdef(placeidToWrite), detectedTag)) {
+      Toast.makeText(this, "Success: Wrote placeid to nfc tag", Toast.LENGTH_LONG)
+        .show();
+      NfcUtils.soundNotify(this);
+    } else {
+      Toast.makeText(this, "Write failed", Toast.LENGTH_LONG).show();
+    }
+  }
+}
 ```
 
 `NfcUtils.getPlaceidAsNdef` takes the placeid and creates a NDEF message with mimetype "application/vnd.facebook.places", which is a custom and vendor-specific mimetype that I made up to distinguish the different NFC tags (places, url, pages) for Facebook.  That way, when the phone reads a NFC tag, it knows which Activity to launch (I detect mimetype "application/vnd.fb.places" - I should launch this specific Activity from Facebook).
 
 NfcUtils is my handy utility class for all things NFC.  `NfcUtils.getPlaceidAsNdef` looks like:
 
-```java 
-/* 
- * Converts a Long into a NdefMessage in application/vnd.facebook.places MIMEtype. 
- * for writing Places 
- */ 
- public static NdefMessage getPlaceidAsNdef(Long id) { 
-   String msg = ((Long) id).toString(); 
-   byte[] textBytes = msg.getBytes(); 
-   NdefRecord textRecord = new NdefRecord(NdefRecord.TNF_MIME_MEDIA, 
-    "application/vnd.facebook.places".getBytes(), new byte[] {}, textBytes); 
-  return new NdefMessage(new NdefRecord[] { textRecord }); 
+```java
+/*
+ * Converts a Long into a NdefMessage in application/vnd.facebook.places MIMEtype.
+ * for writing Places
+ */
+ public static NdefMessage getPlaceidAsNdef(Long id) {
+   String msg = ((Long) id).toString();
+   byte[] textBytes = msg.getBytes();
+   NdefRecord textRecord = new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
+    "application/vnd.facebook.places".getBytes(), new byte[] {}, textBytes);
+  return new NdefMessage(new NdefRecord[] { textRecord });
 }
 ```
 
 Once you construct the NDEF message, you need to actually write it to the tag.  `NfcUtils.writeTag` looks like:
 
-```java 
-/* 
- * Writes an NdefMessage to a NFC tag 
- */ 
-public static boolean writeTag(NdefMessage message, Tag tag) { 
-  int size = message.toByteArray().length; 
-  try { 
-    Ndef ndef = Ndef.get(tag); 
-    if (ndef != null) { 
-      ndef.connect(); 
-      if (!ndef.isWritable()) { 
-        return false; 
-      } 
-      if (ndef.getMaxSize() < size) { 
-        return false; 
-      } 
-      ndef.writeNdefMessage(message); 
-      return true; 
-    } else { 
-      NdefFormatable format = NdefFormatable.get(tag); 
-      if (format != null) { 
-        try { 
-          format.connect(); 
-          format.format(message); 
-          return true; 
-        } catch (IOException e) { 
-          return false; 
-        } 
-      } else { 
-        return false; 
-      } 
-    } 
-  } catch (Exception e) { 
-    return false; 
-  } 
+```java
+/*
+ * Writes an NdefMessage to a NFC tag
+ */
+public static boolean writeTag(NdefMessage message, Tag tag) {
+  int size = message.toByteArray().length;
+  try {
+    Ndef ndef = Ndef.get(tag);
+    if (ndef != null) {
+      ndef.connect();
+      if (!ndef.isWritable()) {
+        return false;
+      }
+      if (ndef.getMaxSize() < size) {
+        return false;
+      }
+      ndef.writeNdefMessage(message);
+      return true;
+    } else {
+      NdefFormatable format = NdefFormatable.get(tag);
+      if (format != null) {
+        try {
+          format.connect();
+          format.format(message);
+          return true;
+        } catch (IOException e) {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
+  } catch (Exception e) {
+    return false;
+  }
 }
 ```
 
@@ -230,13 +240,13 @@ In the AndroidManifest, we need to write intent-filters that captures the differ
 This is a snippet of the AndroidManifest for the app:
 
 ```java
-<activity android:name=".CheckInActivity"> 
-  <intent-filter> 
-    <action android:name="android.nfc.action.NDEF\_DISCOVERED"/> 
-    <data android:mimeType="application/vnd.facebook.places"/> 
-    <category android:name="android.intent.category.DEFAULT"/> 
-  </intent-filter> 
-</activity> 
+<activity android:name=".CheckInActivity">
+  <intent-filter>
+    <action android:name="android.nfc.action.NDEF\_DISCOVERED"/>
+    <data android:mimeType="application/vnd.facebook.places"/>
+    <category android:name="android.intent.category.DEFAULT"/>
+  </intent-filter>
+</activity>
 ```
 
 Notice the exact specification of the mimetype, which is the custom vendor mimetype that I created for checking in to places.  That way, I can have one application, like Facebook, pass different intents to different Activities within Facebook.
@@ -244,16 +254,16 @@ Notice the exact specification of the mimetype, which is the custom vendor mimet
 Within CheckInActivity, it is fairly simple to extract the placeid and open the checkin activity.  You do it in the `onResume` method of CheckInActivity:
 
 ```java
-@Override 
-protected void onResume() { 
-  super.onResume(); 
-  if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) { 
-    NdefMessage[] messages = NfcUtils.getNdefMessages(getIntent()); 
-    byte[] payload = messages[0].getRecords()[0].getPayload(); 
-    String placeId = new String(payload); 
-    NfcUtils.soundNotify(this); 
-  } 
-} 
+@Override
+protected void onResume() {
+  super.onResume();
+  if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
+    NdefMessage[] messages = NfcUtils.getNdefMessages(getIntent());
+    byte[] payload = messages[0].getRecords()[0].getPayload();
+    String placeId = new String(payload);
+    NfcUtils.soundNotify(this);
+  }
+}
 ```
 
 **_Note:_** The user ID and the place ID are all written and transmitted in plaintext with no authentication or encryption. FWIW, that may or may not be acceptable for some apps. I haven't looked into the security implications on NFC, but if you are passing confidential data, you will have to find a way to encrypt the data before writing, verifying the integrity of the data when receiving, and authenticating the entity that sent the data. Since this was a personal hackathon project, I did not implement any security features.

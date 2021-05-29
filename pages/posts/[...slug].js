@@ -3,7 +3,7 @@ import matter from 'gray-matter'
 import hydrate from 'next-mdx-remote/hydrate'
 import renderToString from 'next-mdx-remote/render-to-string'
 import path from 'path'
-import { getAllMDXPosts, getAllMDXPostsWithMetadataSorted, POSTS_PATH } from '../../utils/mdxUtils'
+import { getAllMDXPosts, getAllMDXPostsWithMetadata, POSTS_PATH } from '../../utils/mdxUtils'
 
 import Layout from '../../components/Layout'
 import { Flex, Heading, HStack, Link, Spacer, Text } from '@chakra-ui/layout'
@@ -82,7 +82,7 @@ export const getStaticProps = async ({ params }) => {
     scope: data,
   })
 
-  const allPosts = getAllMDXPostsWithMetadataSorted()
+  const allPosts = getAllMDXPostsWithMetadata()
   const postIndex = allPosts.findIndex(post => post.filePath === postFilename)
   const prevPost = postIndex < allPosts.length - 1 ? allPosts[postIndex + 1] : null
   const nextPost = postIndex > 0 ? allPosts[postIndex - 1] : null 
