@@ -47,7 +47,8 @@ export default function Header() {
       <HStack spacing={[2, 8]}>
         <Link
           borderRadius="full"
-          padding={2}
+          pl={2}
+          py={2}
           onClick={toggleColorMode}>
           <FiSun />
         </Link>
