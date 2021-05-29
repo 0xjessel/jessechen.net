@@ -1,5 +1,5 @@
-import { ChakraProvider, extendTheme } from "@chakra-ui/react"
-import { AppTheme } from "../styles/app-theme"
+import { ChakraProvider } from "@chakra-ui/react"
+import { AppTheme } from "../styles/appTheme"
 import { FontsGlobal } from "../styles/fonts"
 import { PrismGlobal } from '../styles/prism'
 
