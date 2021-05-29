@@ -3,7 +3,7 @@ import { Box, Container, Divider, Heading, Text } from '@chakra-ui/react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import InstaGrid from '../components/InstaGrid'
-import { useLinkColor } from '../styles/links'
+import { useLinkColor } from '../styles/colorModes'
 import NImage from "next/image"
 
 export default function Index(props) {

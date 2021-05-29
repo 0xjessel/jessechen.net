@@ -1,6 +1,7 @@
 import NLink from 'next/link'
-import { Center, Flex, HStack, Link, Spacer, useColorMode, useColorModeValue } from "@chakra-ui/react"
+import { Center, Flex, HStack, Link, Spacer, useColorMode } from "@chakra-ui/react"
 import { FiSun } from 'react-icons/fi'
+import { useBorderColor } from '../styles/colorModes';
 
 export default function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -19,7 +20,7 @@ export default function Header() {
             fontSize={['sm', 'md']}
             mr={1}
             border="1px"
-            borderColor={useColorModeValue('gray.800', 'gray.50')}>
+            borderColor={useBorderColor()}>
             <Center 
               fontSize={['md', 'lg']} 
               whiteSpace="nowrap"

@@ -1,6 +1,6 @@
 import { extendTheme } from "@chakra-ui/react"
 import { mode } from "@chakra-ui/theme-tools"
-import { LINK_DARK, LINK_LIGHT } from "./links"
+import { LINK_DARK, LINK_LIGHT } from "./colorModes"
 
 export const AppTheme = extendTheme({
   config: {

@@ -1,6 +1,6 @@
 import { Heading, HStack, LinkBox, LinkOverlay, Text } from '@chakra-ui/layout'
 import NLink from 'next/link'
-import { useLinkColor } from '../styles/links';
+import { useLinkColor } from '../styles/colorModes';
 import Tags from './Tags';
 
 export default function ArticleListItem({ post }) {
@@ -9,7 +9,7 @@ export default function ArticleListItem({ post }) {
       as="article" 
       minWidth="100%"
       sx={{
-        '&:hover h2': { color: useLinkColor() }
+        '&:hover h2': { color: useLinkColor()}
       }}>
       <Heading as="h2" size="lg">
         <NLink

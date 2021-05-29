@@ -13,7 +13,7 @@ import Tags from '../../components/Tags'
 import NLink from 'next/link'
 
 import { components } from '../../utils/mdxComponents'
-import { useLinkColor } from '../../styles/links'
+import { useLinkColor } from '../../styles/colorModes'
 
 export default function PostPage({ source, frontMatter, previous, next }) {
   const content = hydrate(source, { components })
