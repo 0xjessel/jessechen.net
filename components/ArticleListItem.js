@@ -1,5 +1,4 @@
-import { Container, Heading, HStack, Stack, Text } from '@chakra-ui/layout'
-import { Tag } from '@chakra-ui/tag';
+import { Heading, HStack, Stack, Text } from '@chakra-ui/layout'
 import NLink from 'next/link'
 import Tags from './Tags';
 
