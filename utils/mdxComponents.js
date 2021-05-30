@@ -19,12 +19,10 @@ function Heading({ children, ...props }) {
         _hover={{
           opacity: 1,
           color: useLinkColor(),
-          textDecoration: 'underline',
         }}
         _focus={{
           opacity: 1,
           color: useLinkColor(),
-          textDecoration: 'underline'
         }}>
         #
       </Link>
