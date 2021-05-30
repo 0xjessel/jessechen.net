@@ -46,7 +46,7 @@ export default function Footer() {
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
-          href="mailto:contact@jessechen.net" isExternal>
+          href="mailto:contact+website@jessechen.net" isExternal>
           <RiMailLine size="1.1em" />
         </Link>
       </HStack>
