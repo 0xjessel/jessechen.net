@@ -1,7 +1,6 @@
-import { AspectRatio, Box, LinkOverlay, SimpleGrid } from "@chakra-ui/layout";
-import { Icon } from "@chakra-ui/react";
+import { AspectRatio, LinkOverlay, SimpleGrid } from "@chakra-ui/layout";
+import { Icon, Image } from "@chakra-ui/react";
 import { FaPlay } from "react-icons/fa"
-import NImage from "next/image"
 
 export default function InstaGrid({ medias, ...props }) {
   if (!medias) {
@@ -34,8 +33,7 @@ export default function InstaGrid({ medias, ...props }) {
               : {}
             }>
             <AspectRatio ratio="1">
-              <NImage
-                layout="fill" 
+              <Image
                 objectFit="cover"
                 src={isVideo ? media.thumbnail_url : media.media_url}
                 alt="Instagram photo"
