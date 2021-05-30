@@ -40,6 +40,7 @@ export default function Index(props) {
           height="421"
           layout="intrinsic"
           src="/images/hero.jpg"
+          alt="image of jesse chen"
         />
       </Box>
       <Divider />

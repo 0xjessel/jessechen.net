@@ -25,28 +25,36 @@ export default function Footer() {
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
-          href="https://www.linkedin.com/in/0xjessel" isExternal>
+          href="https://www.linkedin.com/in/0xjessel" 
+          title="LinkedIn"
+          isExternal>
           <RiLinkedinLine size="1.1em" />
         </Link>
         <Link 
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
-          href="https://github.com/0xjessel" isExternal>
+          href="https://github.com/0xjessel" 
+          title="Github"
+          isExternal>
           <RiGithubLine size="1.1em" />
         </Link>
         <Link 
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
-          href="https://twitter.com/0xjessel" isExternal>
+          href="https://twitter.com/0xjessel" 
+          title="Twitter"
+          isExternal>
           <RiTwitterLine size="1.1em" />
         </Link>
         <Link 
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
-          href="mailto:contact+website@jessechen.net" isExternal>
+          href="mailto:contact+website@jessechen.net" 
+          title="Email"
+          isExternal>
           <RiMailLine size="1.1em" />
         </Link>
       </HStack>
