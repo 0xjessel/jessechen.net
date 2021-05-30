@@ -3,14 +3,18 @@ import { RiLinkedinLine, RiGithubLine, RiTwitterLine, RiMailLine } from "react-i
 
 export default function Footer() {
   const commitSHA = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
+  let commitMessage = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE
+  const messageMatch = commitMessage.match(/^.{0,18}/g) // first 18 chars that is not a linebreak
+  commitMessage = messageMatch.length > 0
+    ? messageMatch[0] + '..'
+    : ''
+
   const commitURL = 
     <Link
       href={`https://github.com/0xjessel/jessechen.net/commit/${commitSHA}`}
       isExternal>
       <pre>
-        {commitSHA.slice(0, 7)}
-        {' - '}
-        {process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE}
+        {`${commitSHA.slice(0, 7)} ${commitMessage}`}
       </pre>
     </Link>
 
