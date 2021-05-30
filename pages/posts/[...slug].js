@@ -15,16 +15,15 @@ import NLink from 'next/link'
 import { components } from '../../utils/mdxComponents'
 import { useLinkColor } from '../../styles/colorModes'
 
-export default function PostPage({ source, frontMatter, previous, next }) {
+export default function PostPage({ source, frontMatter, filePath, previous, next }) {
   const content = hydrate(source, { components })
-  const postURL = `/posts/${previous.filePath.replace(/\.mdx?$/, '')}`
 
   return (
     <Layout
       SEO={{ 
         title: frontMatter.title,
         description: frontMatter.description,
-        url: `${process.env.NEXT_PUBLIC_VERCEL_URL}${postURL}`,
+        url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/posts/${filePath}`,
       }}>
       <Header />
       <Heading as="h1" mb="2">{frontMatter.title}</Heading>
@@ -42,7 +41,7 @@ export default function PostPage({ source, frontMatter, previous, next }) {
       <Flex as="nav" mt="20">
         {previous && 
           <NLink
-            as={postURL}
+            as={`/posts/${previous.filePath.replace(/\.mdx?$/, '')}`}
             href={`/posts/[...slug]`}>
             <Link color={useLinkColor()}>
               {`← ${previous.title}`}
@@ -121,6 +120,7 @@ export const getStaticProps = async ({ params }) => {
     props: {
       source: mdxSource,
       frontMatter: data,
+      filePath: `${params.slug.join('/')}`,
       previous,
       next,
     },
