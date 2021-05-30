@@ -18,7 +18,7 @@ export default {
     },
     images: [
       {
-        url: "/images/hero.jpg",
+        url: "https://jessechen.net/images/hero.jpg",
       }
     ]
   },

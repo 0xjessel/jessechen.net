@@ -12,7 +12,6 @@ export default function Index(props) {
   return (
     <Layout 
       SEO={{ 
-        title: "Home",
         url: `${process.env.NEXT_PUBLIC_VERCEL_URL}`,
       }}>
       <Header />
