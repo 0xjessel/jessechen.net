@@ -2,6 +2,18 @@ import { Center, HStack, Link, Text, VStack } from "@chakra-ui/react"
 import { RiLinkedinLine, RiGithubLine, RiTwitterLine, RiMailLine } from "react-icons/ri"
 
 export default function Footer() {
+  const commitSHA = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
+  const commitURL = 
+    <Link
+      href={`https://github.com/0xjessel/jessechen.net/commit/${commitSHA}`}
+      isExternal>
+      <pre>
+        {commitSHA.slice(0, 7)}
+        {' - '}
+        {process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE}
+      </pre>
+    </Link>
+
   return (
     <VStack py="12" spacing="2">
       <HStack spacing="1">
@@ -35,8 +47,13 @@ export default function Footer() {
         </Link>
       </HStack>
       <Center>
-        <Text fontSize="xs" color="gray.400">
-          © 2021, Jesse Chen • 02ecf248
+        <Text 
+          fontSize="xs" 
+          color="gray.400"
+          sx={{ 
+            '& pre': { display: "inline" },
+          }}>
+          © 2021, Jesse Chen • {commitURL}
         </Text>
       </Center>
     </VStack>    
