@@ -1,5 +1,5 @@
 import { Center, HStack, Link, Text, VStack } from "@chakra-ui/react"
-import { FiLinkedin, FiGithub, FiTwitter, FiMail } from "react-icons/fi"
+import { RiLinkedinLine, RiGithubLine, RiTwitterLine, RiMailLine } from "react-icons/ri"
 
 export default function Footer() {
   return (
@@ -10,28 +10,28 @@ export default function Footer() {
           padding="2"
           _hover={{ opacity: .7 }}
           href="https://www.linkedin.com/in/0xjessel" isExternal>
-          <FiLinkedin />
+          <RiLinkedinLine size="1.1em" />
         </Link>
         <Link 
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
           href="https://github.com/0xjessel" isExternal>
-          <FiGithub />
+          <RiGithubLine size="1.1em" />
         </Link>
         <Link 
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
           href="https://twitter.com/0xjessel" isExternal>
-          <FiTwitter />
+          <RiTwitterLine size="1.1em" />
         </Link>
         <Link 
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
           href="mailto:contact@jessechen.net" isExternal>
-          <FiMail />
+          <RiMailLine size="1.1em" />
         </Link>
       </HStack>
       <Center>
