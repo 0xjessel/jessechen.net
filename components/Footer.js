@@ -13,9 +13,9 @@ export default function Footer() {
     <Link
       href={`https://github.com/0xjessel/jessechen.net/commit/${commitSHA}`}
       isExternal>
-      <pre>
+      <Text as="span" display="inline" fontFamily="mono">
         {`${commitSHA.slice(0, 7)} ${commitMessage}`}
-      </pre>
+      </Text>
     </Link>
 
   return (

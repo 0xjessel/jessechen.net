@@ -31,13 +31,15 @@ export default function Header() {
           </Link>
         </NLink>
         {links.map(link => 
-          <NLink href={link[1]}>
+          <NLink 
+            key={link[1]}
+            href={link[1]}>
             <Link 
               fontSize={['sm', 'md']}
               borderRadius="base"
               p={2}
               _hover={{ 
-                'text-decoration': 'none',
+                textDecoration: 'none',
               }}>
               {link[0]}
             </Link>
