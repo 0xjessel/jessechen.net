@@ -4,13 +4,17 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import InstaGrid from '../components/InstaGrid'
 import { useLinkColor } from '../styles/colorModes'
-import NImage from "next/image"
+import NImage from 'next/image'
 
 export default function Index(props) {
   const igMedias = props.igMedias
 
   return (
-    <Layout>
+    <Layout 
+      SEO={{ 
+        title: "Home",
+        url: `${process.env.NEXT_PUBLIC_VERCEL_URL}`,
+      }}>
       <Header />
       <Heading as="h1" mb="4">Hello, I'm <Text as="span" color={useLinkColor()}>Jesse Chen</Text></Heading>
       <Container mb="8">

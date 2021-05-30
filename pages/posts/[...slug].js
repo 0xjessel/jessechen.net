@@ -17,9 +17,15 @@ import { useLinkColor } from '../../styles/colorModes'
 
 export default function PostPage({ source, frontMatter, previous, next }) {
   const content = hydrate(source, { components })
+  const postURL = `/posts/${previous.filePath.replace(/\.mdx?$/, '')}`
 
   return (
-    <Layout>
+    <Layout
+      SEO={{ 
+        title: frontMatter.title,
+        description: frontMatter.description,
+        url: `${process.env.NEXT_PUBLIC_VERCEL_URL}${postURL}`,
+      }}>
       <Header />
       <Heading as="h1" mb="2">{frontMatter.title}</Heading>
       <HStack mb="8">
@@ -36,7 +42,7 @@ export default function PostPage({ source, frontMatter, previous, next }) {
       <Flex as="nav" mt="20">
         {previous && 
           <NLink
-            as={`/posts/${previous.filePath.replace(/\.mdx?$/, '')}`}
+            as={postURL}
             href={`/posts/[...slug]`}>
             <Link color={useLinkColor()}>
               {`← ${previous.title}`}

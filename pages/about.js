@@ -7,7 +7,12 @@ import NImage from "next/image"
 
 export default function About() {
   return (
-    <Layout>
+    <Layout
+      SEO={{ 
+        title: "About",
+        description: "Things you should know about me",
+        url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/about`,
+      }}>
       <Header />
       <Heading as="h1" mb="4">About Me</Heading>
       <Container mb="8">
