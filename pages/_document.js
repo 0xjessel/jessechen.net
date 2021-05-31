@@ -13,7 +13,7 @@ class MyDocument extends Document {
         <Head>
           <script async defer 
             data-website-id="6af95a0c-0756-43f8-8a73-fb9eefe3bffb" 
-            src="http://www.umami.jessechen.net:3000/umami.js"
+            src="https://umami.jessechen.net/umami.js"
             data-domains="jessechen.net">
           </script>
         </Head>
