@@ -49,7 +49,6 @@ export default function Header() {
       <Spacer />
       <HStack spacing={[2, 8]}>
         <Link
-          className="umami--click--toggle_color_mode"
           borderRadius="full"
           pl={2}
           py={2}
