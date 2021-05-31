@@ -9,10 +9,17 @@ export const LINK_DARK = 'yellow.400'
 export const BORDER_LIGHT = 'gray.800'
 export const BORDER_DARK = 'gray.50'
 
+export const BACKGROUND_LIGHT = 'gray.100'
+export const BACKGROUND_DARK = 'gray.700'
+
 export function useLinkColor() {
   return useColorModeValue(LINK_LIGHT, LINK_DARK)
 }
 
 export function useBorderColor() {
   return useColorModeValue(BORDER_LIGHT, BORDER_DARK)
+}
+
+export function useBackgroundColor() {
+  return useColorModeValue(BACKGROUND_LIGHT, BACKGROUND_DARK)
 }
