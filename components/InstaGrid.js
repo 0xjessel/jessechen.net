@@ -17,6 +17,7 @@ export default function InstaGrid({ medias, ...props }) {
 
         return (
           <LinkOverlay
+            className="umami--click--instagram_grid"
             isExternal
             href={media.permalink}
             key={media.id}
