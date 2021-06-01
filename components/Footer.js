@@ -1,5 +1,5 @@
 import { Center, HStack, Link, Text, Tooltip, VStack } from "@chakra-ui/react"
-import { RiLinkedinLine, RiGithubLine, RiTwitterLine, RiMailLine } from "react-icons/ri"
+import { RiLinkedinLine, RiGithubLine, RiInstagramLine, RiMailLine } from "react-icons/ri"
 
 export default function Footer() {
   const commitSHA = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
@@ -47,14 +47,14 @@ export default function Footer() {
           <RiGithubLine size="1.1em" />
         </Link>
         <Link 
-          className="umami--click--twitter"
+          className="umami--click--instagram"
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
-          href="https://twitter.com/0xjessel" 
-          title="Twitter"
+          href="https://instagram.com/0xjessel" 
+          title="Instagram"
           isExternal>
-          <RiTwitterLine size="1.1em" />
+          <RiInstagramLine size="1.1em" />
         </Link>
         <Link 
           className="umami--click--email"
