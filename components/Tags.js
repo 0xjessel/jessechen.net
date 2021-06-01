@@ -7,7 +7,7 @@ export default function Tags({ tags }) {
   }
   
   return (
-    <HStack>
+    <HStack css={{ display: 'inline-flex' }}>
       {tags.map(tag => (
         <Tag size="sm" key={tag}>
           {tag}

@@ -6,12 +6,11 @@ import path from 'path'
 import { getAllMDXPosts, getAllMDXPostsWithMetadata, POSTS_PATH } from '../../utils/mdxUtils'
 
 import Layout from '../../components/Layout'
-import { Flex, Heading, HStack, Link, Spacer, Text } from '@chakra-ui/layout'
+import { Flex, Heading, Link, Spacer } from '@chakra-ui/layout'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import Tags from '../../components/Tags'
 import NLink from 'next/link'
-import { FiClock } from 'react-icons/fi'
+import ArticleMetadata from '../../components/ArticleMetadata'
 
 import { components } from '../../utils/mdxComponents'
 import { useLinkColor } from '../../styles/colorModes'
@@ -28,18 +27,11 @@ export default function PostPage({ source, frontMatter, filePath, previous, next
       }}>
       <Header />
       <Heading as="h1" mb="2">{frontMatter.title}</Heading>
-      <HStack mb="8">
-        <Text fontSize="sm" color="gray.500">
-          {'Jesse Chen • '}
-          {new Date(frontMatter.date)
-            .toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric'})}
-          {' • '}
-          <FiClock style={{ display: "inline" }} />
-          {' '}
-          {frontMatter.readingTime.text}
-        </Text>
-        <Tags tags={frontMatter.tags} />
-      </HStack>
+      <ArticleMetadata 
+        frontMatter={frontMatter}
+        showAuthor={true}
+        mb={8}
+      />
       {content}
       <Flex as="nav" mt="20">
         {previous && 
