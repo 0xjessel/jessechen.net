@@ -1,22 +1,26 @@
-import { Center, HStack, Link, Text, VStack } from "@chakra-ui/react"
+import { Center, HStack, Link, Text, Tooltip, VStack } from "@chakra-ui/react"
 import { RiLinkedinLine, RiGithubLine, RiTwitterLine, RiMailLine } from "react-icons/ri"
 
 export default function Footer() {
   const commitSHA = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
   let commitMessage = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE
-  const messageMatch = commitMessage.match(/^.{0,18}/g) // first 18 chars that is not a linebreak
-  commitMessage = messageMatch.length > 0
-    ? messageMatch[0] + '..'
-    : ''
+  const messageMatch = commitMessage.match(/^.*/g) // grabs commit title only
+  commitMessage = messageMatch.length > 0 ? messageMatch[0] : ''
 
   const commitURL = 
     <Link
       className="umami--click--github_commit"
       href={`https://github.com/0xjessel/jessechen.net/commit/${commitSHA}`}
       isExternal>
-      <Text as="span" display="inline" fontFamily="mono">
-        {`${commitSHA.slice(0, 7)} ${commitMessage}`}
-      </Text>
+      <Tooltip 
+        hasArrow 
+        label={commitMessage} 
+        gutter={12} 
+        fontFamily="mono">
+        <Text as="span" display="inline" fontFamily="mono">
+          {commitSHA.slice(0, 7)}
+        </Text>
+      </Tooltip>
     </Link>
 
   return (
