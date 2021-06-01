@@ -11,6 +11,7 @@ import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import Tags from '../../components/Tags'
 import NLink from 'next/link'
+import { FiClock } from 'react-icons/fi'
 
 import { components } from '../../utils/mdxComponents'
 import { useLinkColor } from '../../styles/colorModes'
@@ -33,6 +34,8 @@ export default function PostPage({ source, frontMatter, filePath, previous, next
           {new Date(frontMatter.date)
             .toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric'})}
           {' • '}
+          <FiClock style={{ display: "inline" }} />
+          {' '}
           {frontMatter.readingTime.text}
         </Text>
         <Tags tags={frontMatter.tags} />

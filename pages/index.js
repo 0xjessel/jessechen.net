@@ -15,7 +15,7 @@ export default function Index(props) {
         url: `${process.env.NEXT_PUBLIC_VERCEL_URL}`,
       }}>
       <Header />
-      <Heading as="h1" mb="4">Hello, I'm <Text as="span" color={useLinkColor()}>Jesse Chen</Text></Heading>
+      <Heading as="h1" mb="4">Hello, I'm <Text as="span" color={useLinkColor()}>Jesse Chen</Text> 👋</Heading>
       <Container mb="8">
         <Text>
           Hello, world!  This is my new and improved website.  Thanks for checking it out.  Lorem ipsum and all that jazz.  It’s been a long time since we saw a revamp here. 

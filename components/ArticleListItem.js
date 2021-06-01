@@ -1,7 +1,8 @@
 import { Heading, HStack, LinkBox, LinkOverlay, Text } from '@chakra-ui/layout'
 import NLink from 'next/link'
-import { useLinkColor } from '../styles/colorModes';
-import Tags from './Tags';
+import { useLinkColor } from '../styles/colorModes'
+import Tags from './Tags'
+import { FiClock } from 'react-icons/fi'
 
 export default function ArticleListItem({ post }) {
   return (
@@ -26,6 +27,8 @@ export default function ArticleListItem({ post }) {
           {new Date(post.data.date)
             .toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric'})}
           {' • '}
+          <FiClock style={{ display: "inline" }} />
+          {' '}
           {post.data.readingTime.text}
         </Text>
         <Tags tags={post.data.tags} />
