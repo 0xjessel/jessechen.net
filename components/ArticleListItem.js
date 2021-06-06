@@ -25,9 +25,6 @@ export default function ArticleListItem({ post }) {
         frontMatter={post.data}
         showAuthor={false}
       />
-      <Text>
-        {post.data.description}
-      </Text>
     </LinkBox>
   )
 }
