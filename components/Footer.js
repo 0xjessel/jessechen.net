@@ -1,5 +1,6 @@
 import { Center, HStack, Link, Text, Tooltip, VStack } from "@chakra-ui/react"
 import { RiLinkedinLine, RiGithubLine, RiInstagramLine, RiMailLine } from "react-icons/ri"
+import { useBackgroundColor } from "../styles/colorModes"
 
 export default function Footer() {
   const commitSHA = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
@@ -16,6 +17,9 @@ export default function Footer() {
         hasArrow 
         label={commitMessage} 
         gutter={12} 
+        fontSize="xs"
+        color="whiteAlpha"
+        bg={useBackgroundColor()}
         fontFamily="mono">
         <Text as="span" display="inline" fontFamily="mono">
           {commitSHA.slice(0, 7)}
