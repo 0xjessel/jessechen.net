@@ -1,10 +1,22 @@
 import Layout from '../components/Layout'
-import { Box, Container, Divider, Heading, Text } from '@chakra-ui/react'
+import { Container, Divider, Heading, Text } from '@chakra-ui/react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import InstaGrid from '../components/InstaGrid'
 import { useLinkColor } from '../styles/colorModes'
-import NImage from 'next/image'
+import dynamic from "next/dynamic";
+
+const HeroImage = dynamic(
+  () => {
+    return import('../components/HeroImage')
+  },
+  { ssr: false },
+)
+const InstaGrid = dynamic(
+  () => {
+    return import('../components/InstaGrid')
+  },
+  { ssr: false },
+)
 
 export default function Index(props) {
   const igMedias = props.igMedias
@@ -29,20 +41,7 @@ export default function Index(props) {
           Experience scaling and supporting multiple fullstack product teams at both Facebook and Instagram.  
         </Text>
       </Container>
-      <Box
-        mb={8}
-        borderRadius="4"
-        maxHeight="421"
-        boxShadow="lg"
-        overflow="hidden">
-        <NImage 
-          width="640"
-          height="421"
-          layout="intrinsic"
-          src="/images/hero.jpg"
-          alt="image of jesse chen"
-        />
-      </Box>
+      <HeroImage />
       <Divider />
       <InstaGrid mt="8" px="8" medias={igMedias} />
       <Footer />

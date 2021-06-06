@@ -1,11 +1,7 @@
 module.exports = {
   images: {
-    domains: [
-      'scontent.cdninstagram.com', 
-      'scontent-iad3-2.cdninstagram.com', 
-      'scontent-lax3-1.cdninstagram.com',
-      'scontent-lax3-2.cdninstagram.com',
-    ],
+    loader: 'imgix',
+    path: 'https://res.cloudinary.com/jessel/',
   },
   async redirects() {
     return [
