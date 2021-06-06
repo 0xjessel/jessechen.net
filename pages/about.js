@@ -1,9 +1,16 @@
-import { Box, Container, Heading, Text, VStack } from '@chakra-ui/react'
+import { Container, Heading, Text, VStack } from '@chakra-ui/react'
 import Layout from '../components/Layout'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import WorkExperience from '../components/WorkExperience'
-import NImage from "next/image"
+import dynamic from "next/dynamic";
+
+const HeroImage = dynamic(
+  () => {
+    return import('../components/HeroImage')
+  },
+  { ssr: false },
+)
 
 export default function About() {
   return (
@@ -16,19 +23,7 @@ export default function About() {
       <Header />
       <Heading as="h1" mb="4">About Me</Heading>
       <Container mb="8">
-        <Box
-          mb={8}
-          borderRadius="4"
-          maxHeight="421"
-          boxShadow="lg"
-          overflow="hidden">
-          <NImage 
-            width="640"
-            height="421"
-            layout="intrinsic"
-            src="/images/hero.jpg"
-          />
-        </Box>
+        <HeroImage />
         <Text>
           My name is Jesse Chen and I am a software engineer at Facebook. I graduated from UC Berkeley in 2012 where I studied Electrical Engineering and Computer Sciences.
         </Text>
