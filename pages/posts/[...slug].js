@@ -39,7 +39,9 @@ export default function PostPage({ source, frontMatter, filePath, previous, next
           <NLink
             as={`/posts/${previous.filePath.replace(/\.mdx?$/, '')}`}
             href={`/posts/[...slug]`}>
-            <Link color={useLinkColor()}>
+            <Link 
+              textAlign="left"
+              color={useLinkColor()}>
               {`← ${previous.title}`}
             </Link>
           </NLink>
@@ -49,7 +51,9 @@ export default function PostPage({ source, frontMatter, filePath, previous, next
           <NLink 
             as={`/posts/${next.filePath.replace(/\.mdx?$/, '')}`}
             href={`/posts/[...slug]`}>
-            <Link color={useLinkColor()}>
+            <Link 
+              textAlign="right"
+              color={useLinkColor()}>
               {`${next.title} →`}
             </Link>
           </NLink>
