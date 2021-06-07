@@ -2,7 +2,7 @@ import { Container, Text } from "@chakra-ui/layout";
 import { FiClock } from 'react-icons/fi'
 import Tags from './Tags'
 
-export default function ArticleMetadata({ frontMatter, showAuthor, ...props }) {
+export default function ArticleMetadata({ frontMatter, showAuthor, showClock, ...props }) {
 
   return (
     <Container {...props}>
@@ -15,8 +15,12 @@ export default function ArticleMetadata({ frontMatter, showAuthor, ...props }) {
         {new Date(frontMatter.date)
           .toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric'})}
         {' • '}
-        <FiClock style={{ display: "inline" }} />
-        {' '}
+        {showClock
+          ? <>
+              <FiClock style={{ display: "inline" }} />
+              {' '}
+            </>
+          : null}
         {frontMatter.readingTime.text}
       </Text>
       <Tags tags={frontMatter.tags} />

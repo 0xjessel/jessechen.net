@@ -24,6 +24,7 @@ export default function ArticleListItem({ post }) {
       <ArticleMetadata 
         frontMatter={post.data}
         showAuthor={false}
+        showClock={false}
       />
     </LinkBox>
   )

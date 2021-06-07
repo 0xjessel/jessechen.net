@@ -30,6 +30,7 @@ export default function PostPage({ source, frontMatter, filePath, previous, next
       <ArticleMetadata 
         frontMatter={frontMatter}
         showAuthor={true}
+        showClock={true}
         mb={8}
       />
       {content}
