@@ -1,3 +1,5 @@
+var cloudinary = require('cloudinary');
+
 import Layout from '../components/Layout'
 import { Container, Divider, Heading, Text } from '@chakra-ui/react'
 import Footer from '../components/Footer'
@@ -50,8 +52,6 @@ export default function Index(props) {
 }
 
 export async function getServerSideProps() {
-  var cloudinary = require('cloudinary');
-
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
