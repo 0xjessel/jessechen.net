@@ -6,14 +6,16 @@ export default function HeroImage() {
     <Box
       mb={8}
       borderRadius="4"
-      maxHeight="421"
+      overflow="hidden"
       boxShadow="lg"
-      overflow="hidden">
+      css={{
+        '& div': { display: 'block !important' },
+      }}>
       <NImage 
-        width="640"
-        height="421"
+        width="638"
+        height="420"
         layout="intrinsic"
-        src={`/image/upload/f_auto,c_fill,w_421,dpr_${window.devicePixelRatio}/v1623004674/hero.jpg`}
+        src={`/image/upload/f_auto,c_fill,w_638,dpr_${window.devicePixelRatio}/v1623004674/hero.jpg`}
         alt="image of jesse chen"
       />
     </Box>
