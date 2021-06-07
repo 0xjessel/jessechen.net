@@ -15,8 +15,7 @@ export default function InstaGrid({ medias, ...props }) {
       spacing="4">
       {medias.map((media) => {
         const isVideo = media.media_type === "VIDEO" 
-
-        console.log(media.media_url)
+        const imgSrc = `/image/upload/f_auto,c_fill,w_181,h_181,dpr_${window.devicePixelRatio}/${media.public_id}`
 
         return (
           <LinkOverlay
@@ -39,7 +38,7 @@ export default function InstaGrid({ medias, ...props }) {
             <AspectRatio ratio="1">
               <NImage
                 layout="fill"
-                src={`/image/fetch/f_auto,c_fill,w_181,h_181,dpr_${window.devicePixelRatio}/${encodeURIComponent(isVideo ? media.thumbnail_url : media.media_url)}`}
+                src={imgSrc}
                 alt="Instagram photo"
               />
             </AspectRatio>

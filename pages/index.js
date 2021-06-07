@@ -50,15 +50,35 @@ export default function Index(props) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`https://graph.instagram.com/${process.env.IG_USER_ID}/media?fields=media_type%2Cmedia_url%2Cpermalink%2Cthumbnail_url&limit=9&access_token=${process.env.IG_ACCESS_TOKEN}`)
-  const data = await res.json()
-  
-  if (!res.ok) {
-    console.error(res.statusText)
-    console.error(res.url)
-  }
+  var cloudinary = require('cloudinary');
 
-  const igMedias = data.data ?? null;
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    secure: true
+  });
+
+  const igMedias = []
+  try {
+    const result = await cloudinary.v2.search.expression('folder:instagram/*')
+      .with_field('context',)
+      .sort_by('created_at','desc')
+      .execute()
+
+    if (result) {
+      result.resources.forEach(resource => igMedias.push(
+        {
+          public_id: resource.public_id,
+          permalink: resource.context.media_permalink,
+          media_type: resource.context.media_type,
+          id: resource.context.id,
+        }
+      ))
+    }
+  } catch (e) {
+    console.error(e)
+  }
 
   return {
     props: {
