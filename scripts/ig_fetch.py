@@ -4,11 +4,14 @@ import cloudinary.api
 import cloudinary.uploader
 import time
 
+IG_ACCESS_TOKEN = 'IGQVJYX3BRYS0wWGZAXbDNXaDlWbVJzeElWNU5Mdm9DZAkRyY1RGbW9NQlBBWXJVZAXhOTFFDRkFRMVB0LUF3ZAXc1QjR4b1ZAqaFNSeE92bnEwLXhUUXZAST3VRbFZAObEJHdHhBWFVDMW5Ub19zNHdCaExTZAgZDZD'
+IG_USER_ID = '17841401609650232'
+
 try:
   cloudinary.config(
-    cloud_name = "jessel",
-    api_key = "673492531519811",
-    api_secret = "QOMiILgeXR6ezmSeZ0W-Gf4Lk-w"
+    cloud_name = 'jessel',
+    api_key = '673492531519811',
+    api_secret = 'QOMiILgeXR6ezmSeZ0W-Gf4Lk-w'
   )
 
   print('✓ cloudinary configured')
@@ -17,7 +20,7 @@ try:
 
   print('✓ previous IG photos deleted')
 
-  contents = urlopen("https://graph.instagram.com/17841401609650232/media?fields=media_type%2Cmedia_url%2Cpermalink%2Cthumbnail_url&limit=9&access_token=IGQVJYX3BRYS0wWGZAXbDNXaDlWbVJzeElWNU5Mdm9DZAkRyY1RGbW9NQlBBWXJVZAXhOTFFDRkFRMVB0LUF3ZAXc1QjR4b1ZAqaFNSeE92bnEwLXhUUXZAST3VRbFZAObEJHdHhBWFVDMW5Ub19zNHdCaExTZAgZDZD").read()
+  contents = urlopen('https://graph.instagram.com/{user_id}/media?fields=media_type%2Cmedia_url%2Cpermalink%2Cthumbnail_url&limit=9&access_token={access_token}'.format(user_id=IG_USER_ID, access_token=IG_ACCESS_TOKEN)).read()
 
   print('✓ received IG Graph API response')
 
@@ -43,7 +46,7 @@ try:
     time.sleep(5)
     count += 1
 
-  print('✓ Done')
+  print('✓ Done!')
 except Exception as e:
   print('x an error occurred')
   traceback.print_exc()
