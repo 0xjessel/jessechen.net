@@ -1,24 +1,23 @@
-import { Heading, LinkBox, LinkOverlay, Text } from '@chakra-ui/layout'
+import { Container, Heading } from '@chakra-ui/layout'
 import NLink from 'next/link'
 import { useLinkColor } from '../styles/colorModes'
 import ArticleMetadata from './ArticleMetadata'
 
 export default function ArticleListItem({ post }) {
   return (
-    <LinkBox 
+    <Container
       as="article" 
-      minWidth="100%"
-      sx={{
-        '&:hover h2': { color: useLinkColor()}
-      }}>
-      <Heading as="h2" size="lg">
+      minWidth="100%">
+      <Heading 
+        as="h2" 
+        size="lg"
+        display="inline-block"
+        _hover={{ color: useLinkColor() }}>
         <NLink
           as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
           href={`/posts/[...slug]`}
           passHref>
-          <LinkOverlay>
-            {post.data.title}
-          </LinkOverlay>
+          {post.data.title}
         </NLink>
       </Heading>
       <ArticleMetadata 
@@ -26,6 +25,6 @@ export default function ArticleListItem({ post }) {
         showAuthor={false}
         showClock={false}
       />
-    </LinkBox>
+    </Container>
   )
 }
