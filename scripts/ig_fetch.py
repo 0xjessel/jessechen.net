@@ -46,7 +46,7 @@ try:
     time.sleep(5)
     count += 1
 
-  print('Done!')
+  print('done!')
 except Exception as e:
   print('an error occurred :(')
   traceback.print_exc()
