@@ -10,6 +10,6 @@ except HTTPError as e:
 except URLError as e:
   print('Reason: ', e.reason)
 else:
-  print('✓ IG access token renewed')
+  print('IG access token renewed!')
   print('\n === RESPONSE === \n')
   print(result)

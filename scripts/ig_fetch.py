@@ -14,15 +14,15 @@ try:
     api_secret = 'QOMiILgeXR6ezmSeZ0W-Gf4Lk-w'
   )
 
-  print('✓ cloudinary configured')
+  print('cloudinary configured..')
 
   cloudinary.api.delete_resources_by_prefix('instagram')
 
-  print('✓ previous IG photos deleted')
+  print('previous IG photos deleted..')
 
-  contents = urlopen('https://graph.instagram.com/{user_id}/media?fields=media_type%2Cmedia_url%2Cpermalink%2Cthumbnail_url&limit=9&access_token={access_token}'.format(user_id=IG_USER_ID, access_token=IG_ACCESS_TOKEN)).read()
+  contents = urlopen('https://graph.instagram.com/{user_id}/media?fields=media_type%2Cmedia_url%2Cpermalink%2Cthumbnail_url&limit=9&access_token={access_token}'.format(user_id=IG_USER_ID, access_token=IG_ACCESS_TOKEN))IGQVJYX3BRYS0wWGZAXbDNXaDlWbVJzeElWNU5Mdm9DZAkRyY1RGbW9NQlBBWXJVZAXhOTFFDRkFRMVB0LUF3ZAXc1QjR4b1ZAqaFNSeE92bnEwLXhUUXZAST3VRbFZAObEJHdHhBWFVDMW5Ub19zNHdCaExTZAgZDZD.read()
 
-  print('✓ received IG Graph API response')
+  print('received IG Graph API response..')
 
   medias = json.loads(contents)['data']
 
@@ -41,13 +41,13 @@ try:
         .format(id=id, media_permalink=media_permalink, media_type=media_type, media_url=media_url)
     )
 
-    print('✓ uploaded {id} ({count}/9)'.format(id=id, count=count))
+    print('uploaded {id} ({count}/9)..'.format(id=id, count=count))
 
     time.sleep(5)
     count += 1
 
-  print('✓ Done!')
+  print('Done!')
 except Exception as e:
-  print('x an error occurred')
+  print('an error occurred :(')
   traceback.print_exc()
 
