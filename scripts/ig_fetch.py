@@ -17,17 +17,17 @@ CLOUDINARY_API_SECRET = config['CLOUDINARY_API_SECRET']
 
 try:
   cloudinary.config(
-      cloud_name=CLOUDINARY_CLOUD_NAME,
-      api_key=CLOUDINARY_API_KEY,
-      api_secret=CLOUDINARY_API_SECRET
+    cloud_name=CLOUDINARY_CLOUD_NAME,
+    api_key=CLOUDINARY_API_KEY,
+    api_secret=CLOUDINARY_API_SECRET
   )
 
   print('cloudinary configured..')
 
   result = cloudinary.Search()\
-      .expression('folder:instagram/*')\
-      .with_field('context')\
-      .execute()
+    .expression('folder:instagram/*')\
+    .with_field('context')\
+    .execute()
 
   existing_ids = []
   incoming_ids = []
@@ -36,8 +36,8 @@ try:
 
   print('previous IG photos fetched..')
 
-  contents = urlopen('https://graph.instagram.com/{user_id}/media?fields=media_type%2Cmedia_url%2Cpermalink%2Cthumbnail_url&limit=9&access_token={access_token}'.format(
-      user_id=IG_USER_ID, access_token=IG_ACCESS_TOKEN)).read()
+  contents = urlopen('https://graph.instagram.com/{user_id}/media?fields=media_type%2Cmedia_url%2Cpermalink%2Cthumbnail_url&limit=9&access_token={access_token}'
+    .format(user_id=IG_USER_ID, access_token=IG_ACCESS_TOKEN)).read()
 
   print('received IG Graph API response..')
 
@@ -77,7 +77,8 @@ try:
     cloudinary.uploader.upload(
       media_url,
       folder='instagram',
-      context='id={id}|media_permalink={media_permalink}|media_type={media_type}|media_url={media_url}'.format(id=media_id, media_permalink=media_permalink, media_type=media_type, media_url=media_url)
+      context='id={id}|media_permalink={media_permalink}|media_type={media_type}|media_url={media_url}'
+        .format(id=media_id, media_permalink=media_permalink, media_type=media_type, media_url=media_url)
     )
 
     print('uploaded {id}..'.format(id=media_id))
