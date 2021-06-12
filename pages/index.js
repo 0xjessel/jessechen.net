@@ -64,6 +64,7 @@ export async function getServerSideProps() {
     const result = await cloudinary.v2.search.expression('folder:instagram/*')
       .with_field('context',)
       .sort_by('created_at','asc')
+      .max_results('9')
       .execute()
 
     if (result) {
