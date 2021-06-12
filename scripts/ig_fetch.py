@@ -3,51 +3,88 @@ import json
 import cloudinary.api
 import cloudinary.uploader
 import time
+import traceback
+from dotenv import dotenv_values
 
-IG_ACCESS_TOKEN = 'IGQVJYX3BRYS0wWGZAXbDNXaDlWbVJzeElWNU5Mdm9DZAkRyY1RGbW9NQlBBWXJVZAXhOTFFDRkFRMVB0LUF3ZAXc1QjR4b1ZAqaFNSeE92bnEwLXhUUXZAST3VRbFZAObEJHdHhBWFVDMW5Ub19zNHdCaExTZAgZDZD'
-IG_USER_ID = '17841401609650232'
+config = dotenv_values("../.env.local")
+
+IG_ACCESS_TOKEN = config['IG_ACCESS_TOKEN']
+IG_USER_ID = config['IG_USER_ID']
+
+CLOUDINARY_CLOUD_NAME = config['CLOUDINARY_CLOUD_NAME']
+CLOUDINARY_API_KEY = config['CLOUDINARY_API_KEY']
+CLOUDINARY_API_SECRET = config['CLOUDINARY_API_SECRET']
 
 try:
   cloudinary.config(
-    cloud_name = 'jessel',
-    api_key = '673492531519811',
-    api_secret = 'QOMiILgeXR6ezmSeZ0W-Gf4Lk-w'
+      cloud_name=CLOUDINARY_CLOUD_NAME,
+      api_key=CLOUDINARY_API_KEY,
+      api_secret=CLOUDINARY_API_SECRET
   )
 
   print('cloudinary configured..')
 
-  cloudinary.api.delete_resources_by_prefix('instagram')
+  result = cloudinary.Search()\
+      .expression('folder:instagram/*')\
+      .with_field('context')\
+      .execute()
 
-  print('previous IG photos deleted..')
+  existing_ids = []
+  incoming_ids = []
+  for resource in result['resources']:
+    existing_ids.append(resource['context']['id'])
 
-  contents = urlopen('https://graph.instagram.com/{user_id}/media?fields=media_type%2Cmedia_url%2Cpermalink%2Cthumbnail_url&limit=9&access_token={access_token}'.format(user_id=IG_USER_ID, access_token=IG_ACCESS_TOKEN)).read()
+  print('previous IG photos fetched..')
+
+  contents = urlopen('https://graph.instagram.com/{user_id}/media?fields=media_type%2Cmedia_url%2Cpermalink%2Cthumbnail_url&limit=9&access_token={access_token}'.format(
+      user_id=IG_USER_ID, access_token=IG_ACCESS_TOKEN)).read()
 
   print('received IG Graph API response..')
 
   medias = json.loads(contents)['data']
-
-  count = 1
   for media in medias:
-    media_url = media['media_url']
+    incoming_ids.append(media['id'])
 
-    id = media['id']
+  to_delete = list(set(existing_ids) - set(incoming_ids))
+  to_upload = list(set(incoming_ids) - set(existing_ids))
+
+  print('found {num} old photos to delete..'.format(num=len(to_delete)))
+  print('found {num} new photos to upload..'.format(num=len(to_upload)))
+
+  # delete old photos
+  for resource in result['resources']:
+    if resource['context']['id'] not in to_delete:
+      continue
+
+    public_id = resource['public_id']
+    cloudinary.uploader.destroy(public_id)
+
+    print('deleted {id}..'.format(id=public_id))
+
+    time.sleep(3)
+
+  # upload new photos
+  for media in medias:
+    media_id = media['id']
+
+    if media_id not in to_upload:
+      continue
+
+    media_url = media['media_url']
     media_type = media['media_type']
     media_permalink = media['permalink']
 
     cloudinary.uploader.upload(
       media_url,
-      folder = 'instagram',
-      context = 'id={id}|media_permalink={media_permalink}|media_type={media_type}|media_url={media_url}'
-        .format(id=id, media_permalink=media_permalink, media_type=media_type, media_url=media_url)
+      folder='instagram',
+      context='id={id}|media_permalink={media_permalink}|media_type={media_type}|media_url={media_url}'.format(id=media_id, media_permalink=media_permalink, media_type=media_type, media_url=media_url)
     )
 
-    print('uploaded {id} ({count}/9)..'.format(id=id, count=count))
+    print('uploaded {id}..'.format(id=media_id))
 
-    time.sleep(5)
-    count += 1
+    time.sleep(3)
 
   print('done!')
 except Exception as e:
   print('an error occurred :(')
   traceback.print_exc()
-

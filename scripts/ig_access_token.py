@@ -1,7 +1,10 @@
 from urllib.request import urlopen
 from urllib.error import URLError, HTTPError
+from dotenv import dotenv_values
 
-IG_ACCESS_TOKEN = 'IGQVJYX3BRYS0wWGZAXbDNXaDlWbVJzeElWNU5Mdm9DZAkRyY1RGbW9NQlBBWXJVZAXhOTFFDRkFRMVB0LUF3ZAXc1QjR4b1ZAqaFNSeE92bnEwLXhUUXZAST3VRbFZAObEJHdHhBWFVDMW5Ub19zNHdCaExTZAgZDZD'
+config = dotenv_values("../.env.local")
+
+IG_ACCESS_TOKEN = config['IG_ACCESS_TOKEN']
 
 try:
   result = urlopen('https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token={access_token}'.format(access_token=IG_ACCESS_TOKEN)).read()
