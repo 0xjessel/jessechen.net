@@ -6,7 +6,7 @@ import time
 import traceback
 from dotenv import dotenv_values
 
-config = dotenv_values("../.env.local")
+config = dotenv_values(".env.local")
 
 IG_ACCESS_TOKEN = config['IG_ACCESS_TOKEN']
 IG_USER_ID = config['IG_USER_ID']
