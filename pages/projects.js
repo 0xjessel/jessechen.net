@@ -1,4 +1,4 @@
-import { Box, Center, Heading, Link, SimpleGrid, VStack } from '@chakra-ui/react'
+import { Box, Center, Heading, Link, SimpleGrid, useBoolean, VStack } from '@chakra-ui/react'
 import Layout from '../components/Layout'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -6,10 +6,9 @@ import ProjectListItem from '../components/ProjectListItem'
 import FeatureListItem from '../components/FeatureListItem'
 
 import { PROJECTS, FEATURES } from '../utils/projectsData'
-import { useState } from 'react'
 
 export default function Projects() {
-  const [seeMore, setSeeMore] = useState(false)
+  const [seeMore, setSeeMore] = useBoolean()
 
   return (
     <Layout
@@ -37,7 +36,7 @@ export default function Projects() {
         </SimpleGrid>
         {!seeMore 
           ? <Center>
-              <Link p="2" onClick={() => setSeeMore(true)}>See more..</Link>
+              <Link p="2" onClick={setSeeMore.toggle}>See more..</Link>
             </Center>
           : null}
       </Box>
