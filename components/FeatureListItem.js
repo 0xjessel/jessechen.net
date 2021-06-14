@@ -8,13 +8,13 @@ export default function FeatureListItem({ feature, ...props }) {
       as="article" 
       borderWidth="1px" 
       rounded="md"
-      display={['flex', null, 'block']}
+      display={['block', 'flex', 'block']}
       overflow="hidden">
       <Image
         objectFit="cover"
         src={feature.image}
-        height={['165px', null, '150px']}
-        width={['165px', null, '100%']}
+        height={['150px', '165px', '150px']}
+        width={['100%', '165px', '100%']}
       />
       <Box pt="4" px="4" pb="4">
         <Heading size="md" mb="2">
