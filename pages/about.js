@@ -25,15 +25,9 @@ export default function About() {
       <Container mb="8">
         <HeroImage />
         <Text>
-          My name is Jesse Chen and I am a software engineer at Facebook. I graduated from UC Berkeley in 2012 where I studied Electrical Engineering and Computer Sciences.
-        </Text>
-        <br />
-        <Text>
-          I started this website because I wanted to create a website for myself where I can control my online profile on the Internet and serve as a place where I can showcase some of my work or projects that I have done. It also serves as a place for people to get to know me better.
-        </Text>
-        <br />
-        <Text>
-          I host a Wordpress blog on this website where I write reviews, how to's, and other various thoughts. My most popular article by far is the article about how Google Voice saved my phone interview. It has been featured on sites like Lifehacker.
+          For the last 10 years, I've been at Facebook where I focused on building both consumer products and engineering orgs at scale.  
+          I've worked across a number of areas across the core app including Photos, Newsfeed, Video, FB/IG Live, Groups and Instagram Creators.
+          Currently, I am the engineering lead for a group of teams building products for specific segments of community creators.
         </Text>
       </Container>
       <Container mb="8">

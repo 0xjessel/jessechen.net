@@ -29,18 +29,14 @@ export default function Index(props) {
         url: `${process.env.NEXT_PUBLIC_VERCEL_URL}`,
       }}>
       <Header />
-      <Heading as="h1" mb="4">Hello, I'm <Text as="span" color={useLinkColor()}>Jesse Chen</Text> 👋</Heading>
+      <Heading as="h1" mb="4">Hi, I'm <Text as="span" color={useLinkColor()}>Jesse Chen</Text> 👋</Heading>
       <Container mb="8">
         <Text>
-          Hello, world!  This is my new and improved website.  Thanks for checking it out.  Lorem ipsum and all that jazz.  It’s been a long time since we saw a revamp here. 
+          Hello, world!  I am currently a Engineering Manager at Facebook.  I love building teams and helping engineering organizations scale. 
+          And I love working on products that people care about.  I have extensive experience scaling and supporting multiple fullstack product teams at both Facebook and Instagram.  
           <br />
           <br />
-          1. I love building teams and helping engineering organizations scale
-          <br />
-          2. I love working on products that people care about
-          <br />
-          <br />
-          Experience scaling and supporting multiple fullstack product teams at both Facebook and Instagram.  
+          Welcome to my website, where I write irregularly about technology, finance, and career.  
         </Text>
       </Container>
       <HeroImage />
