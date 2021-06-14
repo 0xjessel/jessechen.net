@@ -1,7 +1,7 @@
 import NLink from 'next/link'
 import { Center, Flex, HStack, Link, Spacer, useColorMode } from "@chakra-ui/react"
 import { FiSun, FiMoon } from 'react-icons/fi'
-import { useBackgroundColor, useBorderColor } from '../styles/colorModes';
+import { useBackgroundColor, useBorderColor } from '../styles/colorModes'
 
 export default function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
