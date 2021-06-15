@@ -19,7 +19,6 @@ export default function ProjectListItem({ project }) {
         </Link>
       </Heading>
       <Text 
-        color="gray.500" 
         lineHeight="base"
         whiteSpace="pre-line">
         {project.description}
