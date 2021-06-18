@@ -7,6 +7,8 @@ import FeatureListItem from '../components/FeatureListItem'
 
 import { PROJECTS, FEATURES } from '../utils/projectsData'
 
+const SEE_MORE_INDEX = 3
+
 export default function Projects() {
   const [seeMore, setSeeMore] = useBoolean()
 
@@ -22,7 +24,7 @@ export default function Projects() {
       <Box mb="8">
         <SimpleGrid columns={[1, null, 2]} spacing="4" mb="4">
           {FEATURES.map((feature, index) => {
-            if (!seeMore && index > 3) {
+            if (!seeMore && index > SEE_MORE_INDEX) {
               return null
             }
 
@@ -32,7 +34,7 @@ export default function Projects() {
                 feature={feature} 
               />
             )
-            })}
+          })}
         </SimpleGrid>
         {!seeMore 
           ? <Center>
