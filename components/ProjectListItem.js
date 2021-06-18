@@ -1,5 +1,6 @@
 import { Container, Heading, Link, Text } from "@chakra-ui/layout"
 import { useLinkColor } from "../styles/colorModes"
+import { FiArrowUpRight } from 'react-icons/fi'
 
 export default function ProjectListItem({ project }) {
   return(
@@ -16,6 +17,14 @@ export default function ProjectListItem({ project }) {
           _hover={{ textDecoration: 'none' }}
           isExternal>
           {project.title}
+          <FiArrowUpRight 
+            style={{ 
+              display: 'inline',
+              marginLeft: '2px',
+              verticalAlign: 'baseline',
+            }} 
+            size="0.7em" 
+          />
         </Link>
       </Heading>
       <Text 
