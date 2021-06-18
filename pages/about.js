@@ -24,10 +24,10 @@ export default function About() {
       <Heading as="h1" mb="4">About Me</Heading>
       <Container mb="8">
         <HeroImage />
-        <Text>
-          For the last 10 years, I've been at Facebook where I focused on building both consumer products and engineering orgs at scale.  
-          I've worked across a number of areas across the core app including Photos, Newsfeed, Video, FB/IG Live, Groups and Instagram Creators.
-          Currently, I am the engineering lead for a group of teams building products for specific segments of community creators.
+        <Text whiteSpace="pre-line">
+          {`For the last 10 years, I've been at Facebook where I focused on building both consumer products and engineering orgs at scale.  During my time at Facebook, I have been responsible for creating and leading cross-functional teams on multiple new 0-1 ventures, such as Instagram Creators and Facebook Communities.  
+
+          Currently, I lead engineering for the teams that are building the next-gen products for community creators.`}
         </Text>
       </Container>
       <Container mb="8">
@@ -37,21 +37,21 @@ export default function About() {
             imgSource="/images/about/fb-logo.png"
             company="Facebook"
             role="Engineering Manager"
-            description={'Facebook Communities (Groups/Events/Profile).  Supporting a team of ~50 Software Engineers and Engineering Managers.'}
+            description={`Create and lead a 50-person engineering team and 120+ XFN to build meaningful products for community creators.  Products we've launched includes Online Events, Q&A, and Expert badges for Facebook Groups.`}
             dateRange="2020 - Present"
           />
           <WorkExperience
             imgSource="/images/about/ig-logo.png"
             company="Instagram"
             role="Engineering Manager"
-            description={'Instagram Live and Creators.  My teams are responsible for the millions of influencers that drive the majority of impressions and engagement on Instagram.'}
+            description={'Led engineering for Instagram Live and Creator Monetization.  My teams are responsible for the millions of influencers that drive the majority of impressions and engagement on Instagram.'}
             dateRange="2018 - 2020"
           />
           <WorkExperience
             imgSource="/images/about/fb-logo.png"
             company="Facebook"
             role="Engineering Manager"
-            description={'I supported 3 fullstack product teams of Android, iOS, and WWW engineers at Facebook. Experience supporting engineers and managers, I grew the team from 4 to 25 engineers (recursively).'}
+            description={`Built a new team that grew into 25 engineers and EMs to shift Facebook Video towards individual video creators.  Shipped 2-person Live, Creator app, and Top Fans for creators to connect with their fans.`}
             dateRange="2016 - 2018"
           />
           <WorkExperience
@@ -60,7 +60,7 @@ export default function About() {
             role="Software Engineer"
             description={`I wrote code that you see on www.facebook.com.
 
-              Experience in building UI products on mobile and desktop web. Tech-led and shipped core components of the www site including the photo album uploader, photo viewer, newsfeed composer, UFI and more.`}
+              Experience in building UI products on mobile and desktop web. Tech-led and shipped core components of the www site including the photo album uploader, photo viewer, newsfeed composer, and UFI.`}
             dateRange="2012 - 2016"
           />
         </VStack>
