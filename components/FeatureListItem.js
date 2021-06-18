@@ -2,6 +2,8 @@ import { Image } from "@chakra-ui/image";
 import { Box, Heading, LinkBox, LinkOverlay, Text } from "@chakra-ui/layout";
 
 export default function FeatureListItem({ feature, ...props }) {
+  const imgSrc = `https://res.cloudinary.com/jessel/image/upload/f_auto,c_scale,w_300,dpr_${window.devicePixelRatio}/${feature.image}`
+
   return(
     <LinkBox 
       {...props}
@@ -12,7 +14,7 @@ export default function FeatureListItem({ feature, ...props }) {
       overflow="hidden">
       <Image
         objectFit="cover"
-        src={feature.image}
+        src={imgSrc}
         height={['150px', '165px', '150px']}
         width={['100%', '165px', '100%']}
       />

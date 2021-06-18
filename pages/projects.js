@@ -3,9 +3,16 @@ import Layout from '../components/Layout'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import ProjectListItem from '../components/ProjectListItem'
-import FeatureListItem from '../components/FeatureListItem'
+import dynamic from "next/dynamic";
 
 import { PROJECTS, FEATURES } from '../utils/projectsData'
+
+const FeatureListItem = dynamic(
+  () => {
+    return import('../components/FeatureListItem')
+  },
+  { ssr: false },
+)
 
 const SEE_MORE_INDEX = 3
 

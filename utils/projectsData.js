@@ -3,49 +3,49 @@ export const FEATURES = [
     title: 'Facebook Groups to gain suite of new tools for managing discussions, surfacing public content',
     description: 'Facebook is introducing a suite of new features for Facebook Groups, the private social networking product now used by over 1.8 billion people every month. At the company’s digitally hosted Facebook Communities Summit today, Facebook detailed a set of...',
     href: 'https://techcrunch.com/2020/10/01/facebook-groups-to-gain-suite-of-new-tools-for-managing-discussions-surfacing-public-content/',
-    image: 'images/projects/facebook-groups.jpeg',
+    image: 'projects/facebook-groups.jpg',
   },
   {
     title: 'Instagram will share revenue with creators for the first time through ads in IGTV',
     description: 'And purchasable Badges in Instagram Live',
     href: 'https://theverge.com/2020/5/27/21271009/instagram-ads-igtv-live-badges-test-update-creators',
-    image: 'images/projects/igtv-revshare.png',
+    image: 'projects/igtv-revshare.webp',
   },
   {
     title: 'Instagram is testing Creator Accounts for high-profile influencers',
     description: 'Giving influencers and celebrities more control over their accounts',
     href: 'https://theverge.com/2018/12/11/18136212/instagram-creator-account-influencer-celebrity',
-    image: 'images/projects/instagram-creator-account.jpeg',
+    image: 'projects/instagram-creator-account.jpg',
   },
   {
     title: 'Learn about Facebook LIVE WITH',
     description: 'Today at VidCon Facebook pre-announced three new big product updates for Facebook Live, their live-streaming platform built into Facebook. The platform will..',
     href: 'https://facebook.com/notes/808667119706185/',
-    image: 'images/projects/jesse-chen.png',
+    image: 'projects/jesse-chen.png',
   },
   {
     title: 'Facebook Live grows up with two-person broadcasts and waiting rooms for viewers',
     description: 'Today at VidCon Facebook pre-announced three new big product updates for Facebook Live, their live-streaming platform built into Facebook. The platform will..',
     href: 'https://techcrunch.com/2016/06/23/facebook-live-grows-up-with-two-person-broadcasts-and-waiting-rooms-for-viewers/',
-    image: 'images/projects/facebook-live-broadcast.png'
+    image: 'projects/facebook-live-broadcast.png'
   },
   {
     title: 'Facebook Live Updates for Mentions',
     description: 'Facebook Mentions is an app that enables all kinds of public figures — including athletes, musicians, journalists, politicians, and more — to easily connect with their audience on Facebook.',
     href: 'https://facebook.com/formedia/blog/facebook-live-updates-for-mentions',
-    image: 'images/projects/facebook-mentions.jpeg',
+    image: 'projects/facebook-mentions.jpg',
   },
   {
     title: 'Personal Finance For Young Professionals',
     description: 'One of the most valuable classes at Cal that I attended was not an engineering class, nor was it technical. It was UGBA 196, Personal Financial Management.',
     href: 'https://forbes.com/sites/quora/2013/05/01/personal-finance-for-young-professionals/?sh=57e723ac5731',
-    image: 'images/projects/jesse-chen-forbes.jpeg',
+    image: 'projects/jesse-chen-forbes.jpg',
   },
   {
     title: `How Google Voice's Different Calling Options Can Be a Lifesaver`,
     description: `Everybody knows what Google Voice does on a day-to-day basis: It's one number people can call that will ring all the phones in your life. But beyond your normal daily use, it's worth remembering some of the different ways Voice works.`,
     href: 'https://lifehacker.com/how-google-voices-different-calling-options-can-be-a-li-5761345',
-    image: 'images/projects/google-voice.jpeg',
+    image: 'projects/google-voice.jpg',
   },
 ]
 
