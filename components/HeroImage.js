@@ -15,7 +15,7 @@ export default function HeroImage() {
         width="638"
         height="420"
         layout="intrinsic"
-        src={`/image/upload/f_auto,c_fill,w_638,dpr_${window.devicePixelRatio}/v1623004674/hero.jpg`}
+        src={`/image/upload/f_auto,c_fill,w_638,dpr_${window.devicePixelRatio}/hero.jpg`}
         alt="image of jesse chen"
       />
     </Box>

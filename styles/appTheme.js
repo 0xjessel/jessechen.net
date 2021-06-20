@@ -28,9 +28,9 @@ export const AppTheme = extendTheme({
         display: 'none',
       },
       'pre': {
-        '-ms-overflow-style': 'none',
-        'scrollbar-width': 'none',
-        'overflow-x': 'scroll',
+        'msOverflowStyle': 'none',
+        'scrollbarWidth': 'none',
+        'overflowX': 'scroll',
       },
     }),
   },
