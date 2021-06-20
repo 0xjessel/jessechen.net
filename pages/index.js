@@ -4,7 +4,7 @@ import Layout from '../components/Layout'
 import { Container, Divider, Heading, Text } from '@chakra-ui/react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import { useLinkColor } from '../styles/colorModes'
+import { useAccentColor, useLinkColor } from '../styles/colorModes'
 import dynamic from "next/dynamic";
 
 const HeroImage = dynamic(
@@ -29,7 +29,7 @@ export default function Index(props) {
         url: `${process.env.NEXT_PUBLIC_VERCEL_URL}`,
       }}>
       <Header />
-      <Heading as="h1" mb="4">Hi, I'm <Text as="span" color={useLinkColor()}>Jesse Chen</Text> 👋</Heading>
+      <Heading as="h1" mb="4">Hi, I'm <Text as="span" color={useAccentColor()}>Jesse Chen</Text> 👋</Heading>
       <Container mb="8">
         <Text>
           Hello, world!  I am currently a Engineering Manager at Facebook.  I love building teams and helping engineering organizations scale. 
