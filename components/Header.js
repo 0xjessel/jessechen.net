@@ -7,7 +7,7 @@ export default function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   const links = [
-    ['Articles', '/articles'],
+    ['Posts', '/posts'],
     ['Projects', '/projects'],
     ['About', '/about'],
   ]

@@ -10,7 +10,7 @@ import { Flex, Heading, Link, Spacer } from '@chakra-ui/layout'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import NLink from 'next/link'
-import ArticleMetadata from '../../components/ArticleMetadata'
+import PostMetadata from '../../components/PostMetadata'
 
 import { components } from '../../utils/mdxComponents'
 import { useLinkColor } from '../../styles/colorModes'
@@ -27,7 +27,7 @@ export default function PostPage({ source, frontMatter, filePath, previous, next
       }}>
       <Header />
       <Heading as="h1" mb="2">{frontMatter.title}</Heading>
-      <ArticleMetadata 
+      <PostMetadata 
         frontMatter={frontMatter}
         showAuthor={true}
         showClock={true}

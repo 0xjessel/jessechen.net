@@ -121,7 +121,7 @@ Let's create a way for people to check in to places simply by tapping on a NFC t
 
 Lets assume you have a list of Facebook Places, and when the user clicks on a Place, we prompt them to touch the phone to the tag to write that corresponding Place id onto the tag.  So, when the user taps on a place, `onListItemClick` is called and this is what happens:
 
-```java
+```java{6,7}
 ...
 
 Place place = (Place) mListAdapter.getItem(position);

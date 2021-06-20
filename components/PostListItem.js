@@ -1,9 +1,9 @@
 import { Container, Heading } from '@chakra-ui/layout'
 import NLink from 'next/link'
 import { useLinkColor } from '../styles/colorModes'
-import ArticleMetadata from './ArticleMetadata'
+import PostMetadata from './PostMetadata'
 
-export default function ArticleListItem({ post }) {
+export default function PostListItem({ post }) {
   return (
     <Container
       as="article" 
@@ -20,7 +20,7 @@ export default function ArticleListItem({ post }) {
           {post.data.title}
         </NLink>
       </Heading>
-      <ArticleMetadata 
+      <PostMetadata 
         frontMatter={post.data}
         showAuthor={false}
         showClock={false}

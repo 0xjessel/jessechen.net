@@ -6,6 +6,16 @@ module.exports = {
   async redirects() {
     return [
       {
+        source: '/articles',
+        destination: '/posts/',
+        permanent: true,
+      },
+      {
+        source: '/blog',
+        destination: '/posts/',
+        permanent: true,
+      },
+      {
         source: '/blog/personal-finance-for-young-professionals',
         destination: '/posts/2013/personal-finance-for-young-professionals',
         permanent: true,

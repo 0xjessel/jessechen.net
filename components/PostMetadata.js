@@ -2,7 +2,7 @@ import { Container, Text } from "@chakra-ui/layout";
 import { FiClock } from 'react-icons/fi'
 import Tags from './Tags'
 
-export default function ArticleMetadata({ frontMatter, showAuthor, showClock, ...props }) {
+export default function PostMetadata({ frontMatter, showAuthor, showClock, ...props }) {
 
   return (
     <Container {...props}>
