@@ -1,5 +1,5 @@
 import NLink from 'next/link'
-import { Center, Flex, HStack, Link, Spacer, useColorMode } from "@chakra-ui/react"
+import { Center, Flex, HStack, IconButton, Link, Spacer, useColorMode } from "@chakra-ui/react"
 import { FiSun, FiMoon } from 'react-icons/fi'
 import { useBackgroundColor, useBorderColor } from '../styles/colorModes'
 
@@ -49,13 +49,14 @@ export default function Header() {
       </HStack>
       <Spacer />
       <HStack spacing={[2, 8]}>
-        <Link
+        <IconButton
           borderRadius="full"
-          pl={2}
-          py={2}
-          onClick={toggleColorMode}>
-          {colorMode == 'dark' ? <FiMoon /> : <FiSun />}
-        </Link>
+          size="md"
+          variant="ghost"
+          colorScheme="brand"
+          icon={colorMode == 'dark' ? <FiMoon /> : <FiSun />}
+          onClick={toggleColorMode}
+        />
       </HStack>
     </Flex>
   );
