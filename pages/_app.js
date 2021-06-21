@@ -1,9 +1,11 @@
 import { ChakraProvider } from "@chakra-ui/react"
 import { DefaultSeo, SocialProfileJsonLd } from "next-seo"
 import { AppTheme } from "../styles/appTheme"
-import { FontsGlobal } from "../styles/fonts"
 import { PrismGlobal } from '../styles/prism'
 import SEO from '../utils/next-seo.config'
+
+import "@fontsource/noto-serif/700.css"
+import "@fontsource/mukta/400.css"
 
 export default function App({ Component, pageProps }) {
   return (
@@ -20,7 +22,6 @@ export default function App({ Component, pageProps }) {
           'http://github.com/0xjessel',
         ]}
       />
-      <FontsGlobal />
       <PrismGlobal />
       <Component {...pageProps} /> 
     </ChakraProvider>

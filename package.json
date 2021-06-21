@@ -11,6 +11,8 @@
     "@chakra-ui/react": "^1.6.0",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.3.0",
+    "@fontsource/mukta": "^4.4.5",
+    "@fontsource/noto-serif": "^4.4.5",
     "@mdx-js/react": "^1.6.22",
     "cloudinary": "^1.26.0",
     "framer-motion": "^4.1.10",

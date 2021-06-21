@@ -7,10 +7,19 @@ export const AppTheme = extendTheme({
     useSystemColorMode: true,
   },
   fonts: {
-    //heading: "Hoefler Text",
-    //heading: "Merriweather",
-    //heading: "Neue Haas Unica Pro",
-    mono: "Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace",
+    heading: 'Noto Serif',
+    body: 'Mukta',
+    mono: 'Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace',
+
+    // other considerations:
+    // heading: 'Merriweather',
+    // body: 'Hind Guntur',
+
+    // heading: 'Montserrat',
+    // body: 'Kanit',
+
+    // heading: "Hoefler Text",
+    // heading: "Neue Haas Unica Pro",
   },
   styles: {
     global: (props) => ({
