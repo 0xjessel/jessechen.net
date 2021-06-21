@@ -11,7 +11,10 @@ export default function FeatureListItem({ feature, ...props }) {
       borderWidth="1px" 
       rounded="md"
       display={['block', 'flex', 'block']}
-      overflow="hidden">
+      overflow="hidden"
+      transition="all 0.25s"
+      transitionTimingFunction="spring(1 100 10 10)"
+      _hover={{ transform: `translateY(-4px)`, shadow: `xl` }}>
       <Image
         objectFit="cover"
         src={imgSrc}
