@@ -41,7 +41,6 @@ export default function Projects() {
             const fadeDelay = index <= SEE_MORE_INDEX
               ? 200 + (400 * index)
               : 50 * (index + 1)
-            console.log(fadeDelay)
 
             return (
               <Fade 
