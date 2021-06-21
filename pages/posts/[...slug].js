@@ -1,7 +1,7 @@
 import fs from 'fs'
 import matter from 'gray-matter'
-import hydrate from 'next-mdx-remote/hydrate'
-import renderToString from 'next-mdx-remote/render-to-string'
+import { serialize } from 'next-mdx-remote/serialize'
+import { MDXRemote } from 'next-mdx-remote'
 import path from 'path'
 import { getAllMDXPosts, getAllMDXPostsWithMetadata, POSTS_PATH } from '../../utils/mdxUtils'
 
@@ -16,8 +16,6 @@ import { components } from '../../utils/mdxComponents'
 import { useLinkColor } from '../../styles/colorModes'
 
 export default function PostPage({ source, frontMatter, filePath, previous, next }) {
-  const content = hydrate(source, { components })
-
   return (
     <Layout
       SEO={{ 
@@ -33,7 +31,7 @@ export default function PostPage({ source, frontMatter, filePath, previous, next
         showClock={true}
         mb={8}
       />
-      {content}
+      <MDXRemote {...source} components={components} />
       <Flex as="nav" mt="20">
         {previous && 
           <NLink
@@ -73,8 +71,7 @@ export const getStaticProps = async ({ params }) => {
 
   data.readingTime = require('reading-time')(content)
 
-  const mdxSource = await renderToString(content, {
-    components,
+  const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [
         require('remark-breaks'),
