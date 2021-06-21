@@ -3,6 +3,13 @@ module.exports = {
     loader: 'imgix',
     path: 'https://res.cloudinary.com/jessel/',
   },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      import('./scripts/generate-sitemap.mjs')
+    }
+
+    return config
+  },
   async redirects() {
     return [
       {
