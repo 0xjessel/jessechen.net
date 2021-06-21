@@ -2,9 +2,10 @@ import { Box, Center, Heading, Link, SimpleGrid, useBoolean, VStack } from '@cha
 import Layout from '../components/Layout'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
+import FadeItem from '../components/FadeItem'
 import ProjectListItem from '../components/ProjectListItem'
 import dynamic from "next/dynamic";
-import { Fade } from "react-awesome-reveal";
+
 
 import { PROJECTS, FEATURES } from '../utils/projectsData'
 
@@ -28,9 +29,9 @@ export default function Projects() {
         url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/projects`,
       }}>
       <Header />
-      <Fade direction="up" triggerOnce>
+      <FadeItem direction="up" triggerOnce>
         <Heading as="h1" mb="4">Featured Work</Heading>
-      </Fade>
+      </FadeItem>
       <Box mb="8">
         <SimpleGrid columns={[1, null, 2]} spacing="4" mb="4">
           {FEATURES.map((feature, index) => {
@@ -40,37 +41,37 @@ export default function Projects() {
 
             const fadeDelay = index <= SEE_MORE_INDEX
               ? 200 + (400 * index)
-              : 50 * (index + 1)
+              : 100 * ((index + 1) - (SEE_MORE_INDEX + 1))
 
             return (
-              <Fade 
+              <FadeItem 
                 key={feature.href} 
                 delay={fadeDelay} 
                 direction="up" 
                 triggerOnce>
                 <FeatureListItem height="100%" feature={feature} />
-              </Fade>
+              </FadeItem>
             )
           })}
         </SimpleGrid>
         {!seeMore 
-          ? <Fade delay={1800} direction="up" triggerOnce>
+          ? <FadeItem delay={1800} direction="up" triggerOnce>
               <Center>
                 <Link p="2" onClick={setSeeMore.toggle}>See more..</Link>
               </Center>
-            </Fade>
+            </FadeItem>
           : null}
       </Box>
-      <Fade delay={2000} direction="up" triggerOnce>
+      <FadeItem delay={2000} direction="up" triggerOnce>
         <Heading as="h1" mb="4">Side Projects</Heading>
-      </Fade>
-      <Fade delay={2000} direction="up" triggerOnce>
+      </FadeItem>
+      <FadeItem delay={2000} direction="up" triggerOnce>
         <VStack spacing="12">
           {PROJECTS.map((project) => 
             <ProjectListItem key={project.href} project={project} />
           )}
         </VStack>
-      </Fade>
+      </FadeItem>
       <Footer />
     </Layout>
   )
