@@ -13,7 +13,7 @@ export default function Header() {
   ]
 
   return (
-    <Flex as="nav" my={[0, 8]} mb={[4, 8]}>
+    <Flex as="nav" mb={[4, 8]}>
       <HStack spacing={[1, 4]}>
         <NLink href="/">
           <Link
