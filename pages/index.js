@@ -32,11 +32,13 @@ export default function Index(props) {
       <Heading as="h1" mb="4">Hi, I'm <Text as="span" color={useAccentColor()}>Jesse Chen</Text> 👋</Heading>
       <Container mb="8">
         <Text>
-          Hello, world!  I am currently a Engineering Manager at Facebook.  I love building teams and helping engineering organizations scale. 
-          And I love working on products that people care about.  I have extensive experience scaling and supporting multiple fullstack product teams at both Facebook and Instagram.  
+          Hello world!  I am a software engineer/engineering manager, currently at Facebook.  I love building teams and helping engineering organizations scale, and I love working on products that people care about.  
           <br />
           <br />
-          Welcome to my website, where I write irregularly about technology, finance, and career.  
+          Welcome to my site, where I write sporadically about technology, finance, and career.  
+          <br />
+          <br />
+          GHLF.
         </Text>
       </Container>
       <HeroImage />
