@@ -57,7 +57,7 @@ export const PROJECTS = [
   },
   {
     title: 'InstaWifi',
-    description: `It's a new and fun way to connect and share your wifi networks with your friends and family.  No more keeping long passwords on paper, or verbally spelling out the wifi password to the guests. Save time and headaches by downloading InstaWifi today.
+    description: `A new and fun way to connect and share your wifi networks with your friends and family.  No more keeping long passwords on paper, or verbally spelling out the wifi password to the guests. Save time and headaches by downloading InstaWifi today.
     
     100k+ installs on Play Store.`,
     href: 'https://www.instawifi.jessechen.net/',
@@ -67,7 +67,7 @@ export const PROJECTS = [
     description: `A simple way to manage your Eventbrite events from any device. Event organizers can communicate with their attendees instantly with our SMS broadcast feature, and set up polls via text messages to interact with attendees in real-time.
     
     Best Twilio API Integration at AngelHack 2.`,
-    href: 'http://www.eventr.jessechen.net/',
+    href: 'https://www.youtube.com/watch?v=vySwOcQ4LZk',
   },
   {
     title: 'CalChat',
@@ -78,7 +78,7 @@ export const PROJECTS = [
   },
   {
     title: 'Friendly Alarm Clock',
-    description: `Friendly Alarm Clock is an Android app that utilizes Open Graph on Facebook to make alarm clocks social. Creating an alarm creates a post on Facebook which people can comment on such that when the alarm goes off, the comments are read out via TTS.
+    description: `Friendly Alarm Clock is an Android app that utilizes Open Graph on Facebook to make your alarm clocks social. Creating an alarm automatically creates a post on Facebook where your friends can leave a comment such that when the alarm goes off, the comments are read out via TTS.  You will never wake up to a boring message again.
 
     Best Open Graph App winner at Facebook Mobile Hack 2011.`,
     href: 'https://github.com/0xjessel/FriendlyAlarmClock',
@@ -90,7 +90,7 @@ export const PROJECTS = [
   },
   {
     title: 'AccessibleYoutube',
-    description: `Build an a11y-friendly version of YouTube to win a Google I/O ticket.
+    description: `A developer competition hosted by Google to build an a11y-friendly version of YouTube to win a Google I/O ticket.
 
     Winner of the Last Call for Google I/O 2011 - Accessibility Challenge.`,
     href: 'https://github.com/0xjessel/AccessibleYoutube',
