@@ -78,7 +78,7 @@ export const PROJECTS = [
   },
   {
     title: 'Friendly Alarm Clock',
-    description: `Friendly Alarm Clock is an Android app that utilizes Open Graph on Facebook to make your alarm clocks social. Creating an alarm automatically creates a post on Facebook where your friends can leave a comment such that when the alarm goes off, the comments are read out via TTS.  You will never wake up to a boring message again.
+    description: `Friendly Alarm Clock is an Android app that utilizes Open Graph on Facebook to make your alarm clocks social. Creating an alarm automatically creates a post on Facebook where your friends can leave a comment such that when the alarm goes off, the comments are read out via TTS.  Never wake up to a boring alarm again.
 
     Best Open Graph App winner at Facebook Mobile Hack 2011.`,
     href: 'https://github.com/0xjessel/FriendlyAlarmClock',
