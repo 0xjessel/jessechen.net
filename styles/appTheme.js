@@ -21,6 +21,12 @@ export const AppTheme = extendTheme({
     // heading: "Hoefler Text",
     // heading: "Neue Haas Unica Pro",
   },
+  fontSizes: {
+    // to adjust for Mukta, a relative smaller font
+    xs: '0.83rem',
+    sm: '0.95rem',
+    md: '1.08rem',
+  },
   styles: {
     global: (props) => ({
       'html': {
