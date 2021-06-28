@@ -1,7 +1,7 @@
 export default {
   defaultTitle: "Jesse Chen",
   titleTemplate: "%s | Jesse Chen",
-  description: "Engineering Manager. Personal blog of Jesse Chen.",
+  description: "Engineering Manager. Personal website of Jesse Chen.",
   twitter: {
     cardType: "summary_large_image",
     site: "@0xjessel",

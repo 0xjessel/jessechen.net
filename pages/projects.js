@@ -25,7 +25,7 @@ export default function Projects() {
     <Layout
       SEO={{ 
         title: "Projects",
-        description: "Notable projects and work",
+        description: "Notable features and work",
         url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/projects`,
       }}>
       <Header />
