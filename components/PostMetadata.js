@@ -17,7 +17,10 @@ export default function PostMetadata({ frontMatter, showAuthor, showClock, ...pr
         {' • '}
         {showClock
           ? <>
-              <FiClock style={{ display: "inline" }} />
+              <FiClock style={{ 
+                display: "inline",
+                marginTop: "-2px",
+              }} />
               {' '}
             </>
           : null}

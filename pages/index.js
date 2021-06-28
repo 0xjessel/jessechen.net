@@ -61,7 +61,7 @@ export async function getStaticProps() {
   try {
     const result = await cloudinary.v2.search.expression('folder:instagram/*')
       .with_field('context',)
-      .sort_by('created_at','asc')
+      .sort_by('created_at','desc')
       .max_results('9')
       .execute()
 
