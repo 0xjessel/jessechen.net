@@ -26,6 +26,7 @@ export default function FeatureListItem({ feature, ...props }) {
         src={imgSrc}
         height={['150px', '165px', '150px']}
         width={['100%', '165px', '100%']}
+        alt={`${feature.title} thumbnail`}
       />
       <Box pt="4" px="4" pb="4">
         <Heading size="md" mb="2">

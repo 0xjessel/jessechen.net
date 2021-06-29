@@ -4,7 +4,11 @@ export default function WorkExperience({ imgSource, company, role, description, 
   return (
     <Flex position="relative">
       <Box mt="1" mr="3">
-        <Image maxWidth="32px" src={imgSource} />
+        <Image 
+          maxWidth="32px" 
+          src={imgSource} 
+          alt={`${company} logo`}
+        />
       </Box>
       <Box flex="1">
         <Text fontSize="xl" fontWeight="bold" maxWidth={["214px", "none"]}>{company}</Text>

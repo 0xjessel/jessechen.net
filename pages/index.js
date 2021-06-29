@@ -29,10 +29,10 @@ export default function Index(props) {
         url: `${process.env.NEXT_PUBLIC_VERCEL_URL}`,
       }}>
       <Header />
-      <Heading as="h1" mb="4">Hi, I'm <Text as="span" color={useAccentColor()}>Jesse Chen</Text> 👋</Heading>
+      <Heading as="h1" mb="4">Hi, I&apos;m <Text as="span" color={useAccentColor()}>Jesse Chen</Text> 👋</Heading>
       <Container mb="8">
         <Text>
-          Hello world!  I'm an engineering manager, currently at Facebook.  I love building teams and helping engineering organizations scale, and I love working on products that people care about.  
+          Hello world!  I&apos;m an engineering manager, currently at Facebook.  I love building teams and helping engineering organizations scale, and I love working on products that people care about.  
           <br />
           <br />
           Welcome to my site, where I write sporadically about technology, finance, and career.  
