@@ -33,3 +33,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# build files
+/public/sitemap.xml
