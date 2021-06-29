@@ -28,7 +28,7 @@ export default function Footer() {
     </Link>
 
   return (
-    <VStack py="12" spacing="2">
+    <VStack pt="12" spacing="2">
       <HStack spacing="1">
         <Link 
           className="umami--click--linkedin"
