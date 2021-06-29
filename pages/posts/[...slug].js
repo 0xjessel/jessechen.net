@@ -16,6 +16,8 @@ import { components } from '../../utils/mdxComponents'
 import { useLinkColor } from '../../styles/colorModes'
 
 export default function PostPage({ source, frontMatter, filePath, previous, next }) {
+  const linkColor = useLinkColor()
+
   return (
     <Layout
       SEO={{ 
@@ -39,7 +41,7 @@ export default function PostPage({ source, frontMatter, filePath, previous, next
             href={`/posts/[...slug]`}>
             <Link 
               textAlign="left"
-              color={useLinkColor()}>
+              color={linkColor}>
               {`← ${previous.title}`}
             </Link>
           </NLink>
@@ -51,7 +53,7 @@ export default function PostPage({ source, frontMatter, filePath, previous, next
             href={`/posts/[...slug]`}>
             <Link 
               textAlign="right"
-              color={useLinkColor()}>
+              color={linkColor}>
               {`${next.title} →`}
             </Link>
           </NLink>

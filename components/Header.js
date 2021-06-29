@@ -4,7 +4,8 @@ import { FiSun, FiMoon } from 'react-icons/fi'
 import { useBackgroundColor, useBorderColor } from '../styles/colorModes'
 
 export default function Header() {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode()
+  const linkBackgroundColor = useBackgroundColor()
 
   const links = [
     ['Posts', '/posts'],
@@ -39,7 +40,7 @@ export default function Header() {
               borderRadius="base"
               p={2}
               _hover={{ 
-                backgroundColor: useBackgroundColor(),
+                backgroundColor: linkBackgroundColor,
                 textDecoration: 'none',
               }}>
               {link[0]}
