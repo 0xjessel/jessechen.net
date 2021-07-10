@@ -18,7 +18,6 @@ export default function Header() {
       <HStack spacing={[1, 4]}>
         <NLink href="/">
           <Link
-            fontSize={['sm', 'md']}
             mr={1}
             border="1px"
             borderColor={useBorderColor()}>
