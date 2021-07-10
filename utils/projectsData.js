@@ -67,7 +67,7 @@ export const PROJECTS = [
     description: `A simple way to manage your Eventbrite events from any device. Event organizers can communicate with their attendees instantly with our SMS broadcast feature, and set up polls via text messages to interact with attendees in real-time.
     
     Best Twilio API Integration at AngelHack 2.`,
-    href: 'https://www.youtube.com/watch?v=vySwOcQ4LZk',
+    href: 'https://www.twilio.com/blog/2012/03/eventr-captures-twilio-prize-at-angel-hack-sf.html',
   },
   {
     title: 'CalChat',
