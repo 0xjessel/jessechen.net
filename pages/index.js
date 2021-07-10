@@ -38,7 +38,7 @@ export default function Index(props) {
           Welcome to my site, where I write sporadically about technology, finance, and career.  
           <br />
           <br />
-          GHLF.
+          GLHF.
         </Text>
       </Container>
       <HeroImage />
