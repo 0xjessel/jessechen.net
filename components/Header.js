@@ -22,7 +22,7 @@ export default function Header() {
             border="1px"
             borderColor={useBorderColor()}>
             <Center 
-              fontSize={['md', 'lg']} 
+              fontSize={['sm', 'md']} 
               whiteSpace="nowrap"
               py={1}
               px={2}>
