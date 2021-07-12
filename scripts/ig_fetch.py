@@ -74,15 +74,16 @@ try:
     if media_id not in to_upload:
       continue
 
-    media_url = media['media_url']
     media_type = media['media_type']
     media_permalink = media['permalink']
 
+    upload_url = media['thumbnail_url'] if media_type == 'VIDEO' else media['media_url']
+
     cloudinary.uploader.upload(
-        media_url,
+        upload_url,
         folder='instagram',
-        context='id={id}|media_permalink={media_permalink}|media_type={media_type}|media_url={media_url}'
-        .format(id=media_id, media_permalink=media_permalink, media_type=media_type, media_url=media_url)
+        context='id={id}|media_permalink={media_permalink}|media_type={media_type}|media_url={upload_url}'
+        .format(id=media_id, media_permalink=media_permalink, media_type=media_type, upload_url=upload_url)
     )
 
     print('uploaded {id}..'.format(id=media_id))
