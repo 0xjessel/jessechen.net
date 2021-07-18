@@ -1,5 +1,11 @@
 export const FEATURES = [
   {
+    title: 'Facebook Unveils Ways for Experts to Shine Within Groups',
+    description: 'Admins can recognize community members, or people can designate topics they are knowledgeable on to be discovered by admins',
+    href: 'https://www.adweek.com/media/facebook-unveils-ways-for-experts-to-shine-within-groups/',
+    image: 'projects/facebook-group-experts.jpg',
+  },
+  {
     title: 'Facebook Groups to gain suite of new tools for managing discussions, surfacing public content',
     description: 'Facebook is introducing a suite of new features for Facebook Groups, the private social networking product now used by over 1.8 billion people every month. At the company’s digitally hosted Facebook Communities Summit today, Facebook detailed a set of...',
     href: 'https://techcrunch.com/2020/10/01/facebook-groups-to-gain-suite-of-new-tools-for-managing-discussions-surfacing-public-content/',
@@ -9,7 +15,7 @@ export const FEATURES = [
     title: 'Instagram will share revenue with creators for the first time through ads in IGTV',
     description: 'And purchasable Badges in Instagram Live',
     href: 'https://theverge.com/2020/5/27/21271009/instagram-ads-igtv-live-badges-test-update-creators',
-    image: 'projects/igtv-revshare.webp',
+    image: 'projects/igtv-revshare.png',
   },
   {
     title: 'Instagram is testing Creator Accounts for high-profile influencers',
