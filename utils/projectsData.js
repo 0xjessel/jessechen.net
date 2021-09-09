@@ -57,6 +57,11 @@ export const FEATURES = [
 
 export const PROJECTS = [
   {
+    title: 'Bank of 陈CHEN',
+    description: 'A web3 dapp that provides various controls for managing the ERC-20 token 陈CHEN bucks. It is known to be the biggest currency printer in the world.',
+    href: 'https://bankofchen.vercel.app/',
+  },
+  {
     title: 'FBX Importer',
     description: 'Import your Xanga blog posts to Facebook before Xanga shuts down.',
     href: 'http://fbximporter.jessechen.net/',
@@ -64,21 +69,21 @@ export const PROJECTS = [
   {
     title: 'InstaWifi',
     description: `A new and fun way to connect and share your wifi networks with your friends and family.  No more keeping long passwords on paper, or verbally spelling out the wifi password to the guests. Save time and headaches by downloading InstaWifi today.
-    
+
     100k+ installs on Play Store.`,
     href: 'https://www.instawifi.jessechen.net/',
   },
   {
     title: 'Eventr',
     description: `A simple way to manage your Eventbrite events from any device. Event organizers can communicate with their attendees instantly with our SMS broadcast feature, and set up polls via text messages to interact with attendees in real-time.
-    
+
     Best Twilio API Integration at AngelHack 2.`,
     href: 'https://www.twilio.com/blog/2012/03/eventr-captures-twilio-prize-at-angel-hack-sf.html',
   },
   {
     title: 'CalChat',
     description: `CalChat is a web app that hosts chatrooms for every class and building on campus with the goal of connecting the cal campus community. By logging in with Facebook, students can talk to fellow students in the same building or class, make friends, find study partners, and stay in the loop.
-    
+
     First Place in STC Web App Competition.`,
     href: 'https://www.youtube.com/watch?v=5meGOULwsWo',
   },
