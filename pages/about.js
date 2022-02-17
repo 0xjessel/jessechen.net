@@ -25,9 +25,9 @@ export default function About() {
       <Container mb="8">
         <HeroImage />
         <Text whiteSpace="pre-line">
-          {`For the last 10 years, I've been at Facebook where I focused on building both consumer products and engineering orgs at scale.  During my time at Facebook, I have been responsible for creating and leading cross-functional teams on multiple new 0-1 ventures, such as Instagram Creators and Facebook Communities.  
+          {`For the last 10 years, I've been at Facebook where I focused on building both consumer products and engineering orgs at scale.  During my time there, I have been responsible for creating and leading cross-functional teams on multiple new 0-1 ventures, such as Instagram Creators and Facebook Communities.  
 
-          Currently, I lead engineering for the teams that are building the next-gen products for community creators.`}
+          Currently, I lead engineering for the teams focused on unlocking economic activity within communities.`} 
         </Text>
       </Container>
       <Container mb="8">
@@ -37,7 +37,7 @@ export default function About() {
             imgSource="/images/about/fb-logo.png"
             company="Facebook"
             role="Engineering Manager"
-            description={`Create and lead a 50-person engineering team and 120+ XFN to build meaningful products for community creators.  Products we've launched includes Online Events, Q&A, and Expert badges for Facebook Groups.`}
+            description={`Create and lead a 50-person engineering team and 120+ XFN to build new products for community creators.  Products we've launched include Online Events, Q&A, and Expert roles for Facebook Groups.`}
             dateRange="2020 - Present"
           />
           <WorkExperience
