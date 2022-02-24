@@ -57,6 +57,11 @@ export const FEATURES = [
 
 export const PROJECTS = [
   {
+    title: 'Life With A Potato',
+    description: 'Whimsical imagery of life with a potato. A joint project with an IRL potato to mint NFTs on the Polygon blockchain.',
+    href: 'https://opensea.io/collection/life-with-a-potato',
+  },
+  {
     title: 'Bank of 陈CHEN',
     description: 'A web3 dapp that provides various controls for managing the ERC-20 token 陈CHEN bucks. It is known to be the biggest currency printer in the world.',
     href: 'https://bankofchen.vercel.app/',
