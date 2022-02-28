@@ -10,7 +10,10 @@ coverImage: "/images/posts/2022/overkill-badge.png"
 
 This is a a story of over-engineering at its finest — I just built the most overkill Instagram photo grid for fun.
 
-![but why](/images/posts/2022/but-why.mp4)
+<GIF>
+  <source src="/images/posts/2022/but-why.webm" type="video/webm" />
+  <source src="/images/posts/2022/but-why.mp4" type="video/mp4" />
+</GIF>
 
 If you’re an engineer, then you know this feel. Because my website is a side project and I have no obligations or deadlines to anybody else, it created the perfect environment to obsess over an excessively unnecessary and heavily optimized Instagram photo grid for a personal website that barely gets 100 hits a day. Maybe this will be more practical for your website!
 
@@ -25,9 +28,12 @@ Now that the click bait title worked, my goal with this post is to actually shar
 Problem: The IG Graph API returns image URLs that are way too large for thumbnails.
 
 ![graph api thumbnail size](/images/posts/2022/graph-api-thumbnail-size.png)
-_It costs 252kB to download one image_
 
-Considering the Instagram photo grid I want is a 3x3 grid of thumbnails, showing 9 images would require us to download over 2MB just for thumbnails! To put this in context, the rest of my homepage resources add up to just 490kB.
+<Caption>
+  <em>It costs 252kB to download one image</em>
+</Caption>
+
+Considering the Instagram photo grid I want is a 3x3 grid of thumbnails, displaying 9 images would require us to download over 2MB just for thumbnails! To put this in context, the rest of my homepage resources add up to just 490kB.
 
 For mobile phones or slower networks, downloading more bytes lead to longer loading times. In real-world applications, this can be the difference between a user that bounces from your site without interacting vs an engaged user.
 
@@ -45,7 +51,7 @@ My first reaction is to take advantage of NextJS [Image Optimization API](https:
 
 ![next image benefits](/images/posts/2022/next-image-benefits.png)
 
-This sounds awesome and exactly what I need, but how do I leverage this with remote images served from Graph API? The solution is to add a hardcoded allowlist of domains in your `next.config.js` file.
+This sounds awesome and exactly what I need, but how do I leverage this with remote images served from the Graph API? The solution is to add a hardcoded allowlist of domains in your `next.config.js` file.
 
 ```json
 module.exports = {
@@ -99,10 +105,12 @@ Success! Now that I can get the latest 9 medias from the official Instagram API,
 
 Now I need to automate a way to fetch the latest results from the API endpoint and upload any new thumbnails onto Cloudinary. If I have a server, I can run a daily script to hit the Graph API endpoint and see if there are new photos.
 
-<aside>
-❗ This is one of the drawbacks with my implementation.  A daily script to fetch new photos mean the photo grid can be up to 24 hours out of date.  This is an acceptable tradeoff for me, just follow me on Instagram if you really need to see my latest photo!
-
-</aside>
+<Callout status="error">
+  This is one of the drawbacks with my implementation. A daily script to fetch
+  new photos mean the photo grid can be up to 24 hours out of date. This is an
+  acceptable tradeoff for me, just follow me on Instagram if you really need to
+  see my latest photo!
+</Callout>
 
 If new photos are detected, I can use one of Cloudinary’s [many SDKs](https://cloudinary.com/documentation/cloudinary_sdks) to upload said photos. I have a Dreamhost plan from when I used to host my old website on there and they support cron jobs so I deployed my scripts to run daily there. But you could use any VPS or hosting service here.
 
@@ -117,12 +125,16 @@ After I run the script, the 9 photos stored on Cloudinary is synced with my late
 
 If you look carefully, you will also notice that I store some additional state into each photo such as `media_permalink` and `media_type`, which will make sense later.
 
-<aside>
-  ⚠️ Make sure to also have a cron job to hit the [Refresh Access
-  Token](https://developers.facebook.com/docs/instagram-basic-display-api/reference/refresh_access_token)
-  endpoint every 60 days or so — this is to make sure your access token doesn’t
+<Callout>
+  Make sure to also have a cron job to hit the{" "}
+  <a
+    target="_blank"
+    href="https://developers.facebook.com/docs/instagram-basic-display-api/reference/refresh_access_token">
+    Refresh Access Token
+  </a>{" "}
+  endpoint every 60 days — this is to make sure your access token doesn’t
   expire.
-</aside>
+</Callout>
 
 ### Cloudinary Manipulation
 
@@ -148,10 +160,16 @@ const imgSrc = `/image/upload/f_auto,c_fill,w_181,h_181,dpr_${window.devicePixel
 I am now able to transform the original way-too-large images from the Graph API into bite-sized thumbnails that is ready to be rendered in NextJS/Chakra. Compare the image size from the Instagram Graph API vs Cloudinary after applying these transformations.
 
 ![before image](/images/posts/2022/before-image.png)
-_Before: 427kB_
+
+<Caption>
+  <em>Before: 427kB</em>
+</Caption>
 
 ![after image](/images/posts/2022/after-image.png)
-_After: 41kB_
+
+<Caption>
+  <em>After: 41kB</em>
+</Caption>
 
 A 10x improvement!! I was able to considerably save the amount of data sent over the wire by returning the best minimum quality/size necessary for a small thumbnail.
 
@@ -268,13 +286,19 @@ Remember how I mentioned my cron job stored additional state into each photo? Th
 
 This component handles responsive design very well. Chakra UI [automatically handles this](https://chakra-ui.com/docs/features/responsive-styles) with the inclusion of `columns={[2, 3]}` prop. This tells Chakra UI to display the grid in 3 columns if the viewport is tablet-width or greater, 2 columns for anything smaller. `AspectRatio` enforces the thumbnails to scale with the grid but maintain the square dimensions.
 
-![video demo](/images/posts/2022/demo.mp4)
+<GIF>
+  <source src="/images/posts/2022/demo.webm" type="video/webm" />
+  <source src="/images/posts/2022/demo.mp4" type="video/mp4" />
+</GIF>
 
 ### Conclusion
 
 This concludes the story of how I built the most overkill Instagram photo grid ever. To be sure, there are notable downsides with this implementation. It does not update in realtime, and the amount of external dependencies for this means I might regret this years later if/when things fail or break. But overall, I’m very happy with how fast my home page loads now. My entire website is open source, and so all the code for this component is available on my [GitHub](https://github.com/0xjessel/jessechen.net).
 
-Going from 3.2MB to 700kB for my home page was a huge 80% reduction in payload size and it was so worth it. Clicking around on my website now feels snappy and fast. Having not coded for more then half a decade since switching to EM, I felt like hackerman when this worked. As a previous engineer on the Photos team at Facebook, I hope this is making my younger IC self somewhat proud 🥲.
+Going from 3.2MB to 700kB for my home page was a huge 80% reduction in payload size and it was so worth it. Clicking around on my website now feels snappy and fast. Having not coded for more then half a decade since switching to EM, I felt like _hackerman_ when this worked. As an ex-engineer on the Photos team at Facebook, I hope this is somewhat making my younger IC self proud 🥲.
 
 ![Chrome Lighthouse Report](/images/posts/2022/lighthouse-report.png)
-_Chrome Lighthouse report (A+ rating)_
+
+<Caption>
+  <em>Chrome Lighthouse report (A+ rating)</em>
+</Caption>

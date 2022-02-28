@@ -39,14 +39,6 @@ export const AppTheme = extendTheme({
       '::selection': {
         background: mode(SELECTION_LIGHT, SELECTION_DARK)(props),
       },
-      'pre::-webkit-scrollbar': {
-        display: 'none',
-      },
-      'pre': {
-        'msOverflowStyle': 'none',
-        'scrollbarWidth': 'none',
-        'overflowX': 'scroll',
-      },
     }),
   },
   components: {

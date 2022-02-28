@@ -1,6 +1,9 @@
-import { AspectRatio, Box, Code, Divider, Heading as CHeading, Kbd, Link, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/layout'
+/* eslint-disable react/display-name */
+import { AspectRatio, Box, Center, Code, Divider, Heading as CHeading, Kbd, Link, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/layout'
 import { Image, useColorModeValue } from '@chakra-ui/react'
+
 import { useLinkColor } from '../styles/colorModes'
+import Callout from '../components/Callout';
 
 function Heading({ children, ...props }) {
   return (
@@ -16,6 +19,7 @@ function Heading({ children, ...props }) {
         href={`#${props.id}`}
         ml="1"
         opacity="0"
+        fontWeight="bold"
         _hover={{
           opacity: 1,
           color: useLinkColor(),
@@ -30,6 +34,16 @@ function Heading({ children, ...props }) {
   )
 }
 
+function GIF({ children, ...props }) {
+  return (
+    <Box {...props}>
+      <video autoPlay loop muted playsInline>
+        {children}
+      </video>
+    </Box>
+  )
+}
+
 export const components = {
   h1: (p) => <Heading as="h1" fontSize="2xl" {...p} />,
   h2: (p) => <Heading as="h2" fontSize="xl" {...p} />,
@@ -39,6 +53,7 @@ export const components = {
   h6: (p) => <Heading as="h6" fontSize="md" {...p} />,
   p: (p) => <Text as="p" mb="8" {...p} />,
   strong: (p) => <Text as="strong" fontWeight="semibold" {...p} />,
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   a: (p) => <Link isExternal color={useLinkColor()} {...p} />,
   ul: (p) => <UnorderedList mb="8" {...p} />,
   ol: (p) => <OrderedList mb="8" {...p} />,
@@ -58,16 +73,21 @@ export const components = {
       }}
       fontStyle="italic"
       borderLeftWidth={4}
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       borderLeftColor={useColorModeValue('gray.400', 'gray.600')}
       {...p}
     />,
-  inlineCode: (p) => <Code {...p} />,
+  inlineCode: (p) => <Code display="inline" {...p} />,
   pre: (p) =>
     <Box mb="8">
       <pre {...p} />
     </Box>,
   hr: (p) => <Divider mb="8" {...p} />,
   kbd: (p) => <Kbd {...p} />,
+  // eslint-disable-next-line jsx-a11y/alt-text
   img: (p) => <Image {...p} />,
-  iframe: (p) => <AspectRatio my="8" ratio="1.778"><iframe {...p} /></AspectRatio>
+  iframe: (p) => <AspectRatio my="8" ratio="1.778"><iframe {...p} /></AspectRatio>,
+  GIF: (p) => <GIF my="8" {...p} />,
+  Caption: (p) => <Center mb="8" mt="-6" {...p} />,
+  Callout: (p) => <Callout mb="8" {...p} />,
 }
