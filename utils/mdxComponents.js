@@ -3,7 +3,7 @@ import { AspectRatio, Box, Center, Code, Divider, Heading as CHeading, Kbd, Link
 import { Image, useColorModeValue } from '@chakra-ui/react'
 
 import { useLinkColor } from '../styles/colorModes'
-import Callout from '../components/Callout';
+import Callout from '../components/Callout'
 
 function Heading({ children, ...props }) {
   return (
