@@ -1,4 +1,4 @@
-import { Alert, Box, AlertDescription, AlertIcon } from '@chakra-ui/react'
+import { Alert, AlertDescription, AlertIcon } from '@chakra-ui/react'
 
 export default function Callout({status, icon, children, ...props}) {
   return (
