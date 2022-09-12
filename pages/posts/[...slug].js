@@ -23,7 +23,7 @@ export default function PostPage({ source, frontMatter, filePath, previous, next
       SEO={{ 
         title: frontMatter.title,
         description: frontMatter.description,
-        url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/posts/${filePath}`,
+        url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/posts/${filePath}`,
       }}>
       <Header />
       <Heading as="h1" mb="2">{frontMatter.title}</Heading>
