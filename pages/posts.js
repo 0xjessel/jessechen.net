@@ -27,7 +27,11 @@ export default function Posts({ posts }) {
 }
 
 export function getStaticProps() {
-  const posts = getAllMDXPostsWithMetadata()
+  const posts = getAllMDXPostsWithMetadata(
+    true, // sorted
+    false, // includeUnpublished
+    false, // withContent
+  )
 
   return { props: { posts } }
 }

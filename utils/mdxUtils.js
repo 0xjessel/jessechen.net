@@ -34,7 +34,7 @@ export function getAllMDXPosts() {
  return mdxFiles
 }
 
-export function getAllMDXPostsWithMetadata(sorted = true, includeUnpublished = false) {
+export function getAllMDXPostsWithMetadata(sorted = true, includeUnpublished = false, withContent = true) {
   const posts = getAllMDXPosts().map((filePath) => {
     const source = fs.readFileSync(path.join(POSTS_PATH, filePath))
     const { content, data } = matter(source)
@@ -46,9 +46,9 @@ export function getAllMDXPostsWithMetadata(sorted = true, includeUnpublished = f
     data.readingTime = require('reading-time')(content)
 
     return {
-      content,
       data,
       filePath,
+      ...(withContent && {content}),
     }
   }).filter((post) => Object.keys(post).length !== 0)
 
