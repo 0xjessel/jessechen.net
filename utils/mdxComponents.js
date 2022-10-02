@@ -55,6 +55,7 @@ export const components = {
   strong: (p) => <Text as="strong" fontWeight="semibold" {...p} />,
   // eslint-disable-next-line react-hooks/rules-of-hooks
   a: (p) => <Link isExternal color={useLinkColor()} {...p} />,
+  Link: (p) => <Link isExternal color={useLinkColor()} {...p} />,
   ul: (p) => <UnorderedList mb="8" {...p} />,
   ol: (p) => <OrderedList mb="8" {...p} />,
   li: (p) => <ListItem {...p} />,
@@ -88,6 +89,6 @@ export const components = {
   img: (p) => <Image {...p} />,
   iframe: (p) => <AspectRatio my="8" ratio="1.778"><iframe {...p} /></AspectRatio>,
   GIF: (p) => <GIF my="8" {...p} />,
-  Caption: (p) => <Center mb="8" mt="-6" {...p} />,
+  Caption: (p) => <Center mb="8" mt="-6"><Text as="i" fontSize="sm" {...p} /></Center>,
   Callout: (p) => <Callout mb="8" {...p} />,
 }

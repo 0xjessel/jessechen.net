@@ -106,10 +106,10 @@ Success! Now that I can get the latest 9 medias from the official Instagram API,
 Now I need to automate a way to fetch the latest results from the API endpoint and upload any new thumbnails onto Cloudinary. If I have a server, I can run a daily script to hit the Graph API endpoint and see if there are new photos.
 
 <Callout status="error">
-  This is one of the drawbacks with my implementation. A daily script to fetch
+  {`This is one of the drawbacks with my implementation. A daily script to fetch
   new photos mean the photo grid can be up to 24 hours out of date. This is an
   acceptable tradeoff for me, just follow me on Instagram if you really need to
-  see my latest photo!
+  see my latest photo!`}
 </Callout>
 
 If new photos are detected, I can use one of Cloudinary’s [many SDKs](https://cloudinary.com/documentation/cloudinary_sdks) to upload said photos. I have a Dreamhost plan from when I used to host my old website on there and they support cron jobs so I deployed my scripts to run daily there. But you could use any VPS or hosting service here.
@@ -125,15 +125,14 @@ After I run the script, the 9 photos stored on Cloudinary is synced with my late
 
 If you look carefully, you will also notice that I store some additional state into each photo such as `media_permalink` and `media_type`, which will make sense later.
 
-<Callout>
-  Make sure to also have a cron job to hit the{" "}
-  <a
+<Callout status="info">
+  {`Make sure to also have a cron job to hit the `}
+  <Link
     target="_blank"
     href="https://developers.facebook.com/docs/instagram-basic-display-api/reference/refresh_access_token">
-    Refresh Access Token
-  </a>{" "}
-  endpoint every 60 days — this is to make sure your access token doesn’t
-  expire.
+    {`Refresh Access Token`}
+  </Link>
+  {` endpoint every 60 days — this is to make sure your access token doesn’t expire.`}
 </Callout>
 
 ### Cloudinary Manipulation
@@ -161,15 +160,11 @@ I am now able to transform the original way-too-large images from the Graph API 
 
 ![before image](/images/posts/2022/before-image.png)
 
-<Caption>
-  <em>Before: 427kB</em>
-</Caption>
+<Caption>Before: 427kB</Caption>
 
 ![after image](/images/posts/2022/after-image.png)
 
-<Caption>
-  <em>After: 41kB</em>
-</Caption>
+<Caption>After: 41kB</Caption>
 
 A 10x improvement!! I was able to considerably save the amount of data sent over the wire by returning the best minimum quality/size necessary for a small thumbnail.
 
