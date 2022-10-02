@@ -9,7 +9,7 @@ export default function HeroImage() {
       overflow="hidden"
       boxShadow="lg"
       css={{
-        '& div': { display: 'block !important' },
+        '& span': { display: 'block !important' },
       }}>
       <NImage 
         width="638"
