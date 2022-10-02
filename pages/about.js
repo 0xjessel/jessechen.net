@@ -25,9 +25,7 @@ export default function About() {
       <Container mb="8">
         <HeroImage />
         <Text whiteSpace="pre-line">
-          {`For the last 10 years, I've been at Facebook where I focused on building both consumer products and engineering orgs at scale.  During my time there, I have been responsible for creating and leading cross-functional teams on multiple new 0-1 ventures, such as Instagram Creators and Facebook Communities.  
-
-          Currently, I lead engineering for the teams focused on unlocking economic activity within communities.`} 
+          {`For the last 10+ years, I've been at Facebook where I focused on building both consumer products and engineering orgs at scale.  During my time there, I have been responsible for creating and leading cross-functional teams on multiple new 0-1 ventures, such as Instagram Creators and Facebook Groups.`}
         </Text>
       </Container>
       <Container mb="8">
@@ -36,15 +34,15 @@ export default function About() {
           <WorkExperience
             imgSource="/images/about/fb-logo.png"
             company="Facebook"
-            role="Engineering Manager"
-            description={`Create and lead a 50-person engineering team and 120+ XFN to build new products for community creators.  Products we've launched include Online Events, Q&A, and Expert roles for Facebook Groups.`}
+            role="Senior Engineering Manager"
+            description={`Create and lead a 70-person engineering team to build new products for community creators.  Products we've launched include Online Events, Q&A, and Expert roles for Facebook Groups.`}
             dateRange="2020 - Present"
           />
           <WorkExperience
             imgSource="/images/about/ig-logo.png"
             company="Instagram"
             role="Engineering Manager"
-            description={'Led engineering for Instagram Live and Creator Monetization.  My teams are responsible for the millions of influencers that drive the majority of impressions and engagement on Instagram.'}
+            description={'Led engineering for Instagram Live and Creator Monetization.  My teams were responsible for the millions of influencers that drive the majority of impressions and engagement on Instagram.'}
             dateRange="2018 - 2020"
           />
           <WorkExperience
