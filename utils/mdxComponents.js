@@ -87,7 +87,7 @@ export const components = {
   kbd: (p) => <Kbd {...p} />,
   // eslint-disable-next-line jsx-a11y/alt-text
   img: (p) => <Image {...p} />,
-  iframe: (p) => <AspectRatio my="8" ratio="1.778"><iframe {...p} /></AspectRatio>,
+  VideoEmbed: (p) => <AspectRatio my="8"><iframe {...p} /></AspectRatio>,
   GIF: (p) => <GIF my="8" {...p} />,
   Caption: (p) => <Center mb="8" mt="-6"><Text as="i" fontSize="sm" {...p} /></Center>,
   Callout: (p) => <Callout mb="8" {...p} />,
