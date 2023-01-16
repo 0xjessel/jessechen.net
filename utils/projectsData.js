@@ -69,7 +69,7 @@ export const PROJECTS = [
   {
     title: 'FBX Importer',
     description: 'Import your Xanga blog posts to Facebook before Xanga shuts down.',
-    href: 'http://fbximporter.jessechen.net/',
+    href: 'https://www.youtube.com/watch?v=f69l9ZhuvPo',
   },
   {
     title: 'InstaWifi',
