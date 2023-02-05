@@ -19,6 +19,21 @@ The website is pretty straightforward:
 - `posts/` is where my raw blog posts go (written in .mdx format)
 - `components/` contains the various UI components seen across the site
 
+## Dreamhost Scripts
+
+The scripts to renew IG access token and fetch new media are hosted on Dreamhost.  To run the scripts locally:
+
+1. ssh into your devserver
+2. `cd cron_jobs/`
+3. `source venv/bin/activate`
+4. `python3 ./ig_fetch.py`
+
+## IG API Integration
+
+I hit the `/refresh_access_token` endpoint to renew my access token every month via the `ig_access_token.py` script.  The access token is stored as a secret environment variable on Vercel.  The access token also needs to be stored in the local environment variable file on Dreamhost for other scripts to use.
+
+With a valid access token, a cron job runs daily at midnight to check for new IG posts.  The `ig_fetch.py` script fetches the last 9 photos from the `/{user_id}/media` endpoint and compares it to the 9 photos already uploaded to Cloudinary.  The script synchronizes the Cloudinary photos to mirror the last 9 photos on my IG profile.  
+
 ## Credit & Inspiration
 
 - [Josh Comeau](https://www.joshwcomeau.com/)
