@@ -70,6 +70,12 @@ export const getStaticProps = async ({ params }) => {
   const source = fs.readFileSync(postFilePath)
 
   const { content, data } = matter(source)
+  
+  if (!data.isPublished) {
+    return {
+      notFound: true,
+    }
+  }
 
   data.readingTime = require('reading-time')(content)
 
