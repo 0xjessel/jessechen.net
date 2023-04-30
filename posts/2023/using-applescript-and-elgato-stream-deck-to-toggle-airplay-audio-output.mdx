@@ -1,0 +1,82 @@
+---
+title: "Using AppleScript and Elgato Stream Deck to Toggle AirPlay Audio Output"
+description: "Weekend hacking with AppleScript"
+date: "2023-04-29"
+isPublished: true
+tags:
+  - battlestation
+coverImage: "/images/posts/2023/vc-setup.png"
+---
+
+![my vc setup](/images/posts/2023/vc-setup.png)
+
+At work, we have a VC Perfectionist group where enthusiasts share their over-the-top video conferencing setup for others to emulate and admire. I have, unfortunately, gone off the deep end and have decided to sink excessive time and money to making the best setup possible.
+
+One of the last nuisances with my VC setup is switching the audio output device between my AirPlay speakers and AirPods. In my case, I use my AirPods when I’m on VC and speakers otherwise. I find myself having to constantly go to the Sound settings to toggle between the two, and have decided it’s time to make this a one-button shortcut.
+
+### Setting up the AppleScript
+
+First step is to write the AppleScript to programmatically set your audio output to your specified device. At first, `switchaudio-osx` on [GitHub](https://github.com/deweller/switchaudio-osx) looked to be the perfect solution. However, this did not work for my use case because my speakers are on AirPlay and it cannot detect AirPlay devices.
+
+The only other alternative is to programmatically open the System Preferences window and use accessibility identifiers to select the output devices from the settings menu. With a bit of help from chatGPT, I took a few scripts that I found online and merged them into one that works for macOS Ventura.
+
+```haskell
+set myDevices to {"Office"} -- or specify your AirPods here
+set settingsPane to "Sound"
+
+tell application "System Settings"
+	activate
+end tell
+
+tell application "System Events"
+	tell application process "System Settings"
+		-- Select {settingsPane} from the left navbar
+		tell splitter group 1 of group 1 of window 1
+			repeat until outline 1 of scroll area 1 of group 1 exists
+				delay 0
+			end repeat
+			tell outline 1 of scroll area 1 of group 1
+				set row_names to value of static text of UI element 1 of every row
+				repeat with i from 1 to (count row_names)
+					if item i of row_names = {settingsPane} then
+						log item i of row_names & i
+						select row i
+					end if
+				end repeat
+			end tell
+		end tell
+		-- Wait until settingsPane window is available to interact with
+		repeat until exists window settingsPane
+		end repeat
+		-- AirPlay devices takes some time to show
+		delay 1
+		set theRows to (every row of table 1 of scroll area 1 of group 2 of scroll area 1 of group 1 of group 2 of splitter group 1 of group 1 of window settingsPane)
+		repeat with myDevice in myDevices
+			set theDevice to myDevice as string
+			repeat with aRow in theRows
+				if name of first item of static text of group 1 of UI element 1 of aRow is equal to theDevice then
+					set selected of aRow to true
+					exit repeat
+				end if
+			end repeat
+			exit repeat
+		end repeat
+	end tell
+end tell
+
+quit application "System Settings"
+```
+
+Ventura broke a lot of existing AppleScripts on the Internet that do this, so there’s a bunch of outdated blog posts with code that no longer works. My hope with this post is to bring awareness to a working script you can use going forward (until Apple inevitably breaks it again). The only downside is that it opens the System Settings window briefly, it would be a lot cleaner if it could be done in the background.
+
+All credit goes to [u/Son_of_a_Shepherd](https://www.reddit.com/r/applescript/comments/118ivys/updateguide_macos_ventura_system_settings_with/) on reddit and [JayBrown](https://github.com/deweller/switchaudio-osx/issues/9#issuecomment-1496674289) on GitHub, who also cobbled their scripts from other online sources too 😅 we’re all just building barely functional code on top of each other.
+
+### Adding to Elgato Stream Deck+
+
+![stream deck](/images/posts/2023/stream-deck.png)
+
+I have a [Elgato Stream Deck+](https://www.elgato.com/en/stream-deck-plus) which sits on your desk and features a grid of customizable LCD keys which can be programmed with macros and shortcuts. I love having this device to control my office lights, Zoom controls (e.g. mute, camera), volume, and now audio output. AppleScripts are supported, so lets make it a satisfying key press to switch between the outputs.
+
+Drag the AppleScript files into the StreamDeck software, which should automatically create a new System > Open action that is pointed at the location of your script.
+
+The last step is to create some fresh icons for the AirPods and Speaker. Download [SF Symbols.app](https://developer.apple.com/sf-symbols/) and grab the `airpodspro` symbol. I just took a screenshot and use Preview to make a transparent background. From there, just size it correctly in the [Key Creator](https://www.elgato.com/en/keycreator) tool to generate a png that you can use as the icon. Do the same with `hifispeaker.2`.
