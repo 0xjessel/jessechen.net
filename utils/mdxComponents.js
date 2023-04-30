@@ -78,7 +78,7 @@ export const components = {
       borderLeftColor={useColorModeValue('gray.400', 'gray.600')}
       {...p}
     />,
-  inlineCode: (p) => <Code display="inline" {...p} />,
+  code: (p) => <Code display="inline" {...p} />,
   pre: (p) =>
     <Box mb="8">
       <pre {...p} />
