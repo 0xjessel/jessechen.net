@@ -34,6 +34,26 @@ I hit the `/refresh_access_token` endpoint to renew my access token every month 
 
 With a valid access token, a cron job runs daily at midnight to check for new IG posts.  The `ig_fetch.py` script fetches the last 9 photos from the `/{user_id}/media` endpoint and compares it to the 9 photos already uploaded to Cloudinary.  The script synchronizes the Cloudinary photos to mirror the last 9 photos on my IG profile.  
 
+## Adding a new post
+
+1. Export to markdown from Notion
+2. Drop `.md` file into `posts/2022/title-here.mdx`
+3. Drop images into `public/images/posts/2022/image-file.png`. Image markdown needs to be `![caption](/images/posts/2022/something-here.png)`
+4. Add metadata to the top of file. Example:
+```md
+---
+title: "The Most Overkill Instagram Photo Grid Ever"
+description: "This is a a story of over-engineering at its finest — I just built the most overkill Instagram photo grid for fun."
+date: "2022-02-27"
+isPublished: true
+tags:
+  - web perf
+coverImage: "/images/posts/2022/overkill-badge.png"
+---
+```
+5. Save and reload localhost to preview
+6. Push to deploy!
+
 ## Credit & Inspiration
 
 - [Josh Comeau](https://www.joshwcomeau.com/)
