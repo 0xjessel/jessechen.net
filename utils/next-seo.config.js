@@ -18,7 +18,7 @@ const SEO_CONFIG_BASE = {
     },
     images: [
       {
-        url: "https://Dhinesh-SE.net/images/hero.png",
+        url: "https://Dhinesh-SE.net/images/hero.jpg",
       },
     ],
   },
