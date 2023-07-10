@@ -35,7 +35,7 @@ export default function Index(props) {
           Hello world!  I&apos;m an Software Engineer currently at Kgisl.  I love building Backend Applications.  
           <br />
           <br />
-          Welcome to my site, where I write sporadically about technology, finance, and career.  
+          Welcome to my site, where I write sporadically about technology and career.  
           <br />
           <br />
           GLHF.
