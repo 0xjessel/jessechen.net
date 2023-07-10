@@ -10,7 +10,7 @@ export default function Footer() {
   const commitURL = 
     <Link
       className="umami--click--github_commit"
-      href={`https://github.com/Dhinesh-Se/jessechen.net/commit/${commitSHA}`}
+      href={`https://github.com/Dhinesh-Se/Dhinesh-SE.net/commit/${commitSHA}`}
       isExternal>
       <Tooltip 
         hasArrow 
