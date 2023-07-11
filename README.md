@@ -1,4 +1,4 @@
-# jessechen.net
+# Dhinesh-SE.net
 
 Source code of my personal website. I decided to update my website because:
 
