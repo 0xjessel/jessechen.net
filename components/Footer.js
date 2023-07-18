@@ -77,7 +77,7 @@ export default function Footer() {
           sx={{ 
             '& pre': { display: "inline" },
           }}>
-          © 2023, Dhinesh SE • {commitURL}
+          © 2023, Dhinesh SE 
         </Text>
       </Center>
     </VStack>    
