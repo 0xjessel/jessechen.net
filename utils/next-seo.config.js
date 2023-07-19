@@ -18,7 +18,7 @@ const SEO_CONFIG_BASE = {
     },
     images: [
       {
-        url: "https://res.cloudinary.com/dhineshse/hero.jpg",
+        url: "https://res.cloudinary.com/dhineshse/images/upload/v1688964717/hero.jpg",
       },
     ],
   },
