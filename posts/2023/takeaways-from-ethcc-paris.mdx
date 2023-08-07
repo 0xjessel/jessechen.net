@@ -18,7 +18,21 @@ The `FormControl` class represents an individual input element within a form. It
 ### Usage
 
 ```typescript
-import { FormControl, Validators } from '@angular/forms';
-
-const username = new FormControl('', Validators.required);
-const email = new FormControl('', [Validators.required, Validators.email]);
+| Feature           | `FormControl`                      | `FormGroup`                         | `FormBuilder`                      | `FormArray`                       |
+|-------------------|-----------------------------------|------------------------------------|-----------------------------------|-----------------------------------|
+| Purpose           | Represents an individual input    | Represents a group of related     | Simplifies form creation          | Represents an array of form controls |
+|                   | element                           | form controls                      |                                   |                                 |
+| Usage             | Used for simple form controls     | Used for complex forms with        | Used to simplify form creation    | Used to manage an array of form controls |
+|                   | like input, select, etc.          | multiple input elements            |                                   |                                 |
+| Creation          | Created manually                  | Created manually                   | Created using FormBuilder service | Created using FormBuilder service |
+|                   |                                   |                                    |                                   |                                 |
+| Validation        | Can have validators and           | Can have validators and            | Validators can be applied         | Validators can be applied to     |
+|                   | async validators applied          | async validators applied           | directly to controls              | individual controls              |
+| Nested Controls   | Cannot hold other controls       | Can hold other controls            | Can hold other controls           | Can hold other controls           |
+| Nesting           | Cannot nest `FormGroup` or        | Can nest other `FormGroup` or      | Can nest other `FormGroup` or     | Can nest other controls, including |
+|                   | `FormArray`                        | `FormArray`                         | `FormArray`                        | other `FormArray` instances       |
+| Handling Changes  | Handles the value and status      | Handles the values and statuses    | Provides a streamlined way of     | Manages an array of form controls   |
+|                   | of a single input element         | of multiple input elements         | defining and configuring controls | and handles changes               |
+| Use Cases         | Individual form controls          | Complex forms with groups of       | Complex forms with a concise      | Arrays of dynamic form controls,   |
+|                   | (e.g., input, select)             | related input elements             | syntax                            | e.g., list of addresses           |
+| Examples          | `new FormControl('initialValue')` | `new FormGroup({})`                 | `this.fb.group({})`               | `new FormArray([])`               |

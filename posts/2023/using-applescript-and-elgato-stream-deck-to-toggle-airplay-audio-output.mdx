@@ -1,82 +1,60 @@
 ---
-title: "Using AppleScript and Elgato Stream Deck to Toggle AirPlay Audio Output"
-description: "Weekend hacking with AppleScript"
-date: "2023-04-29"
+title: "Angular Forms: Template-Driven vs Reactive Forms"
+description: "A comprehensive comparison between template-driven forms and reactive forms in Angular, highlighting their features, use cases, and benefits."
+date: "2023-08-07"
 isPublished: true
 tags:
-  - battlestation
-coverImage: "/images/posts/2023/vc-setup.jpg"
+  - Angular
+  - Forms
+coverImage: "/images/posts/2023/angular-forms-comparison.jpg"
 ---
 
-![my vc setup](/images/posts/2023/vc-setup.jpg)
+When it comes to building forms in Angular applications, developers have two primary options: template-driven forms and reactive forms. Both approaches offer unique features and benefits, catering to different scenarios and preferences. In this article, we'll dive into the differences between template-driven forms and reactive forms and help you choose the right approach for your project.
 
-At work, we have a VC Perfectionist group where enthusiasts share their over-the-top video conferencing setup for others to emulate and admire. I have, unfortunately, gone off the deep end and have decided to sink excessive time and money to making the best setup possible.
+## Template-Driven Forms
 
-One of the last nuisances with my VC setup is switching the audio output device between my AirPlay speakers and AirPods. In my case, I use my AirPods when I’m on VC and speakers otherwise. I find myself having to constantly go to the Sound settings to toggle between the two, and have decided it’s time to make this a one-button shortcut.
+Template-driven forms are a declarative approach to building forms in Angular. They rely on the `ngModel` directive to establish a connection between the form controls and the underlying data model.
 
-### Setting up the AppleScript
+### Features
 
-First step is to write the AppleScript to programmatically set your audio output to your specified device. At first, `switchaudio-osx` on [GitHub](https://github.com/deweller/switchaudio-osx) looked to be the perfect solution. However, this did not work for my use case because my speakers are on AirPlay and it cannot detect AirPlay devices.
+- **Easy to Use:** Template-driven forms require less boilerplate code, making them simpler and quicker to implement.
+- **Implicit State Management:** Angular handles the form control state and validation behind the scenes.
+- **Two-Way Data Binding:** Changes in form controls automatically update the data model, and changes in the data model update the form controls.
+- **Directives for Validation:** Angular provides built-in directives like `ngModel` and `ngForm` for validation.
 
-The only other alternative is to programmatically open the System Preferences window and use accessibility identifiers to select the output devices from the settings menu. With a bit of help from chatGPT, I took a few scripts that I found online and merged them into one that works for macOS Ventura.
+### Use Cases
 
-```haskell
-set myDevices to {"Office"} -- or specify your AirPods here
-set settingsPane to "Sound"
+Template-driven forms are suitable for small to medium-sized forms with basic validation requirements. They are often used for simple user input scenarios, such as login forms, search bars, and contact forms.
 
-tell application "System Settings"
-	activate
-end tell
+## Reactive Forms
 
-tell application "System Events"
-	tell application process "System Settings"
-		-- Select {settingsPane} from the left navbar
-		tell splitter group 1 of group 1 of window 1
-			repeat until outline 1 of scroll area 1 of group 1 exists
-				delay 0
-			end repeat
-			tell outline 1 of scroll area 1 of group 1
-				set row_names to value of static text of UI element 1 of every row
-				repeat with i from 1 to (count row_names)
-					if item i of row_names = {settingsPane} then
-						log item i of row_names & i
-						select row i
-					end if
-				end repeat
-			end tell
-		end tell
-		-- Wait until settingsPane window is available to interact with
-		repeat until exists window settingsPane
-		end repeat
-		-- AirPlay devices takes some time to show
-		delay 1
-		set theRows to (every row of table 1 of scroll area 1 of group 2 of scroll area 1 of group 1 of group 2 of splitter group 1 of group 1 of window settingsPane)
-		repeat with myDevice in myDevices
-			set theDevice to myDevice as string
-			repeat with aRow in theRows
-				if name of first item of static text of group 1 of UI element 1 of aRow is equal to theDevice then
-					set selected of aRow to true
-					exit repeat
-				end if
-			end repeat
-			exit repeat
-		end repeat
-	end tell
-end tell
+Reactive forms are a programmatic approach to building forms in Angular. They involve creating instances of the `FormControl`, `FormGroup`, and `FormArray` classes to manage form controls and their state.
 
-quit application "System Settings"
-```
+### Features
 
-Ventura broke a lot of existing AppleScripts on the Internet that do this, so there’s a bunch of outdated blog posts with code that no longer works. My hope with this post is to bring awareness to a working script you can use going forward (until Apple inevitably breaks it again). The only downside is that it opens the System Settings window briefly, it would be a lot cleaner if it could be done in the background.
+- **Explicit Control:** Reactive forms provide fine-grained control over form control creation, validation, and state management.
+- **Dynamic Control:** Form controls can be added or removed dynamically, making them ideal for complex and dynamic forms.
+- **Reactive State Management:** Developers have full control over form control state, making custom validation and error handling more flexible.
+- **Immutable Data Flow:** Reactive forms encourage an immutable data flow, which can simplify state management in larger applications.
 
-All credit goes to [u/Son_of_a_Shepherd](https://www.reddit.com/r/applescript/comments/118ivys/updateguide_macos_ventura_system_settings_with/) on reddit and [JayBrown](https://github.com/deweller/switchaudio-osx/issues/9#issuecomment-1496674289) on GitHub, who also cobbled their scripts from other online sources too 😅 we’re all just building barely functional code on top of each other.
+### Use Cases
 
-### Adding to Elgato Stream Deck+
+Reactive forms are suitable for complex forms with dynamic requirements and custom validation rules. They are a preferred choice when working with large forms, multi-step forms, or forms that require conditional validation logic.
 
-![stream deck](/images/posts/2023/stream-deck.jpg)
+## Choosing the Right Approach
 
-I have a [Elgato Stream Deck+](https://www.elgato.com/en/stream-deck-plus) which sits on your desk and features a grid of customizable LCD keys which can be programmed with macros and shortcuts. I love having this device to control my office lights, Zoom controls (e.g. mute, camera), volume, and now audio output. AppleScripts are supported, so lets make it a satisfying key press to switch between the outputs.
+The decision between template-driven forms and reactive forms depends on the specific needs of your project.
 
-Drag the AppleScript files into the StreamDeck software, which should automatically create a new System > Open action that is pointed at the location of your script.
+- **Use Template-Driven Forms When:**
+  - You need a simple form with basic validation.
+  - You prefer less code and quicker implementation.
+  - The form is relatively small and doesn't require dynamic changes.
 
-The last step is to create some fresh icons for the AirPods and Speaker. Download [SF Symbols.app](https://developer.apple.com/sf-symbols/) and grab the `airpodspro` symbol. I just took a screenshot and use Preview to make a transparent background. From there, just size it correctly in the [Key Creator](https://www.elgato.com/en/keycreator) tool to generate a png that you can use as the icon. Do the same with `hifispeaker.2`.
+- **Use Reactive Forms When:**
+  - You need more control over form control creation and validation.
+  - The form has complex requirements and dynamic behavior.
+  - You want a structured and maintainable approach, especially for larger forms.
+
+## Conclusion
+
+Both template-driven forms and reactive forms have their strengths and weaknesses. Template-driven forms offer simplicity and ease of use, while reactive forms provide greater flexibility and control. Understanding the strengths and appropriate use cases of each approach will enable you to choose the right strategy for your Angular forms, ensuring a smooth and efficient development process.
