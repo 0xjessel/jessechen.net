@@ -64,7 +64,7 @@ export default function Footer() {
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
-          href="mailto:contact+elavarasivel1976@gmail.com" 
+          href="mailto:elavarasivel1976@gmail.com" 
           title="Email"
           isExternal>
           <RiMailLine size="1.1em" />

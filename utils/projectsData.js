@@ -1,9 +1,5 @@
 export const FEATURES = [
-  {
-    title: 'Facebook Unveils Ways for Experts to Shine Within Groups',
-    description: 'Admins can recognize community members, or people can designate topics they are knowledgeable on to be discovered by admins',
-    href: 'https://www.adweek.com/media/facebook-unveils-ways-for-experts-to-shine-within-groups/',
-  },
+ 
 ]
 
 export const PROJECTS = [
@@ -15,5 +11,10 @@ export const PROJECTS = [
   {
     title: 'Dhinesh-SE.net',
     description: 'My first website, crafted beautifully with Next.js',
+  },
+  {
+    title: 'MultipleDBConnInSpringBoot',
+    description: 'Multiple Databaseconnection using spring boot .separate connection to procedure and Native query',
+    href: 'https://github.com/Dhinesh-Se/MultipleDBConnInSpringBoot',
   },
 ]
