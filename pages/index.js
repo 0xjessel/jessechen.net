@@ -1,4 +1,5 @@
 // pages/index.js
+
 import React from "react";
 import Layout from "../components/Layout";
 import { Container, Divider, Heading, Text } from "@chakra-ui/react";
@@ -25,11 +26,11 @@ export default function Index(props) {
     >
       <Header />
       <Heading as="h1" mb="4">
-        Hi, I'm <Text as="span" color={useAccentColor()}>Dhinesh </Text> 👋
+        Hi, I&apos;m <Text as="span" color={useAccentColor()}>Dhinesh </Text> 👋
       </Heading>
       <Container mb="8">
         <Text>
-          Hello world! I'm a Software Engineer currently at Kgisl. I love
+          Hello world! I&apos;m a Software Engineer currently at Kgisl. I love
           building Backend Applications.
           <br />
           <br />
