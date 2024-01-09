@@ -4,7 +4,7 @@ import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import dynamic from "next/dynamic";
- 
+import { SpeedInsights } from "@vercel/speed-insights/next"
 const HeroImage = dynamic(
   () => {
     return import("../components/HeroImage");
@@ -14,6 +14,7 @@ const HeroImage = dynamic(
 
 export default function About() {
   return (
+    
     <Layout
       SEO={{
         title: "About",
@@ -35,6 +36,7 @@ export default function About() {
         <Heading as="h2" size="lg" mb="4">
           Education
         </Heading>
+        <SpeedInsights/>
         <WorkExperience
           imgSource="/images/about/cal-logo.png"
           company="Coimbatore Institute Of Enginnering and Technology"
