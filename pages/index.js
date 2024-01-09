@@ -42,7 +42,7 @@ export default function Index(props) {
       </Container>
       <HeroImage />
       <Divider />
-      {/* Pass the igMedias prop to InstaGrid */}
+      {/* Pass the igMedias prop to InstaGrid using double curly braces */}
       <InstaGrid mt="8" px="8" medias={igMedias} />
       <Footer />
     </Layout>
