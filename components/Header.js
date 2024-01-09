@@ -26,7 +26,7 @@ export default function Header() {
               whiteSpace="nowrap"
               py={1}
               px={2}>
-              𝚓𝚎𝚜𝚜𝚎𝚕 ⟠        
+              Dhinesh-SE ⟠        
             </Center>
           </Link>
         </NLink>

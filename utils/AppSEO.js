@@ -10,13 +10,13 @@ export default function AppSEO() {
       <DefaultSeo {...SEO_CONFIG} />
       <SocialProfileJsonLd
         type="Person"
-        name="Jesse Chen"
-        url="http://jessechen.net"
+        name="Dhinesh -SE"
+        url="http://Dhinesh-SE.net"
         sameAs={[
-          'http://www.facebook.com/0xjessel',
-          'http://instagram.com/0xjessel',
-          'http://www.linkedin.com/in/0xjessel',
-          'http://github.com/0xjessel',
+          'http://www.facebook.com/Dhinesh-Se',
+          'http://instagram.com/dnesh_vd',
+          'http://www.linkedin.com/in/dhineshse',
+          'http://github.com/Dhinesh-Se',
         ]}
       />
     </>

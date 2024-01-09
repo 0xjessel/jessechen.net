@@ -26,7 +26,7 @@ try {
 
         return `
           <url>
-            <loc>${`https://jessechen.net${route}`}</loc>
+            <loc>${`https://Dhinesh-SE.net${route}`}</loc>
           </url>
         `
       }).join('')}
