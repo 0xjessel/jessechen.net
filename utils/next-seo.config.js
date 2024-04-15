@@ -27,37 +27,37 @@ const SEO_CONFIG_BASE = {
 const ADDITIONAL_LINK_TAGS_LIGHT = [
   {
     rel: "icon",
-    href: "/favicon-16x16-light.png",
+    href: "/favicon-16x16.png",
     sizes: "16x16",
   },
   {
     rel: "icon",
-    href: "/favicon-32x32-light.png",
+    href: "/favicon-32x32.png",
     sizes: "32x32",
   },
   {
     rel: "icon",
-    href: "/favicon-light.ico",
+    href: "/favicon.ico",
     sizes: "48x48",
   },
   {
     rel: "icon",
-    href: "/apple-touch-icon-light.png",
+    href: "/apple-touch-icon.png",
     sizes: "180x180",
   },
   {
     rel: "icon",
-    href: "/android-chrome-192x192-light.png",
+    href: "/android-chrome-192x192.png",
     sizes: "192x192",
   },
   {
     rel: "icon",
-    href: "/android-chrome-512x512-light.png",
+    href: "/android-chrome-512x512.png",
     sizes: "512x512",
   },
   {
     rel: "apple-touch-icon",
-    href: "/apple-touch-icon-light.png",
+    href: "/apple-touch-icon.png",
     sizes: "180x180",
   },
 ];
@@ -65,37 +65,37 @@ const ADDITIONAL_LINK_TAGS_LIGHT = [
 const ADDITIONAL_LINK_TAGS_DARK = [
   {
     rel: "icon",
-    href: "/favicon-16x16-dark.png",
+    href: "/favicon-16x16.png",
     sizes: "16x16",
   },
   {
     rel: "icon",
-    href: "/favicon-32x32-dark.png",
+    href: "/favicon-32x32.png",
     sizes: "32x32",
   },
   {
     rel: "icon",
-    href: "/favicon-dark.ico",
+    href: "/favicon.ico",
     sizes: "48x48",
   },
   {
     rel: "icon",
-    href: "/apple-touch-icon-dark.png",
+    href: "/apple-touch-icon.png",
     sizes: "180x180",
   },
   {
     rel: "icon",
-    href: "/android-chrome-192x192-dark.png",
+    href: "/android-chrome-192x192.png",
     sizes: "192x192",
   },
   {
     rel: "icon",
-    href: "/android-chrome-512x512-dark.png",
+    href: "/android-chrome-192x192.png",
     sizes: "512x512",
   },
   {
     rel: "apple-touch-icon",
-    href: "/apple-touch-icon-dark.png",
+    href: "/apple-touch-icon.png",
     sizes: "180x180",
   },
 ];

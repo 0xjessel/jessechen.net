@@ -4,7 +4,6 @@ import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import dynamic from "next/dynamic";
-import { SpeedInsights } from "@vercel/speed-insights/next"
 const HeroImage = dynamic(
   () => {
     return import("../components/HeroImage");
