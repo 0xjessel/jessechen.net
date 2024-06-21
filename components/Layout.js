@@ -8,7 +8,7 @@ export default function Layout({ SEO, children }) {
         title={SEO.title}
         description={SEO.description}
         openGraph={{
-          title: `${SEO.title ? `${SEO.title} | Jesse Chen` : `Jesse Chen`}`,
+          title: `${SEO.title ? `${SEO.title} | Dhinesh-SE` : `Dhinesh-SE`}`,
           description: SEO.description,
           url: SEO.url,
         }}

@@ -11,7 +11,7 @@ export default function Posts({ posts }) {
     <Layout
       SEO={{ 
         title: "Posts",
-        description: "Sage wisdoms by Jesse Chen",
+        description: "Sage wisdoms by Dhinesh",
         url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/posts`,
       }}>
       <Header />

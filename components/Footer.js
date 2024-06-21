@@ -1,17 +1,16 @@
 import { Center, HStack, Link, Text, Tooltip, VStack } from "@chakra-ui/react"
 import { RiLinkedinLine, RiGithubLine, RiInstagramLine, RiMailLine } from "react-icons/ri"
 import { useBackgroundColor } from "../styles/colorModes"
-
 export default function Footer() {
-  const commitSHA = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
-  let commitMessage = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE
-  const messageMatch = commitMessage.match(/^.*/g) // grabs commit title only
-  commitMessage = messageMatch.length > 0 ? messageMatch[0] : ''
+  const commitSHA = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || "";
+  let commitMessage = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE || "";
+  const messageMatch = commitMessage.match(/^.*/g); // grabs commit title only
+  commitMessage = messageMatch && messageMatch.length > 0 ? messageMatch[0] : "";
 
   const commitURL = 
     <Link
       className="umami--click--github_commit"
-      href={`https://github.com/0xjessel/jessechen.net/commit/${commitSHA}`}
+      href={`https://github.com/Dhinesh-Se/Dhinesh-SE.net/commit/${commitSHA}`}
       isExternal>
       <Tooltip 
         hasArrow 
@@ -35,7 +34,7 @@ export default function Footer() {
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
-          href="https://www.linkedin.com/in/0xjessel" 
+          href="https://www.linkedin.com/in/dhineshse" 
           title="LinkedIn"
           isExternal>
           <RiLinkedinLine size="1.1em" />
@@ -45,7 +44,7 @@ export default function Footer() {
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
-          href="https://github.com/0xjessel" 
+          href="https://github.com/Dhinesh-Se" 
           title="Github"
           isExternal>
           <RiGithubLine size="1.1em" />
@@ -55,7 +54,7 @@ export default function Footer() {
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
-          href="https://instagram.com/0xjessel" 
+          href="https://instagram.com/dnesh_vd" 
           title="Instagram"
           isExternal>
           <RiInstagramLine size="1.1em" />
@@ -65,7 +64,7 @@ export default function Footer() {
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
-          href="mailto:contact+website@jessechen.net" 
+          href="mailto:elavarasivel1976@gmail.com" 
           title="Email"
           isExternal>
           <RiMailLine size="1.1em" />
@@ -78,7 +77,7 @@ export default function Footer() {
           sx={{ 
             '& pre': { display: "inline" },
           }}>
-          © 2021, Jesse Chen • {commitURL}
+          © 2023, Dhinesh SE 
         </Text>
       </Center>
     </VStack>    
