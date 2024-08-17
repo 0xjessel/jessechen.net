@@ -1,5 +1,5 @@
 import fs from 'fs'
-import globby from 'globby'
+import { globby } from 'globby';
 
 try {
   console.info('Generating sitemap...')
