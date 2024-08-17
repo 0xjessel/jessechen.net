@@ -39,7 +39,7 @@ export default function InstaGrid({ medias, ...props }) {
               <NImage
                 loader={cloudinaryLoader}
                 src={media.public_id}
-                //dpr={window.devicePixelRatio}
+                dpr={window.devicePixelRatio}
                 height="181"
                 width="181"
                 alt="Instagram photo"

@@ -15,7 +15,7 @@ export default function HeroImage() {
       <NImage 
         loader={cloudinaryLoader}
         src="hero.jpg"
-        //dpr={window.devicePixelRatio}
+        dpr={window.devicePixelRatio}
         width="638"
         height="420"
         style={{
