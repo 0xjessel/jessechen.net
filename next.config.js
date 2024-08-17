@@ -1,7 +1,7 @@
 module.exports = {
   images: {
-    loader: 'imgix',
-    path: 'https://res.cloudinary.com/jessel/',
+    loader: 'custom',
+    loaderFile: './utils/cloudinaryLoader.js',
   },
   webpack: (config, { isServer }) => {
     if (isServer) {

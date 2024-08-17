@@ -1,5 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import NImage from 'next/image'
+import cloudinaryLoader from '../utils/cloudinaryLoader'
 
 export default function HeroImage() {
   return (
@@ -12,10 +13,15 @@ export default function HeroImage() {
         '& span': { display: 'block !important' },
       }}>
       <NImage 
+        loader={cloudinaryLoader}
+        src="hero.jpg"
+        //dpr={window.devicePixelRatio}
         width="638"
         height="420"
-        layout="intrinsic"
-        src={`/image/upload/f_auto,c_fill,w_638,dpr_${window.devicePixelRatio}/hero.jpg`}
+        style={{
+          width: '100%',
+          height: 'auto',
+        }}
         alt="image of jesse chen"
       />
     </Box>

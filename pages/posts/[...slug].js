@@ -3,6 +3,9 @@ import matter from 'gray-matter'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from 'next-mdx-remote'
 import path from 'path'
+import MDXPrism from 'mdx-prism';
+import remarkBreaks from 'remark-breaks';
+import remarkSlug from 'remark-slug';
 import { getAllMDXPosts, getAllMDXPostsWithMetadata, POSTS_PATH } from '../../utils/mdxUtils'
 
 import Layout from '../../components/Layout'
@@ -81,13 +84,8 @@ export const getStaticProps = async ({ params }) => {
 
   const mdxSource = await serialize(content, {
     mdxOptions: {
-      remarkPlugins: [
-        require('remark-breaks'),
-        require('remark-slug'),
-      ],
-      rehypePlugins: [
-        require('mdx-prism'),
-      ],
+      remarkPlugins: [remarkBreaks, remarkSlug],
+      rehypePlugins: [MDXPrism],
     },
     scope: data,
   })
