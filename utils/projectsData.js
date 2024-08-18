@@ -1,5 +1,11 @@
 export const FEATURES = [
   {
+    title: 'Threads: The inside story of Meta’s newest social app',
+    description: 'Earlier this year, a small team of engineers at Meta started working on an idea for a new app. It would have all the features people expect from a text-based conversations app, but with one very key, distinctive goal – being an app that would allow people to share their content across multiple platforms.',
+    href: 'https://engineering.fb.com/2023/09/07/culture/threads-inside-story-metas-newest-social-app/',
+    image: 'projects/threads.png',
+  },
+  {
     title: 'Facebook Unveils Ways for Experts to Shine Within Groups',
     description: 'Admins can recognize community members, or people can designate topics they are knowledgeable on to be discovered by admins',
     href: 'https://www.adweek.com/media/facebook-unveils-ways-for-experts-to-shine-within-groups/',

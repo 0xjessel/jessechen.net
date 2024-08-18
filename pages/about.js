@@ -25,18 +25,25 @@ export default function About() {
       <Container mb="8">
         <HeroImage />
         <Text whiteSpace="pre-line">
-          {`For the last 10+ years, I've been at Facebook where I focused on building both consumer products and engineering orgs at scale.  During my time there, I have been responsible for creating and leading cross-functional teams on multiple new 0-1 ventures, such as Instagram Creators and Facebook Groups.`}
+          {`For the last 12 years, I've been at Meta where I focused on building consumer products and engineering orgs at scale.  During my time there, I have been responsible for creating and leading cross-functional teams on multiple 0-1 ventures, such as Instagram Creators and Threads.`}
         </Text>
       </Container>
       <Container mb="8">
         <Heading as="h2" size="lg" mb="4">Career</Heading>
         <VStack spacing="8" mb="8">
           <WorkExperience
+            imgSource="/images/about/threads-logo.png"
+            company="Threads"
+            role="Director of Engineering, Threads"
+            description={`Lead the engineering team for Threads. Built in 5 months and became the fastest growing app in history (100M users in 5 days).`}
+            dateRange="2023 - Present"
+          />
+          <WorkExperience
             imgSource="/images/about/fb-logo.png"
             company="Facebook"
             role="Senior Engineering Manager"
             description={`Create and lead a 70-person engineering team to build new products for community creators.  Products we've launched include Online Events, Q&A, and Expert roles for Facebook Groups.`}
-            dateRange="2020 - Present"
+            dateRange="2020 - 2023"
           />
           <WorkExperience
             imgSource="/images/about/ig-logo.png"

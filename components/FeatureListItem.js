@@ -3,7 +3,7 @@ import { Box, Heading, LinkBox, LinkOverlay, Text } from "@chakra-ui/layout";
 import { useBreakpointValue } from "@chakra-ui/react";
 
 export default function FeatureListItem({ feature, ...props }) {
-  const imgSrc = `https://res.cloudinary.com/jessel/image/upload/f_auto,c_scale,w_300,dpr_${window.devicePixelRatio}/${feature.image}`
+  const imgSrc = `https://res.cloudinary.com/jessel/image/upload/w_300,f_auto,c_scale,dpr_${window.devicePixelRatio}/${feature.image}`
 
   const tooSmall = useBreakpointValue({ base: true, sm: true, md: false })
 

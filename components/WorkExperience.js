@@ -5,6 +5,7 @@ export default function WorkExperience({ imgSource, company, role, description, 
     <Flex position="relative">
       <Box mt="1" mr="3">
         <Image 
+          borderRadius="8px"
           maxWidth="32px" 
           src={imgSource} 
           alt={`${company} logo`}

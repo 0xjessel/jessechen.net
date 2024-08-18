@@ -40,7 +40,7 @@ export default function Projects() {
             }
 
             const fadeDelay = index <= SEE_MORE_INDEX
-              ? 200 + (400 * index)
+              ? 200 + (200 * index)
               : 100 * ((index + 1) - (SEE_MORE_INDEX + 1))
 
             return (
@@ -55,17 +55,17 @@ export default function Projects() {
           })}
         </SimpleGrid>
         {!seeMore 
-          ? <FadeItem delay={1800} direction="up" triggerOnce>
+          ? <FadeItem delay={1200} direction="up" triggerOnce>
               <Center>
                 <Link p="2" onClick={setSeeMore.toggle}>See more..</Link>
               </Center>
             </FadeItem>
           : null}
       </Box>
-      <FadeItem delay={2000} direction="up" triggerOnce>
+      <FadeItem delay={1400} direction="up" triggerOnce>
         <Heading as="h1" mb="4">Side Projects</Heading>
       </FadeItem>
-      <FadeItem delay={2000} direction="up" triggerOnce>
+      <FadeItem delay={1000} direction="up" triggerOnce>
         <VStack spacing="12">
           {PROJECTS.map((project) => 
             <ProjectListItem key={project.href} project={project} />
