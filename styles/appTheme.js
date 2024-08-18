@@ -7,8 +7,8 @@ export const AppTheme = extendTheme({
     useSystemColorMode: true,
   },
   fonts: {
-    heading: 'Noto Serif',
-    body: 'Mukta',
+    heading: 'Noto Serif, Georgia, Times New Roman, serif',
+    body: 'Mukta, Arial, Helvetica, sans-serif',
     mono: 'Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace',
 
     // other considerations:
