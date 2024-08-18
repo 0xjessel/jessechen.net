@@ -51,16 +51,6 @@ export default function Footer() {
           <RiGithubLine size="1.1em" />
         </Link>
         <Link 
-          className="umami--click--instagram"
-          borderRadius="full"
-          padding="2"
-          _hover={{ opacity: .7 }}
-          href="https://instagram.com/0xjessel" 
-          title="Instagram"
-          isExternal>
-          <RiInstagramLine size="1.1em" />
-        </Link>
-        <Link 
           className="umami--click--threads"
           borderRadius="full"
           padding="2"
@@ -69,6 +59,16 @@ export default function Footer() {
           title="Threads"
           isExternal>
           <RiThreadsLine size="1.1em" />
+        </Link>
+        <Link 
+          className="umami--click--instagram"
+          borderRadius="full"
+          padding="2"
+          _hover={{ opacity: .7 }}
+          href="https://instagram.com/0xjessel" 
+          title="Instagram"
+          isExternal>
+          <RiInstagramLine size="1.1em" />
         </Link>
         <Link 
           className="umami--click--email"
