@@ -6,6 +6,8 @@ export default function HeroImage(props) {
   return (
     <Box
       {...props}
+      width="100%"
+      height="fit-content"
       borderRadius="4"
       overflow="hidden"
       boxShadow="lg"
