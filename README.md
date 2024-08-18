@@ -55,6 +55,7 @@ coverImage: "/images/posts/2022/overkill-badge.png"
 6. Push to deploy!
 
 ## Credit & Inspiration
+My website was inspired by these greats and many others.
 
 - [Josh Comeau](https://www.joshwcomeau.com/)
 - [Francois Best](https://francoisbest.com/)
