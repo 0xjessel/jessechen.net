@@ -10,7 +10,7 @@ export default function Footer() {
 
   const commitURL = 
     <Link
-      className="umami--click--github_commit"
+      data-umami-event="click--github_commit"
       href={`https://github.com/0xjessel/jessechen.net/commit/${commitSHA}`}
       isExternal>
       <Tooltip 
@@ -31,7 +31,7 @@ export default function Footer() {
     <VStack pt="12" spacing="2">
       <HStack spacing="1">
         <Link 
-          className="umami--click--linkedin"
+          data-umami-event="click--linkedin"
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
@@ -41,7 +41,7 @@ export default function Footer() {
           <RiLinkedinLine size="1.1em" />
         </Link>
         <Link 
-          className="umami--click--github"
+          data-umami-event="click--github"
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
@@ -51,7 +51,7 @@ export default function Footer() {
           <RiGithubLine size="1.1em" />
         </Link>
         <Link 
-          className="umami--click--threads"
+          data-umami-event="click--threads"
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
@@ -61,7 +61,7 @@ export default function Footer() {
           <RiThreadsLine size="1.1em" />
         </Link>
         <Link 
-          className="umami--click--instagram"
+          data-umami-event="click--instagram"
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
@@ -71,7 +71,7 @@ export default function Footer() {
           <RiInstagramLine size="1.1em" />
         </Link>
         <Link 
-          className="umami--click--email"
+          data-umami-event="click--email"
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
