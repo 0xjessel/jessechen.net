@@ -1,7 +1,7 @@
 var cloudinary = require('cloudinary');
 
 import Layout from '../components/Layout'
-import { Container, Divider, Heading, Text } from '@chakra-ui/react'
+import { Container, Divider, Flex, Heading, Text } from '@chakra-ui/react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { useAccentColor } from '../styles/colorModes'
@@ -30,18 +30,23 @@ export default function Index(props) {
       }}>
       <Header />
       <Heading as="h1" mb="4">Hi, I&apos;m <Text as="span" color={useAccentColor()}>Jesse Chen</Text> 👋</Heading>
-      <Container mb="8">
-        <Text>
-          Hello world!  I&apos;m an engineering director currently at Meta.  I love building products and helping engineering organizations scale.  
-          <br />
-          <br />
-          Welcome to my site, where I write sporadically about technology, finance, and career.  
-          <br />
-          <br />
-          GLHF.
-        </Text>
-      </Container>
-      <HeroImage />
+      <Flex mb="8">
+        <HeroImage 
+          mr="4"
+          width="300px"
+        />
+        <Container>
+          <Text>
+            Hello world!  I&apos;m an engineering director currently at Meta.  I love building products and helping engineering organizations scale.  
+            <br />
+            <br />
+            Welcome to my site, where I write sporadically about technology, finance, and career.  
+            <br />
+            <br />
+            GLHF.
+          </Text>
+        </Container>
+      </Flex>
       <Divider />
       <InstaGrid mt="8" px="8" medias={igMedias} />
       <Footer />

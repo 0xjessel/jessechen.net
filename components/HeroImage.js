@@ -1,11 +1,11 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Center } from '@chakra-ui/react'
 import NImage from 'next/image'
 import cloudinaryLoader from '../utils/cloudinaryLoader'
 
-export default function HeroImage() {
+export default function HeroImage(props) {
   return (
     <Box
-      mb={8}
+      {...props}
       borderRadius="4"
       overflow="hidden"
       boxShadow="lg"
@@ -14,10 +14,10 @@ export default function HeroImage() {
       }}>
       <NImage 
         loader={cloudinaryLoader}
-        src="hero.jpg"
+        src="hero2.jpg"
         dpr={window.devicePixelRatio}
-        width="638"
-        height="420"
+        width="640"
+        height="766"
         style={{
           width: '100%',
           height: 'auto',

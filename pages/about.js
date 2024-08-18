@@ -23,7 +23,10 @@ export default function About() {
       <Header />
       <Heading as="h1" mb="4">About Me</Heading>
       <Container mb="8">
-        <HeroImage />
+        <HeroImage 
+          mb="4" 
+          width="100%" 
+        />
         <Text whiteSpace="pre-line">
           {`For the last 12 years, I've been at Meta where I focused on building consumer products and engineering orgs at scale.  During my time there, I have been responsible for creating and leading cross-functional teams on multiple 0-1 ventures, such as Instagram Creators and Threads.`}
         </Text>
