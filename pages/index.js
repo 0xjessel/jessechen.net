@@ -1,7 +1,7 @@
 var cloudinary = require('cloudinary');
 
 import Layout from '../components/Layout'
-import { Container, Divider, Flex, Heading, Text } from '@chakra-ui/react'
+import { Container, Divider, Heading, Text } from '@chakra-ui/react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { useAccentColor } from '../styles/colorModes'

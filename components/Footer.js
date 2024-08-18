@@ -1,5 +1,5 @@
 import { Center, HStack, Link, Text, Tooltip, VStack } from "@chakra-ui/react"
-import { RiLinkedinLine, RiGithubLine, RiInstagramLine, RiMailLine } from "react-icons/ri"
+import { RiLinkedinLine, RiGithubLine, RiInstagramLine, RiMailLine, RiThreadsLine } from "react-icons/ri"
 import { useBackgroundColor } from "../styles/colorModes"
 
 export default function Footer() {
@@ -59,6 +59,16 @@ export default function Footer() {
           title="Instagram"
           isExternal>
           <RiInstagramLine size="1.1em" />
+        </Link>
+        <Link 
+          className="umami--click--threads"
+          borderRadius="full"
+          padding="2"
+          _hover={{ opacity: .7 }}
+          href="https://threads.net/0xjessel" 
+          title="Threads"
+          isExternal>
+          <RiThreadsLine size="1.1em" />
         </Link>
         <Link 
           className="umami--click--email"

@@ -1,4 +1,4 @@
-import { Box, Center } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import NImage from 'next/image'
 import cloudinaryLoader from '../utils/cloudinaryLoader'
 
