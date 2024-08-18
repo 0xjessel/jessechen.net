@@ -18,7 +18,7 @@ const SEO_CONFIG_BASE = {
     },
     images: [
       {
-        url: "https://jessechen.net/images/hero2.jpg",
+        url: "https://jessechen.net/images/hero2_seo.jpg",
       }
     ]
   },
