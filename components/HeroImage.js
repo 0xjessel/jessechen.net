@@ -25,6 +25,7 @@ export default function HeroImage(props) {
           height: 'auto',
         }}
         alt="image of jesse chen"
+        priority
       />
     </Box>
   )
