@@ -27,6 +27,12 @@ export default function Index(props) {
     <Layout 
       SEO={{ 
         url: `${process.env.NEXT_PUBLIC_VERCEL_URL}`,
+        additionalLinkTags: [
+          {
+            rel: 'me',
+            href: 'https://www.threads.net/@0xjessel'
+          }
+        ]
       }}>
       <Header />
       <Heading as="h1" mb="4">Hi, I&apos;m <Text as="span" color={useAccentColor()}>Jesse Chen</Text> 👋</Heading>

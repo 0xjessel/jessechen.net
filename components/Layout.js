@@ -12,6 +12,7 @@ export default function Layout({ SEO, children }) {
           description: SEO.description,
           url: SEO.url,
         }}
+        additionalLinkTags={SEO.additionalLinkTags}
       />
       <Container 
         as="main" 
