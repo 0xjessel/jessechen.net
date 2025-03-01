@@ -25,18 +25,27 @@ export default function About() {
       <Container mb="8">
         <HeroImage mb="4" />
         <Text whiteSpace="pre-line">
-          {`For the last 12 years, I've been at Meta where I focused on building consumer products and engineering orgs at scale.  During my time there, I have been responsible for creating and leading cross-functional teams on multiple 0-1 ventures, such as Instagram Creators and Threads.`}
+          {`For the last 12 years, I've been at Meta where I focused on building consumer products and scaling teams. `
+          + `During my time there, I have been responsible for creating and leading cross-functional teams on multiple 0-1 ventures, such as Instagram Creators and Threads.`
+          + `\n\nI recently transitioned to product management, where I lead our efforts to improve developer productivity leveraging AI.`}
         </Text>
       </Container>
       <Container mb="8">
         <Heading as="h2" size="lg" mb="4">Career</Heading>
         <VStack spacing="8" mb="8">
           <WorkExperience
+            imgSource="/images/about/meta-logo.png"
+            company="Meta"
+            role="Director, Product Management"
+            description={`PM lead for Meta's AI developer productivity tools.  Exploring the future of programming with AI engineering agents.`}
+            dateRange="2025 - Present"
+          />
+          <WorkExperience
             imgSource="/images/about/threads-logo.png"
             company="Threads"
             role="Director of Engineering, Threads"
             description={`Lead the engineering team for Threads. Built in 5 months and became the fastest growing app in history (100M users in 5 days).`}
-            dateRange="2023 - Present"
+            dateRange="2023 - 2025"
           />
           <WorkExperience
             imgSource="/images/about/fb-logo.png"
@@ -65,7 +74,7 @@ export default function About() {
             role="Software Engineer"
             description={`I wrote code that you see on www.facebook.com.
 
-              Experience in building UI products on mobile and desktop web. Tech-led and shipped core components of the www site including the photo album uploader, photo viewer, newsfeed composer, and UFI.`}
+              Experience in building UI products on mobile and desktop web. Tech lead for core components of the www site including the photo album uploader, photo viewer, newsfeed composer, and UFI.`}
             dateRange="2012 - 2016"
           />
         </VStack>
