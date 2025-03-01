@@ -1,1 +1,68 @@
- 
+---
+description: Rules for Next.js pages
+globs: pages/**/*.{tsx,ts}
+---
+# Page Structure Rules
+
+These rules apply to all Next.js pages in the `pages/` directory.
+
+## File-Based Routing
+- Follow Next.js file-based routing conventions
+- Use proper directory structure for nested routes
+- Implement dynamic routes correctly
+- Handle catch-all routes appropriately
+
+## SEO Implementation
+- Include proper SEO metadata using next-seo
+```typescript
+import { NextSeo } from 'next-seo';
+
+export default function Page() {
+  return (
+    <>
+      <NextSeo
+        title="Page Title"
+        description="Page description"
+        canonical="https://jessechen.net/page-path"
+      />
+      {/* Page content */}
+    </>
+  );
+}
+```
+
+## TypeScript Implementation
+- Implement proper TypeScript types for page props
+```typescript
+interface PageProps {
+  // Define prop types
+}
+
+export default function Page({ prop1, prop2 }: PageProps) {
+  // Page implementation
+}
+```
+
+## Static Generation
+- Use getStaticProps/getStaticPaths for MDX content
+- Implement proper ISR when needed
+- Handle fallback states correctly
+- Optimize build time performance
+
+## Layout Structure
+- Maintain consistent layout structure
+- Implement proper navigation patterns
+- Handle loading states appropriately
+- Maintain responsive layouts
+
+## Error Handling
+- Include proper error boundaries
+- Implement 404 handling
+- Handle API errors gracefully
+- Provide user-friendly error messages
+
+## Performance
+- Implement proper code splitting
+- Use proper image optimization
+- Implement proper caching strategies
+- Monitor and optimize Core Web Vitals

@@ -1,6 +1,6 @@
 ---
-description: Update llm-docs/ automatically
-globs: 
+description: Rules for maintaining LLM documentation
+globs: llm-docs/**/*.{md,mdx}
 ---
 # LLM Documentation Rules
 

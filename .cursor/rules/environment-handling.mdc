@@ -1,1 +1,79 @@
- 
+---
+description: Rules for environment variable management
+globs: {.env*,next.config.js}
+---
+# Environment Handling Rules
+
+These rules apply to environment configuration and management.
+
+## Security
+- Never commit actual environment values to repository
+- Use strong encryption for sensitive values
+- Rotate secrets regularly
+- Implement proper access controls
+
+## Environment Files
+- Maintain `.env.default` with all required variables
+```env
+# Required Instagram API credentials
+INSTAGRAM_ACCESS_TOKEN=
+INSTAGRAM_USER_ID=
+
+# Required Cloudinary configuration
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+# Other required configurations
+SITE_URL=https://jessechen.net
+```
+
+## Documentation
+- Document all environment variables in README
+- Include description and purpose for each variable
+- Document any default values
+- Specify required vs optional variables
+
+## Type Safety
+- Use strong typing for environment variables
+```typescript
+// env.d.ts
+declare namespace NodeJS {
+  interface ProcessEnv {
+    INSTAGRAM_ACCESS_TOKEN: string;
+    INSTAGRAM_USER_ID: string;
+    CLOUDINARY_CLOUD_NAME: string;
+    // ... other variables
+  }
+}
+```
+
+## Validation
+- Include validation for required environment variables
+```typescript
+function validateEnv() {
+  const required = [
+    'INSTAGRAM_ACCESS_TOKEN',
+    'INSTAGRAM_USER_ID',
+    // ... other required variables
+  ];
+  
+  for (const var of required) {
+    if (!process.env[var]) {
+      throw new Error(`Missing required environment variable: ${var}`);
+    }
+  }
+}
+```
+
+## Configuration Management
+- Separate development and production configurations
+- Implement proper fallback values
+- Handle configuration updates gracefully
+- Document configuration changes
+
+## Deployment
+- Ensure proper environment setup in Vercel
+- Maintain separate configurations for different environments
+- Implement proper secret management
+- Document deployment requirements 

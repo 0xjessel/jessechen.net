@@ -1,1 +1,59 @@
- 
+---
+description: Rules for Instagram integration code
+globs: {scripts,cron_jobs}/**/ig_*.{py,ts,js}
+---
+# Instagram Integration Rules
+
+These rules apply to all Instagram integration code in `scripts/` and `cron_jobs/` directories.
+
+## Security
+- All Instagram API tokens must be accessed via environment variables
+- Never commit tokens or sensitive data to the repository
+- Implement proper token refresh mechanisms
+- Store tokens securely in Vercel and Dreamhost environments
+
+## Photo Synchronization
+- Maintain exactly 9 photos in the grid
+- Use Cloudinary as intermediate storage
+- Implement proper cleanup of old photos
+- Ensure proper image quality and optimization
+
+## Error Handling
+- Always include comprehensive error handling
+- Implement proper logging for all operations
+- Include retry logic for network operations
+- Handle API rate limits gracefully
+
+## API Usage
+- Respect Instagram API rate limits
+- Implement proper backoff strategies
+- Cache API responses when appropriate
+- Monitor API quota usage
+
+## Implementation Requirements
+```python
+# Example error handling and retry logic
+def fetch_instagram_photos(retries=3):
+    for attempt in range(retries):
+        try:
+            # API call here
+            return photos
+        except RateLimitError:
+            time.sleep(exponential_backoff(attempt))
+        except APIError as e:
+            log_error(e)
+            if attempt == retries - 1:
+                raise
+```
+
+## Documentation
+- Document any changes to token refresh logic
+- Maintain clear logs of synchronization issues
+- Document API version dependencies
+- Keep integration documentation current
+
+## Monitoring
+- Implement health checks for sync jobs
+- Monitor token expiration
+- Track synchronization success rates
+- Alert on critical failures 

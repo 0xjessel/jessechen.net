@@ -1,10 +1,10 @@
 ---
-description: 
-globs: 
+description: Rules for JavaScript code style, patterns, and best practices
+globs:  "**/*.{js,jsx,ts,tsx}", "!node_modules/**","!.next/**","!out/**"
 ---
-# JavaScript/TypeScript Style Rules
+# JavaScript Style Rules
 
-These rules apply to all JavaScript and TypeScript files in the codebase.
+These rules apply to all JavaScript and files in the codebase.
 
 ## File Organization
 - One component/module per file

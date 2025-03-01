@@ -1,5 +1,54 @@
 ---
-description: 
-globs: 
+description: Rules for React component organization and styling
+globs: components/**/*.{tsx,ts}
 ---
- 
+ # Component Structure Rules
+
+These rules apply to all React components in the `components/` directory.
+
+## Component Organization
+- Use PascalCase for component names (e.g., `TodoList.tsx`)
+- One component per file
+- Components should be functionally pure when possible
+- Export components as named exports
+
+## TypeScript Implementation
+- Props must be properly typed with TypeScript interfaces
+- Use proper type imports from dependencies
+- Avoid using `any` type
+- Define proper return types for components
+
+## Documentation
+- Include JSDoc comments for component documentation
+```typescript
+/**
+ * Component description
+ * @param {ComponentProps} props - Component props description
+ * @returns {JSX.Element} Component description
+ */
+```
+
+## Chakra UI Usage
+- Use Chakra UI components and styling system
+- Follow Chakra's component composition patterns
+- Utilize Chakra's theme system for consistent styling
+- Maintain responsive design patterns using Chakra's responsive syntax
+```typescript
+<Box
+  width={{ base: "100%", md: "50%", lg: "33%" }}
+  padding={[2, 4, 6]}
+>
+```
+
+## Component Best Practices
+- Components should be modular and reusable
+- Implement proper prop validation
+- Use proper React hooks patterns
+- Maintain consistent error boundary implementation
+- Follow established naming conventions throughout
+
+## Performance Considerations
+- Implement proper memoization where needed
+- Avoid unnecessary re-renders
+- Use proper lazy loading patterns
+- Keep components focused and minimal
