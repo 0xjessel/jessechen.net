@@ -1,0 +1,172 @@
+---
+description: 
+globs: 
+---
+# JavaScript/TypeScript Style Rules
+
+These rules apply to all JavaScript and TypeScript files in the codebase.
+
+## File Organization
+- One component/module per file
+- Use descriptive filenames in PascalCase for components (e.g., `InstaGrid.js`, `PostListItem.js`)
+- Use camelCase for utility files (e.g., `mdxUtils.js`, `cloudinaryLoader.js`)
+- Group related utilities in dedicated directories
+
+## Component Structure
+- Use functional components with hooks
+- Export components as default when they are the main export
+- Destructure props in function parameters
+- Use rest props spreading for flexibility
+```javascript
+export default function Component({ prop1, prop2, ...props }) {
+  return <div {...props}>{children}</div>
+}
+```
+
+## Naming Conventions
+- PascalCase for component names and types
+- camelCase for functions, variables, and instances
+- UPPER_SNAKE_CASE for constants and static configurations
+```javascript
+// Constants
+export const POSTS_PATH = path.join(process.cwd(), 'posts')
+export const FEATURES = [ /* ... */ ]
+
+// Components
+export default function FeatureListItem({ /* ... */ })
+
+// Utility functions
+export function getAllMDXPosts() { /* ... */ }
+```
+
+## Chakra UI Implementation Patterns
+- Use Chakra's component props for styling
+- Utilize responsive array syntax for breakpoints
+- Use semantic Chakra components
+- Apply consistent spacing units
+```javascript
+// Semantic HTML with Chakra
+<Container as="article" minWidth="100%">
+  <Heading as="h2" size="lg">
+    {title}
+  </Heading>
+</Container>
+
+// Consistent hover states
+<Link
+  borderRadius="full"
+  padding="2"
+  _hover={{ opacity: .7 }}
+  href={url}
+  isExternal
+>
+
+// Responsive design with breakpoints
+const tooSmall = useBreakpointValue({ 
+  base: true, 
+  sm: true, 
+  md: false 
+})
+```
+
+## Component Implementation Patterns
+- Use Next.js components for routing and links
+```javascript
+<NLink
+  as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
+  href={`/posts/[...slug]`}
+  passHref>
+  {post.data.title}
+</NLink>
+```
+
+- Implement responsive conditionals
+```javascript
+// Conditional rendering based on breakpoint
+if (tooSmall) {
+  return children
+}
+
+return <Component>{children}</Component>
+```
+
+- Use proper event tracking
+```javascript
+<Link 
+  data-umami-event="click--linkedin"
+  href="https://linkedin.com/in/username"
+>
+```
+
+- Implement tooltips for enhanced UX
+```javascript
+<Tooltip 
+  hasArrow 
+  label={tooltipText} 
+  gutter={12} 
+  fontSize="xs">
+  <Text>{content}</Text>
+</Tooltip>
+```
+
+## Environment Variable Usage
+- Access environment variables through process.env
+- Use NEXT_PUBLIC_ prefix for client-side variables
+- Implement proper fallbacks for optional values
+```javascript
+const commitSHA = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
+const message = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE || ''
+```
+
+## String Manipulation Patterns
+- Use regex for specific string operations
+- Implement proper string slicing for display
+```javascript
+// Regex pattern matching
+const messageMatch = message.match(/^.*/g) // grabs first line only
+
+// String truncation
+const shortSHA = commitSHA.slice(0, 7)
+```
+
+## Layout Patterns
+- Use consistent spacing units (px={4}, py={8})
+- Implement proper stack components (VStack, HStack)
+- Use semantic containers
+```javascript
+<VStack pt="12" spacing="2">
+  <HStack spacing="1">
+    {children}
+  </HStack>
+</VStack>
+```
+
+## Icon Usage
+- Use react-icons library
+- Maintain consistent icon sizing
+- Implement proper accessibility
+```javascript
+import { RiGithubLine } from "react-icons/ri"
+
+<RiGithubLine 
+  size="1.1em"
+  title="Github"
+/>
+```
+
+## Styling Patterns
+- Use Chakra's style props primarily
+- Implement sx prop for custom CSS when needed
+- Use consistent color modes
+```javascript
+<Text
+  fontSize="xs"
+  color="gray.400"
+  sx={{ 
+    '& pre': { display: "inline" },
+  }}>
+  {content}
+</Text>
+```
+
+[Previous sections remain unchanged...]

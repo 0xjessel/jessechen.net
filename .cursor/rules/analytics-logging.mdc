@@ -1,0 +1,137 @@
+---
+description: Rules for implementing analytics and logging across the application
+globs: {components,pages}/**/*.js
+---
+# Analytics and Logging Rules
+
+These rules define how to implement and maintain analytics and logging across the application.
+
+## Analytics Implementation
+
+### Event Tracking
+- Use Umami for privacy-focused analytics
+- Implement click tracking using `data-umami-event` attributes
+- Follow consistent event naming conventions
+
+### Event Naming Convention
+```javascript
+// Format: action--target
+data-umami-event="click--linkedin"    // Social links
+data-umami-event="click--github"      // Repository links
+data-umami-event="view--post"         // Page views
+```
+
+### Click Events Pattern
+```javascript
+// Social/External Links
+<Link 
+  data-umami-event="click--linkedin"
+  href="https://linkedin.com/in/username"
+  isExternal
+>
+
+// Content Links
+<Link
+  data-umami-event="click--github_commit"
+  href={`https://github.com/username/repo/commit/${commitSHA}`}
+  isExternal
+>
+
+// Interactive Elements
+<LinkOverlay
+  data-umami-event="click--instagram_grid"
+  href={media.permalink}
+  isExternal
+>
+```
+
+### Event Categories
+1. **Social Interactions**
+   - `click--linkedin`
+   - `click--github`
+   - `click--instagram`
+   - `click--email`
+   - `click--threads`
+
+2. **Content Interactions**
+   - `click--github_commit`
+   - `click--instagram_grid`
+
+3. **Navigation Events**
+   - `view--home`
+   - `view--posts`
+   - `view--post`
+
+## Error Logging
+
+### Error Handling Pattern
+```javascript
+try {
+  // Operation
+} catch (error) {
+  // Log error with context
+  console.error('Operation failed:', {
+    error,
+    context: 'relevant context',
+    timestamp: new Date().toISOString()
+  })
+  
+  // Return appropriate error state
+  return {
+    notFound: true  // for 404s
+    // or
+    props: { error: error.message }  // for graceful degradation
+  }
+}
+```
+
+### Debug Information
+- Include git commit information in error context
+```javascript
+const debugInfo = {
+  commit: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
+  message: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE
+}
+```
+
+## Environment Configuration
+
+### Analytics Variables
+```env
+# Vercel deployment info
+NEXT_PUBLIC_VERCEL_URL="http://localhost:3000/"
+NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA="commit_sha"
+NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE="commit_message"
+```
+
+## Best Practices
+
+### Event Tracking
+- Track meaningful user interactions
+- Use consistent naming patterns
+- Include context when relevant
+- Respect user privacy
+
+### Error Logging
+- Log errors with sufficient context
+- Include timestamps
+- Add relevant metadata
+- Handle errors gracefully
+
+### Performance Monitoring
+- Track page load times
+- Monitor API response times
+- Track resource usage
+- Monitor error rates
+
+### Security Considerations
+- Never log sensitive information
+- Sanitize error messages
+- Respect GDPR and privacy laws
+- Use appropriate log levels
+
+### Maintenance
+- Review analytics data regularly
+- Clean up unused events
+- Update tracking as features change
+- Monitor error trends

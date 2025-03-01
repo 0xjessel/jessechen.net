@@ -1,0 +1,110 @@
+---
+description: Rules for writing git commit messages following the project's established style
+globs: .git/COMMIT_EDITMSG, .gitmessage
+---
+# Git Commit Style Rules
+
+These rules define how to write git commit messages in this project.
+
+## Message Structure
+- Use concise, lowercase messages
+- Start with a verb in present tense
+- No period at the end
+- Keep to a single line unless absolutely necessary
+- Maximum 72 characters
+
+## Verb Usage
+Common verbs to start with:
+- `add` - for new features/files
+- `fix` - for bug fixes
+- `update` - for modifications to existing features
+- `swap` - for changing order/position of elements
+- `set` - for configuration changes
+
+## Examples
+```git
+# Adding new features
+add rel=me link for threads profile
+add backup fonts to help with cumulative layout shift
+
+# Fixing issues
+fix hero2_seo.jpg crop
+fix umami breaking changes
+
+# Updating existing features
+update og:image cropping to be centered on face
+
+# UI/Component changes
+swap instagram and threads icon in footer because threads is #1
+```
+
+## Message Components
+
+1. **Action Verb** (required)
+   - Always start with a present-tense verb
+   - Use lowercase
+   ```git
+   add feature
+   fix bug
+   update content
+   ```
+
+2. **Subject** (required)
+   - Brief description of what changed
+   - Use lowercase
+   - Be specific but concise
+   ```git
+   fix hero2_seo.jpg crop
+   add backup fonts
+   ```
+
+3. **Context** (optional)
+   - Add "because" or "to" for important context
+   - Only when clarity is needed
+   ```git
+   swap instagram and threads icon in footer because threads is #1
+   add backup fonts to help with cumulative layout shift
+   ```
+
+## Best Practices
+
+- Be descriptive but concise
+- Focus on the "what" and "why"
+- Use consistent verbs
+- Keep related changes together
+- Reference issue numbers when applicable
+
+## What to Avoid
+
+- Don't use past tense (~~added~~, ~~fixed~~)
+- Don't use uppercase unless necessary
+- Don't use punctuation at the end
+- Don't use vague messages ("minor changes", "updates")
+- Don't mix multiple unrelated changes
+
+## Commit Types
+
+1. **Feature Additions**
+```git
+add rel=me link for threads profile
+```
+
+2. **Bug Fixes**
+```git
+fix umami breaking changes
+```
+
+3. **UI Updates**
+```git
+update og:image cropping to be centered on face
+```
+
+4. **Performance Improvements**
+```git
+set priority on LCP hero image
+```
+
+5. **Documentation**
+```git
+update README.md
+``` 

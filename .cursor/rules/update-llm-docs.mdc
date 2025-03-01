@@ -1,0 +1,67 @@
+---
+description: Update llm-docs/ automatically
+globs: 
+---
+# LLM Documentation Rules
+
+These rules apply to all AI/LLM-specific documentation in the `llm-docs/` directory.
+
+## Documentation Updates
+- Keep `architecture.mdx` updated when making structural changes
+- Document all new integration points
+- Update documentation when adding new features
+- Maintain version history of significant changes
+
+## AI-Friendly Documentation Style
+- Use clear, explicit language
+- Provide concrete examples
+- Include context for decisions
+- Document edge cases and limitations
+
+## Examples
+- Include clear examples for common operations
+```typescript
+// Example: Adding a new blog post
+const newPost = {
+  title: "Post Title",
+  description: "Description here",
+  date: "2024-03-01",
+  // ... other required fields
+};
+
+// Example: Using Chakra UI responsive design
+const responsiveComponent = {
+  width: { base: "100%", md: "50%" },
+  padding: [2, 4, 6],
+};
+```
+
+## Debugging Guidelines
+- Update debugging tips when new issues are discovered
+- Document common error scenarios
+- Provide troubleshooting steps
+- Include relevant log examples
+
+## Performance Documentation
+- Document performance implications of changes
+- Include benchmark results when relevant
+- Document optimization strategies
+- Monitor and update performance metrics
+
+## Security Considerations
+- Keep security documentation current
+- Document security best practices
+- Update security protocols
+- Document security incident responses
+
+## Integration Documentation
+- Document all external service integrations
+- Keep API documentation current
+- Document authentication flows
+- Update integration troubleshooting guides
+
+## Maintenance
+- Review documentation quarterly
+- Update outdated information
+- Remove deprecated content
+- Keep examples current with latest practices

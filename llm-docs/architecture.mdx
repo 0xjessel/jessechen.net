@@ -1,0 +1,180 @@
+---
+title: "Architecture Documentation"
+description: "Comprehensive architecture documentation for jessechen.net, designed for AI agents"
+---
+
+# jessechen.net Architecture Documentation
+
+This document provides a detailed overview of the jessechen.net website architecture, designed to help AI agents quickly understand the codebase structure, development workflow, and key integration points.
+
+## Tech Stack Overview
+
+The website is built using a modern React-based tech stack:
+
+- **Frontend Framework**: Next.js (React)
+- **UI Framework**: Chakra UI
+- **Content Format**: MDX (Markdown + JSX)
+- **Deployment Platform**: Vercel
+- **Media Storage**: Cloudinary (for Instagram photos)
+- **Additional Services**: Instagram API integration
+
+## Directory Structure
+
+```
+jessechen.net/
+├── pages/           # Next.js pages and routing
+├── components/      # Reusable React components
+├── posts/          # Blog posts in MDX format
+│   └── YYYY/       # Posts organized by year
+├── public/         # Static assets
+│   └── images/     # Image assets
+├── styles/         # Global styles
+├── utils/          # Utility functions
+├── scripts/        # Automation scripts
+└── cron_jobs/      # External scripts (on Dreamhost)
+```
+
+## Key Components
+
+### 1. Content Management
+
+- Blog posts are written in MDX format
+- Posts are stored in `posts/YYYY/title-here.mdx`
+- Each post requires specific frontmatter metadata:
+  ```md
+  ---
+  title: "Post Title"
+  description: "Post description"
+  date: "YYYY-MM-DD"
+  isPublished: boolean
+  tags: string[]
+  coverImage: string
+  ---
+  ```
+
+### 2. Instagram Integration
+
+The site features an Instagram photo grid with an automated sync system:
+
+#### Architecture Flow:
+
+1. Access token management:
+
+   - Monthly token refresh via `ig_access_token.py`
+   - Tokens stored in Vercel environment variables
+   - Backup token storage on Dreamhost
+
+2. Photo synchronization:
+   - Daily cron job runs at midnight
+   - `ig_fetch.py` fetches latest 9 photos
+   - Photos are synchronized with Cloudinary
+   - Integration points:
+     - Instagram API (`/{user_id}/media` endpoint)
+     - Cloudinary storage
+     - Dreamhost for script hosting
+
+### 3. Development Workflow
+
+#### Local Development:
+
+```bash
+# Installation
+npm install
+
+# Development server
+npm run dev        # Starts at http://localhost:3000
+```
+
+#### Content Creation Process:
+
+1. Write content in Notion
+2. Export to Markdown
+3. Convert to MDX format
+4. Add required metadata
+5. Place in `posts/YYYY/` directory
+6. Add images to `public/images/posts/YYYY/`
+7. Update image paths in MDX
+8. Test locally
+9. Deploy via git push
+
+## Environment Configuration
+
+The application requires several environment variables:
+
+- Instagram API credentials
+- Cloudinary configuration
+- Other service integrations
+
+Environment files:
+
+- `.env.local` - Local development
+- `.env.default` - Template for required variables
+- Production variables set in Vercel dashboard
+
+## Deployment
+
+- Main deployment: Vercel (automatic on main branch push)
+- Secondary services: Dreamhost (for cron jobs and scripts)
+- Content delivery: Cloudinary (for Instagram photos)
+
+## Common Development Tasks
+
+### Adding New Blog Posts
+
+1. Create new MDX file in `posts/YYYY/`
+2. Add required frontmatter
+3. Add images to `public/images/posts/YYYY/`
+4. Reference images using path: `/images/posts/YYYY/image-name.png`
+5. Test locally before deploying
+
+### Modifying UI Components
+
+- Components are located in `components/` directory
+- Uses Chakra UI for styling and components
+- Follows React best practices
+- Changes automatically hot-reload in development
+
+### Debugging Tips
+
+1. Instagram Integration:
+   - Check Dreamhost cron logs
+   - Verify environment variables
+   - Test token refresh manually
+2. Content Issues:
+   - Verify MDX frontmatter format
+   - Check image paths
+   - Ensure all dependencies are installed
+
+## Performance Considerations
+
+- Next.js provides automatic code splitting
+- Images should be optimized before upload
+- Instagram photos are cached in Cloudinary
+- MDX content is statically generated at build time
+
+## Security Notes
+
+- Instagram access tokens must be kept secure
+- Environment variables should never be committed
+- API keys should be rotated periodically
+- Use environment variables for all sensitive data
+
+## Future AI Development Guidelines
+
+When working with this codebase, AI agents should:
+
+1. Respect the existing architecture patterns
+2. Maintain the MDX content structure
+3. Follow the established component organization
+4. Use Chakra UI for new components
+5. Test Instagram integration changes carefully
+6. Keep security considerations in mind
+7. Document any architectural changes in this file
+
+For any major changes, consider:
+
+- Impact on build and deployment process
+- Effects on content management workflow
+- Integration with existing services
+- Performance implications
+- Security implications
