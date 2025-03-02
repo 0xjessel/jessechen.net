@@ -1,0 +1,133 @@
+# Next.js 15 Migration Guide
+
+This document outlines the steps taken to upgrade the jessechen.net project from Next.js 14 to Next.js 15, as well as the related React ecosystem updates.
+
+## Packages Updated
+
+The following packages were updated as part of the migration:
+
+- `next`: v14.2.5 → v15.x
+- `eslint-config-next`: v14.2.5 → v15.x
+- `react`: v18.3.1 → v19.x (optional)
+- `react-dom`: v18.3.1 → v19.x (optional)
+
+## Upgrade Steps
+
+### 1. Package Installation
+
+```bash
+# Update Next.js and related packages
+npm install next@latest eslint-config-next@latest
+
+# Update React (optional)
+npm install react@latest react-dom@latest
+```
+
+### 2. Link API Migration
+
+Next.js 15 removes support for the legacy Link API. We updated all instances of the Link component to use the modern API by:
+
+1. Changing imports from `NextLink` to `Link`:
+
+   ```jsx
+   // Before
+   import NextLink from "next/link"
+
+   // After
+   import Link from "next/link"
+   ```
+
+2. Removing `passHref` and `legacyBehavior` props:
+
+   ```jsx
+   // Before
+   <NextLink href="/path" passHref legacyBehavior>
+     <ChakraLink>Link Text</ChakraLink>
+   </NextLink>
+
+   // After
+   <Link href="/path">
+     <ChakraLink>Link Text</ChakraLink>
+   </Link>
+   ```
+
+The following files were updated:
+
+- `pages/posts/[...slug].js`
+- `components/PostListItem.js`
+- `utils/mdxComponents.js`
+
+### 3. Fixing Hydration Errors
+
+After the initial migration, we encountered hydration errors related to nested anchor tags. In Next.js 15, the Link component renders as an `<a>` tag by default, so nesting a ChakraLink (which is also an `<a>` tag) inside it resulted in invalid HTML.
+
+We fixed these issues by:
+
+1. Replacing nested Link and ChakraLink components with a single Link component using inline styles:
+
+   ```jsx
+   // Before (post-migration, causing hydration error)
+   <Link href="/path">
+     <ChakraLink color={linkColor}>
+       Link Text
+     </ChakraLink>
+   </Link>
+
+   // After (fixed)
+   <Link
+     href="/path"
+     style={{ color: linkColor }}
+   >
+     Link Text
+   </Link>
+   ```
+
+The following files were updated again to fix these issues:
+
+- `pages/posts/[...slug].js` - Navigation links
+- `components/PostListItem.js` - Post title links
+- `utils/mdxComponents.js` - Custom link component
+
+### 4. MDX Processing
+
+The project uses `next-mdx-remote` for MDX processing, which is already at v5.0.0 and compatible with Next.js 15. No changes were needed for MDX processing.
+
+### 5. Pages Router
+
+This project uses the Pages Router pattern, not the App Router. Next.js 15 continues to support the Pages Router, so no migration to App Router was necessary.
+
+## Potential Issues and Considerations
+
+### Peer Dependencies
+
+During the update process, several peer dependency warnings were encountered. These are primarily related to the Next.js and React version requirements of various packages:
+
+- `next@14.2.24` expects `react@^18.2.0` and `react-dom@^18.2.0`
+- When updating to React 19, these peer dependency warnings may appear but are generally not problematic
+
+### Build and Deployment
+
+After completing the migration, make sure to:
+
+1. Run a full build to verify no build-time errors:
+
+   ```bash
+   npm run build
+   ```
+
+2. Test the site locally:
+
+   ```bash
+   npm run start
+   ```
+
+3. Verify all key functionality:
+   - Navigation links work correctly
+   - MDX content renders properly
+   - Dynamic routes function as expected
+   - No console errors appear
+
+## References
+
+- [Next.js 15 Release Notes](https://nextjs.org/blog/next-15)
+- [Next.js Upgrade Guide](https://nextjs.org/docs/app/building-your-application/upgrading/version-15)

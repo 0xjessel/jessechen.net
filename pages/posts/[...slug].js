@@ -5,12 +5,12 @@ import { MDXRemote } from 'next-mdx-remote'
 import path from 'path'
 import MDXPrism from 'mdx-prism';
 import remarkBreaks from 'remark-breaks';
-import remarkSlug from 'remark-slug';
+import rehypeSlug from 'rehype-slug';
 import { getAllMDXPosts, getAllMDXPostsWithMetadata, POSTS_PATH } from '../../utils/mdxUtils'
 
 import Layout from '../../components/Layout'
 import { Flex, Heading, Spacer, Link as ChakraLink } from '@chakra-ui/react'
-import NextLink from 'next/link'
+import Link from 'next/link'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import PostMetadata from '../../components/PostMetadata'
@@ -39,23 +39,27 @@ export default function PostPage({ source, frontMatter, filePath, previous, next
       <MDXRemote {...source} components={components} />
       <Flex as="nav" mt="20">
         {previous && 
-          <NextLink href={`/posts/${previous.filePath.replace(/\.mdx?$/, '')}`} passHref legacyBehavior>
-            <ChakraLink 
-              textAlign="left"
-              color={linkColor}>
-              {`← ${previous.title}`}
-            </ChakraLink>
-          </NextLink>
+          <Link 
+            href={`/posts/${previous.filePath.replace(/\.mdx?$/, '')}`}
+            style={{ 
+              textAlign: "left",
+              color: linkColor
+            }}
+          >
+            {`← ${previous.title}`}
+          </Link>
         }
         <Spacer />
         {next &&
-          <NextLink href={`/posts/${next.filePath.replace(/\.mdx?$/, '')}`} passHref legacyBehavior>
-            <ChakraLink 
-              textAlign="right"
-              color={linkColor}>
-              {`${next.title} →`}
-            </ChakraLink>
-          </NextLink>
+          <Link 
+            href={`/posts/${next.filePath.replace(/\.mdx?$/, '')}`}
+            style={{ 
+              textAlign: "right", 
+              color: linkColor
+            }}
+          >
+            {`${next.title} →`}
+          </Link>
         }
       </Flex>
       <Footer />
@@ -80,8 +84,8 @@ export const getStaticProps = async ({ params }) => {
 
   const mdxSource = await serialize(content, {
     mdxOptions: {
-      remarkPlugins: [remarkBreaks, remarkSlug],
-      rehypePlugins: [MDXPrism],
+      remarkPlugins: [remarkBreaks],
+      rehypePlugins: [MDXPrism, rehypeSlug],
     },
     scope: data,
   })

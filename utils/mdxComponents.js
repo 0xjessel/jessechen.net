@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { AspectRatio, Box, Center, Code, Divider, Heading as CHeading, Kbd, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/react'
 import { Image, useColorModeValue, Link as ChakraLink } from '@chakra-ui/react'
-import NextLink from 'next/link'
+import Link from 'next/link'
 
 import { useLinkColor } from '../styles/colorModes'
 import Callout from '../components/Callout'
@@ -57,11 +57,13 @@ const CustomLink = (props) => {
   
   // For internal links
   return (
-    <NextLink href={props.href} passHref legacyBehavior>
-      <ChakraLink color={linkColor} {...props}>
-        {props.children}
-      </ChakraLink>
-    </NextLink>
+    <Link 
+      href={props.href}
+      style={{ color: linkColor }}
+      {...props}
+    >
+      {props.children}
+    </Link>
   );
 }
 
