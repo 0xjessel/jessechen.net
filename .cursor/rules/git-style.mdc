@@ -11,7 +11,7 @@ These rules define how to write git commit messages in this project.
 - Start with a verb in present tense
 - No period at the end
 - Keep to a single line unless absolutely necessary
-- Maximum 72 characters
+- Maximum 100 characters
 
 ## Verb Usage
 Common verbs to start with:
