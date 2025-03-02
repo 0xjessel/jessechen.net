@@ -1,0 +1,281 @@
+---
+title: "Chakra UI v3 Migration Execution Guide"
+description: "Step-by-step commands and actions to upgrade jessechen.net from Chakra UI v2 to v3"
+---
+
+# Chakra UI v3 Migration Execution Guide
+
+This document provides a practical, step-by-step guide to execute the migration from Chakra UI v2 to v3 for jessechen.net.
+
+## Preparation
+
+1. **Create a new branch for the migration**:
+
+   ```bash
+   git checkout -b feature/chakra-ui-v3-upgrade
+   ```
+
+2. **Document current dependency versions** (for rollback purposes):
+
+   ```bash
+   npm list @chakra-ui/react @emotion/react @emotion/styled framer-motion react react-dom > pre-migration-deps.txt
+   ```
+
+3. **Take screenshots** of key pages and components for visual comparison.
+
+## Step 1: Install New Dependencies
+
+```bash
+# Install Chakra UI v3 and its peer dependencies
+npm install @chakra-ui/react@3 framer-motion@12
+```
+
+If you encounter peer dependency warnings:
+
+```bash
+# Only if necessary
+npm install @emotion/react @emotion/styled
+```
+
+## Step 2: Update the Theme Configuration
+
+1. **Update `styles/appTheme.js`**:
+
+   ```bash
+   # Make a backup of the original file
+   cp styles/appTheme.js styles/appTheme.js.bak
+   ```
+
+2. **Edit `styles/appTheme.js`** with these changes:
+
+   ```javascript
+   // Replace:
+   import { extendTheme } from "@chakra-ui/react"
+
+   // With:
+   import { extendBaseTheme } from "@chakra-ui/react"
+   import chakraTheme from "@chakra-ui/theme"
+
+   // Add after imports:
+   const {
+     Container,
+     Button,
+     Heading,
+     Text,
+     Link,
+     Code,
+     Divider,
+     List,
+     Alert,
+     Badge,
+     Kbd,
+     Image,
+     Modal,
+     Menu,
+   } = chakraTheme.components
+
+   // Replace:
+   export const AppTheme = extendTheme({
+
+   // With:
+   export const AppTheme = extendBaseTheme({
+
+   // Update the components section:
+   components: {
+     Container,
+     Button,
+     Heading,
+     Text,
+     Link,
+     Code,
+     Divider,
+     List,
+     Alert,
+     Badge,
+     Kbd,
+     Image,
+     Modal,
+     Menu,
+     // Override Container with custom style
+     Container: {
+       ...Container,
+       baseStyle: {
+         maxW: '40rem',
+         px: 0,
+       },
+     },
+   },
+   ```
+
+## Step 3: Test Initial Compatibility
+
+1. **Start the development server**:
+
+   ```bash
+   npm run dev
+   ```
+
+2. **Check for console errors** - especially related to theme or Chakra components.
+
+3. **If you encounter `extendBaseTheme is not a function` error**:
+
+   ```javascript
+   // Try this alternative:
+   import { extendTheme } from "@chakra-ui/react"
+   const extendBaseTheme = extendTheme
+
+   // Or this:
+   import { extendBaseTheme } from "@chakra-ui/theme"
+   ```
+
+## Step 4: Update MDX Components (if needed)
+
+1. **Review `utils/mdxComponents.js`**:
+
+   ```bash
+   # Make a backup
+   cp utils/mdxComponents.js utils/mdxComponents.js.bak
+   ```
+
+2. **Update imports if necessary**:
+
+   ```javascript
+   // Check for any imports that may have moved:
+   // Example: If you use theme tools like defineStyle:
+   import { defineStyle } from "@chakra-ui/styled-system"
+   ```
+
+3. **Test MDX rendering** on various blog posts.
+
+## Step 5: Component-by-Component Testing
+
+1. **Test core Chakra components**:
+
+   - Navigation links
+   - Buttons
+   - Text elements
+   - Color mode toggle
+
+2. **Test custom components**:
+
+   - Custom link components
+   - Callout component
+   - Any other custom components that wrap Chakra components
+
+3. **Fix CSS and style issues** - Many issues can be fixed by:
+
+   - Updating style objects
+   - Adjusting theme properties
+   - Adding explicit style props
+
+## Step 6: Fix Common Issues
+
+### Theme Configuration Issues
+
+If you encounter issues with theme configuration:
+
+```javascript
+// In styles/appTheme.js
+// If you have component style config issues:
+import { defineStyleConfig } from "@chakra-ui/styled-system"
+
+// For custom component styles:
+const CustomComponent = defineStyleConfig({
+  // component styles
+})
+
+// Then include in theme:
+components: {
+  // other components...
+  CustomComponent,
+}
+```
+
+### Mode Function Issues
+
+If the `mode` function from theme-tools causes issues:
+
+```javascript
+// Use inline conditional for simple cases:
+"::selection": {
+  background: props.colorMode === "dark" ? SELECTION_DARK : SELECTION_LIGHT,
+},
+
+// Or import mode from a different location if needed:
+import { mode } from "@chakra-ui/theme-utils" // location may change in v3
+```
+
+### Color Mode Issues
+
+If color mode switching doesn't work:
+
+```javascript
+// Check _app.js for any needed changes to ChakraProvider:
+<ChakraProvider
+  theme={AppTheme}
+  // Make sure colorModeManager is properly set up if you use it
+>
+```
+
+## Step 7: Test All Pages and Components
+
+Perform a thorough testing of all major pages and components:
+
+1. **Navigation** - Test all navigation links
+2. **Blog posts** - Test all MDX components
+3. **Color mode** - Test light/dark mode switching
+4. **Responsive layouts** - Test on multiple screen sizes
+
+## Step 8: Commit and Deploy
+
+Once everything is working correctly:
+
+```bash
+# Commit changes
+git add .
+git commit -m "Upgrade to Chakra UI v3"
+
+# Merge to main branch
+git checkout main
+git merge feature/chakra-ui-v3-upgrade
+
+# Deploy
+git push
+```
+
+## Rollback Plan
+
+If the migration encounters critical issues that can't be resolved:
+
+```bash
+# Discard changes and go back to main branch
+git checkout main
+
+# If already committed but not pushed:
+git reset --hard origin/main
+
+# Reinstall previous dependencies
+npm install @chakra-ui/react@2.10.6 framer-motion@11.18.2
+```
+
+## Common Error Resolutions
+
+| Error                                 | Solution                                                                    |
+| ------------------------------------- | --------------------------------------------------------------------------- |
+| `extendBaseTheme is not a function`   | Use `extendTheme` or import from `@chakra-ui/theme`                         |
+| `defineStyleConfig is not a function` | Import from `@chakra-ui/styled-system`                                      |
+| `mode is not a function`              | Check import path or use inline conditional                                 |
+| Theme styling issues                  | Include base components from `chakraTheme.components`                       |
+| Hydration errors                      | Check for nested Link components or client/server rendering inconsistencies |
+
+## Documentation Tasks
+
+After successful migration, update documentation:
+
+1. Update the migration status in `llm-docs/npm-upgrades.mdx`
+2. Document any component changes or workarounds
+3. Note any deprecated patterns that were updated
+
+## Conclusion
+
+This execution guide provides practical steps to migrate jessechen.net from Chakra UI v2 to v3. By taking an incremental approach and testing thoroughly after each change, the migration process should be successful with minimal disruption to the website's functionality and appearance.

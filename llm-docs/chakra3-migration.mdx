@@ -1,0 +1,418 @@
+---
+title: "Chakra UI v3 Migration Guide"
+description: "Comprehensive guide for upgrading from Chakra UI v2 to v3"
+---
+
+# Chakra UI v3 Migration Guide
+
+This document outlines the breaking changes, migration steps, and best practices for upgrading from Chakra UI v2 to v3 in the jessechen.net project.
+
+## Overview of Breaking Changes
+
+Chakra UI v3 introduces several significant breaking changes from v2, particularly in these areas:
+
+1. **Theme API Changes**: Major refactoring of theme configuration and extension
+2. **Styling System Updates**: Changes to style props and configuration
+3. **Component API Changes**: Updates to component props and behavior
+4. **Dependency Changes**: Updated peer dependencies including framer-motion v12
+
+## Previous Migration Attempt
+
+According to our npm-upgrades.mdx documentation, a previous attempt to upgrade to Chakra UI v3 encountered these specific issues:
+
+- `TypeError: extendBaseTheme is not a function`
+- `TypeError: defineStyleConfig is not a function`
+- `TypeError: Cannot read properties of undefined (reading '_config')`
+
+These errors indicated significant breaking changes in Chakra UI's theming API between v2 and v3.
+
+## Major Breaking Changes
+
+### 1. Theme API Changes
+
+#### Theme Extension
+
+**Chakra UI v2:**
+
+```javascript
+import { extendTheme } from "@chakra-ui/react"
+
+const theme = extendTheme({
+  // theme overrides
+})
+```
+
+**Chakra UI v3:**
+
+```javascript
+import { extendBaseTheme } from "@chakra-ui/react"
+
+const theme = extendBaseTheme({
+  // theme overrides
+})
+```
+
+#### Component Style Configuration
+
+**Chakra UI v2:**
+
+```javascript
+import { defineStyleConfig } from "@chakra-ui/react"
+
+const Button = defineStyleConfig({
+  // button styles
+})
+```
+
+**Chakra UI v3:**
+
+```javascript
+// Component styles are now configured differently
+import { defineStyle, defineStyleConfig } from "@chakra-ui/styled-system"
+
+const Button = defineStyleConfig({
+  // button styles
+})
+```
+
+#### Color Mode Configuration
+
+**Chakra UI v2:**
+
+```javascript
+const config = {
+  initialColorMode: "light",
+  useSystemColorMode: false,
+}
+
+const theme = extendTheme({ config })
+```
+
+**Chakra UI v3:**
+
+```javascript
+const theme = extendBaseTheme({
+  config: {
+    initialColorMode: "light",
+    useSystemColorMode: false,
+  },
+})
+```
+
+### 2. Package Structure Changes
+
+Chakra UI v3 has reorganized its package structure:
+
+- Many functions previously in `@chakra-ui/react` are now in specialized packages
+- Theme utilities moved to `@chakra-ui/styled-system`
+- Component-specific code is more modular
+
+### 3. Component API Changes
+
+Several components have updated APIs:
+
+#### Modal Component
+
+**Chakra UI v2:**
+
+```javascript
+<Modal isOpen={isOpen} onClose={onClose}>
+  <ModalOverlay />
+  <ModalContent>
+    <ModalHeader>Modal Title</ModalHeader>
+    <ModalCloseButton />
+    <ModalBody>Content</ModalBody>
+    <ModalFooter>
+      <Button onClick={onClose}>Close</Button>
+    </ModalFooter>
+  </ModalContent>
+</Modal>
+```
+
+**Chakra UI v3:**
+
+```javascript
+<Modal isOpen={isOpen} onClose={onClose}>
+  <ModalOverlay />
+  <ModalContent>
+    <ModalHeader>Modal Title</ModalHeader>
+    <ModalCloseButton />
+    <ModalBody>Content</ModalBody>
+    <ModalFooter>
+      <Button onClick={onClose}>Close</Button>
+    </ModalFooter>
+  </ModalContent>
+</Modal>
+```
+
+_Note: While the basic Modal structure remains similar, certain prop behaviors have changed._
+
+#### Link Component
+
+**Chakra UI v2:**
+
+```javascript
+import { Link } from "@chakra-ui/react"
+;<Link href="/">Home</Link>
+```
+
+**Chakra UI v3:**
+
+```javascript
+import { Link } from "@chakra-ui/react"
+;<Link href="/">Home</Link>
+```
+
+_Note: The API is similar but internal behaviors may have changed, especially when used with Next.js._
+
+### 4. Styling System Updates
+
+Chakra UI v3 has updated its styling system:
+
+- Style props have more consistent behavior
+- Responsive styles have improved performance
+- Some style shorthands may have changed
+
+### 5. Peer Dependency Requirements
+
+Chakra UI v3 requires:
+
+```json
+{
+  "react": ">=18",
+  "react-dom": ">=18",
+  "@emotion/react": ">=11",
+  "framer-motion": ">=12"
+}
+```
+
+## Step-by-Step Migration Plan
+
+Based on the breaking changes and previous issues, here's a comprehensive migration plan:
+
+### 1. Environment Preparation
+
+1. **Create a new branch** for the migration:
+
+   ```bash
+   git checkout -b feature/chakra-ui-v3-upgrade
+   ```
+
+2. **Install required peer dependencies**:
+
+   ```bash
+   npm install react@19 react-dom@19 framer-motion@12 @emotion/react @emotion/styled
+   ```
+
+3. **Install Chakra UI v3**:
+   ```bash
+   npm install @chakra-ui/react@3
+   ```
+
+### 2. Theme Migration
+
+The theme configuration requires the most significant changes:
+
+1. **Update theme imports**:
+
+   ```javascript
+   // OLD
+   import { extendTheme, theme as baseTheme } from "@chakra-ui/react"
+
+   // NEW
+   import { extendBaseTheme } from "@chakra-ui/react"
+   import chakraTheme from "@chakra-ui/theme"
+   ```
+
+2. **Update theme extension**:
+
+   ```javascript
+   // OLD
+   const theme = extendTheme({
+     colors: { ... },
+     components: { ... }
+   })
+
+   // NEW
+   const { Button, Menu, ...rest } = chakraTheme.components
+   const theme = extendBaseTheme({
+     colors: { ... },
+     components: {
+       Button,
+       Menu,
+       // Other components you want to include from the base theme
+       // Plus your custom components
+     },
+     // Other theme values
+   })
+   ```
+
+3. **Update component style configs**:
+
+   ```javascript
+   // OLD
+   import { defineStyleConfig } from "@chakra-ui/react"
+
+   // NEW
+   import { defineStyle, defineStyleConfig } from "@chakra-ui/styled-system"
+   ```
+
+4. **Update color mode configuration**:
+
+   ```javascript
+   // OLD
+   const config = {
+     initialColorMode: "system",
+     useSystemColorMode: true,
+   }
+   const theme = extendTheme({ config })
+
+   // NEW
+   const theme = extendBaseTheme({
+     config: {
+       initialColorMode: "system",
+       useSystemColorMode: true,
+     },
+   })
+   ```
+
+### 3. Component Updates
+
+1. **Update imports**: Some components may have moved to different packages
+2. **Review component props**: Check for deprecated or renamed props
+3. **Update style props**: Ensure style props follow v3 conventions
+
+### 4. Testing Strategy
+
+1. **Incremental testing**:
+
+   - Test theme configuration first
+   - Test basic page rendering
+   - Test interactive components
+   - Test responsive layouts
+
+2. **Visual regression testing**:
+
+   - Compare pages before and after migration
+   - Check for styling inconsistencies
+
+3. **Functionality testing**:
+   - Verify all interactive components work
+   - Test color mode switching
+   - Test responsive behavior
+
+### 5. Common Issues and Solutions
+
+#### Theme Configuration Issues
+
+**Issue**: `TypeError: extendBaseTheme is not a function`
+**Solution**:
+
+```javascript
+// Make sure you're importing from the correct location
+import { extendBaseTheme } from "@chakra-ui/react"
+// Or if that doesn't work
+import { extendTheme } from "@chakra-ui/react"
+const extendBaseTheme = extendTheme
+```
+
+**Issue**: `TypeError: defineStyleConfig is not a function`
+**Solution**:
+
+```javascript
+// Import from styled-system instead
+import { defineStyleConfig } from "@chakra-ui/styled-system"
+```
+
+**Issue**: `TypeError: Cannot read properties of undefined (reading '_config')`
+**Solution**:
+
+```javascript
+// Make sure your theme structure matches v3 expectations
+// You may need to completely restructure your theme object
+```
+
+#### React Hydration Errors
+
+**Issue**: Hydration errors with nested Chakra components
+**Solution**:
+
+- Check for nested anchor tags (especially with Next.js Link and Chakra Link)
+- Ensure server and client rendering are consistent
+
+#### Style Inconsistencies
+
+**Issue**: Components look different after migration
+**Solution**:
+
+- Review and update theme tokens
+- Check for changes in default styles
+- Add explicit style props where needed
+
+## Best Practices for Upgrading
+
+1. **Use the Official Migration Guide**:
+
+   - Reference the [official Chakra UI migration documentation](https://chakra-ui.com/docs/migration)
+   - Look for specific examples relevant to your use cases
+
+2. **Incremental Approach**:
+
+   - Start with theme configuration
+   - Update one component type at a time
+   - Test frequently
+
+3. **Create a Component Inventory**:
+
+   - Document all Chakra components used in the project
+   - Track migration status for each component
+
+4. **Use TypeScript** (if applicable):
+
+   - TypeScript can help identify API changes
+   - Pay attention to type errors after upgrading
+
+5. **Consider Custom Components**:
+
+   - You may need to update custom components that build on Chakra
+   - Check for internal Chakra API usage
+
+6. **Have a Rollback Plan**:
+   - Document the exact versions that work together
+   - Be prepared to revert if issues are too complex
+
+## Integration with Next.js 15
+
+Since we've already upgraded to Next.js 15 and React 19, here are specific considerations for Chakra UI v3 with this stack:
+
+1. **Link Component Integration**:
+
+   - Next.js 15 Link API changes may affect how Chakra's Link component works
+   - Test nested links carefully
+
+2. **SSR Compatibility**:
+
+   - Ensure Chakra provider is properly configured for Next.js 15
+   - Test server-side rendering behavior
+
+3. **React 19 Compatibility**:
+   - Chakra UI v3 is designed to work with React 19
+   - No need for `--legacy-peer-deps` flag
+
+## Conclusion
+
+Upgrading to Chakra UI v3 requires significant changes, particularly to theme configuration. The most critical changes involve:
+
+1. Using `extendBaseTheme` instead of `extendTheme`
+2. Restructuring theme components and styling
+3. Updating imports for theme utilities
+4. Managing peer dependencies correctly
+
+By following this migration guide and testing thoroughly, we can successfully upgrade to Chakra UI v3 while minimizing disruption to the application.
+
+## References
+
+- [Official Chakra UI v3 Documentation](https://chakra-ui.com/docs/getting-started)
+- [Chakra UI v3 Release Notes](https://github.com/chakra-ui/chakra-ui)
+- [Theme Migration Guide](https://chakra-ui.com/docs/styled-system/theming/customize-theme)
+- [Component Migration Examples](https://chakra-ui.com/docs/components)

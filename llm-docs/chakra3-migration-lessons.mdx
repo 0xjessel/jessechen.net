@@ -1,0 +1,178 @@
+---
+title: "Chakra UI v3 Migration Attempt: Lessons Learned"
+description: "Key findings and challenges encountered during the Chakra UI v2 to v3 migration attempt"
+---
+
+# Chakra UI v3 Migration Attempt: Lessons Learned
+
+This document outlines the challenges encountered and lessons learned during our attempt to migrate jessechen.net from Chakra UI v2 to v3. While the migration was ultimately unsuccessful, the insights gained will be valuable for future attempts.
+
+## Key Challenges Encountered
+
+### 1. Theme System Architecture Changes
+
+The most significant breaking change in Chakra UI v3 is the complete restructuring of the theme system:
+
+- **v2** used `extendTheme` for theme configuration
+- **v3** introduces a new `createSystem` approach that requires a different structure
+- The token system is entirely different, requiring a complete rewrite of the theme object
+
+```javascript
+// Chakra UI v2 Theme
+export const AppTheme = extendTheme({
+  config: {
+    /* ... */
+  },
+  fonts: {
+    /* ... */
+  },
+  // Simple direct values
+})
+
+// Chakra UI v3 Theme
+export const AppTheme = createSystem(defaultConfig, {
+  theme: {
+    tokens: {
+      fonts: {
+        heading: { value: "Font stack" },
+        // All values must be wrapped in { value: ... }
+      },
+    },
+  },
+})
+```
+
+### 2. ChakraProvider Configuration
+
+The `ChakraProvider` component has changed significantly:
+
+- The `theme` prop from v2 is no longer used in v3
+- We attempted various props including:
+  - `value={AppTheme}`
+  - `{...AppTheme}`
+  - `system={AppTheme}`
+- All resulted in the error: `TypeError: Cannot read properties of undefined (reading '_config')`
+
+### 3. Color Mode Implementation
+
+Our custom color mode implementation:
+
+- Uses `next-themes` underneath with a custom `ColorModeProvider`
+- Provides custom hooks: `useColorMode` and `useColorModeValue`
+- These hooks work correctly, but integrating them with Chakra UI v3 proved challenging
+
+### 4. Component Import/Export Issues
+
+We encountered errors related to component imports and exports:
+
+- "Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined"
+- This occurred after trying to change the export pattern of our `Provider` component
+
+## What We Tried
+
+### 1. Theme Structure Updates
+
+We attempted to transform the theme structure to match v3 requirements:
+
+```javascript
+// Updated to use createSystem
+export const AppTheme = createSystem(defaultConfig, {
+  theme: {
+    tokens: {
+      fonts: {
+        heading: { value: "Noto Serif, Georgia, Times New Roman, serif" },
+        body: { value: "Mukta, Arial, Helvetica, sans-serif" },
+        mono: {
+          value:
+            "Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace",
+        },
+      },
+      // Other tokens transformed to the new format
+    },
+    // Added semantic tokens for dark/light mode values
+  },
+})
+```
+
+### 2. Provider Modifications
+
+We tried different approaches to the `Provider` component:
+
+```javascript
+// Attempt 1: Using the value prop (original)
+<ChakraProvider value={value}>
+
+// Attempt 2: Using object spread
+<ChakraProvider {...value}>
+
+// Attempt 3: Using the system prop
+<ChakraProvider system={value}>
+```
+
+### 3. Component Export Patterns
+
+To address the "Element type is invalid" error, we tried modifying the export pattern:
+
+```javascript
+// Original
+export function Provider({ children, value }) {
+  /* ... */
+}
+
+// Attempt with default export
+export default function Provider({ children, value }) {
+  /* ... */
+}
+export { Provider } // For backward compatibility
+```
+
+## Root Causes
+
+### 1. Lack of Complete Migration Documentation
+
+- The Chakra UI v3 migration guide lacks examples for migrating complex theme setups
+- Documentation for the new theme token system is limited
+- Specific guidance for customized setups with custom color mode providers is missing
+
+### 2. Breaking Changes in Core Architecture
+
+- The theme system is completely redesigned in v3
+- The component APIs have changed significantly
+- Configuration options like `colorMode` have been restructured
+
+### 3. Integration with Custom Systems
+
+- Our custom color mode implementation using `next-themes` is difficult to integrate with Chakra UI v3
+- The interaction between our custom hooks and Chakra's internal systems is complex
+
+## Next Steps for Future Migration Attempts
+
+### 1. Start with a Clean Setup
+
+Rather than trying to migrate the existing theme configuration, consider:
+
+- Creating a new theme from scratch using the v3 API
+- Rebuilding the color mode system to align with v3's patterns
+- Incrementally integrating components
+
+### 2. Staged Migration
+
+Consider a staged approach:
+
+1. Migrate the theme system first, with minimal components
+2. Add components one by one, testing extensively
+3. Address color mode integration as a separate step
+
+### 3. Explore Alternative Approaches
+
+If Chakra UI v3 migration proves too challenging, consider:
+
+- Staying on v2 until more comprehensive migration resources are available
+- Exploring other UI libraries with similar capabilities
+- Building a custom design system based on primitive components
+
+## Conclusion
+
+While our migration attempt was unsuccessful, it provided valuable insights into the significant changes in Chakra UI v3. The migration is more complex than a typical version update and requires a fundamental restructuring of the theme and component systems.
+
+We've documented these challenges to assist with future migration attempts, either when more comprehensive migration resources become available or when a complete rebuild of the UI system is feasible.
