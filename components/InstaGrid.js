@@ -1,5 +1,4 @@
-import { AspectRatio, LinkOverlay, SimpleGrid } from "@chakra-ui/layout";
-import { Icon } from "@chakra-ui/react";
+import { AspectRatio, Icon, LinkOverlay, SimpleGrid } from "@chakra-ui/react";
 import { FaPlay } from "react-icons/fa"
 import NImage from 'next/image'
 import cloudinaryLoader from "../utils/cloudinaryLoader";
@@ -39,7 +38,6 @@ export default function InstaGrid({ medias, ...props }) {
               <NImage
                 loader={cloudinaryLoader}
                 src={media.public_id}
-                dpr={window.devicePixelRatio}
                 height="181"
                 width="181"
                 alt="Instagram photo"

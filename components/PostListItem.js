@@ -1,5 +1,5 @@
-import { Container, Heading } from '@chakra-ui/layout'
-import NLink from 'next/link'
+import { Container, Heading, Link as ChakraLink } from '@chakra-ui/react'
+import NextLink from 'next/link'
 import { useLinkColor } from '../styles/colorModes'
 import PostMetadata from './PostMetadata'
 
@@ -13,12 +13,11 @@ export default function PostListItem({ post }) {
         size="lg"
         display="inline-block"
         _hover={{ color: useLinkColor() }}>
-        <NLink
-          as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
-          href={`/posts/[...slug]`}
-          passHref>
-          {post.data.title}
-        </NLink>
+        <NextLink href={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`} passHref legacyBehavior>
+          <ChakraLink>
+            {post.data.title}
+          </ChakraLink>
+        </NextLink>
       </Heading>
       <PostMetadata 
         frontMatter={post.data}

@@ -9,10 +9,10 @@ import remarkSlug from 'remark-slug';
 import { getAllMDXPosts, getAllMDXPostsWithMetadata, POSTS_PATH } from '../../utils/mdxUtils'
 
 import Layout from '../../components/Layout'
-import { Flex, Heading, Link, Spacer } from '@chakra-ui/layout'
+import { Flex, Heading, Spacer, Link as ChakraLink } from '@chakra-ui/react'
+import NextLink from 'next/link'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import NLink from 'next/link'
 import PostMetadata from '../../components/PostMetadata'
 
 import { components } from '../../utils/mdxComponents'
@@ -39,27 +39,23 @@ export default function PostPage({ source, frontMatter, filePath, previous, next
       <MDXRemote {...source} components={components} />
       <Flex as="nav" mt="20">
         {previous && 
-          <NLink
-            as={`/posts/${previous.filePath.replace(/\.mdx?$/, '')}`}
-            href={`/posts/[...slug]`}>
-            <Link 
+          <NextLink href={`/posts/${previous.filePath.replace(/\.mdx?$/, '')}`} passHref legacyBehavior>
+            <ChakraLink 
               textAlign="left"
               color={linkColor}>
               {`← ${previous.title}`}
-            </Link>
-          </NLink>
+            </ChakraLink>
+          </NextLink>
         }
         <Spacer />
         {next &&
-          <NLink 
-            as={`/posts/${next.filePath.replace(/\.mdx?$/, '')}`}
-            href={`/posts/[...slug]`}>
-            <Link 
+          <NextLink href={`/posts/${next.filePath.replace(/\.mdx?$/, '')}`} passHref legacyBehavior>
+            <ChakraLink 
               textAlign="right"
               color={linkColor}>
               {`${next.title} →`}
-            </Link>
-          </NLink>
+            </ChakraLink>
+          </NextLink>
         }
       </Flex>
       <Footer />

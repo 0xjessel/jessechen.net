@@ -1,6 +1,7 @@
 /* eslint-disable react/display-name */
-import { AspectRatio, Box, Center, Code, Divider, Heading as CHeading, Kbd, Link, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/layout'
-import { Image, useColorModeValue } from '@chakra-ui/react'
+import { AspectRatio, Box, Center, Code, Divider, Heading as CHeading, Kbd, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/react'
+import { Image, useColorModeValue, Link as ChakraLink } from '@chakra-ui/react'
+import NextLink from 'next/link'
 
 import { useLinkColor } from '../styles/colorModes'
 import Callout from '../components/Callout'
@@ -15,7 +16,7 @@ function Heading({ children, ...props }) {
         '&:hover a:hover': { opacity: 1 }
       }}>
       {children}
-      <Link 
+      <ChakraLink 
         href={`#${props.id}`}
         ml="1"
         opacity="0"
@@ -29,7 +30,7 @@ function Heading({ children, ...props }) {
           color: useLinkColor(),
         }}>
         #
-      </Link>
+      </ChakraLink>
     </CHeading>
   )
 }
@@ -44,6 +45,26 @@ function GIF({ children, ...props }) {
   )
 }
 
+// Custom link components that handles external and internal links
+const CustomLink = (props) => {
+  const linkColor = useLinkColor();
+  // Check if it's an external link
+  const isExternal = props.href && (props.href.startsWith('http') || props.href.startsWith('mailto:'));
+  
+  if (isExternal) {
+    return <ChakraLink isExternal color={linkColor} {...props} />;
+  }
+  
+  // For internal links
+  return (
+    <NextLink href={props.href} passHref legacyBehavior>
+      <ChakraLink color={linkColor} {...props}>
+        {props.children}
+      </ChakraLink>
+    </NextLink>
+  );
+}
+
 export const components = {
   h1: (p) => <Heading as="h1" fontSize="2xl" {...p} />,
   h2: (p) => <Heading as="h2" fontSize="xl" {...p} />,
@@ -53,9 +74,8 @@ export const components = {
   h6: (p) => <Heading as="h6" fontSize="md" {...p} />,
   p: (p) => <Text as="p" mb="8" {...p} />,
   strong: (p) => <Text as="strong" fontWeight="semibold" {...p} />,
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  a: (p) => <Link isExternal color={useLinkColor()} {...p} />,
-  Link: (p) => <Link isExternal color={useLinkColor()} {...p} />,
+  a: (p) => <CustomLink {...p} />,
+  Link: (p) => <CustomLink {...p} />,
   ul: (p) => <UnorderedList mb="8" {...p} />,
   ol: (p) => <OrderedList mb="8" {...p} />,
   li: (p) => <ListItem {...p} />,

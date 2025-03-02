@@ -1,4 +1,4 @@
-import { Container, Heading, Link, Text } from "@chakra-ui/layout"
+import { Container, Heading, Link, Text } from "@chakra-ui/react"
 import { useLinkColor } from "../styles/colorModes"
 import { FiArrowUpRight } from 'react-icons/fi'
 

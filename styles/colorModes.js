@@ -1,4 +1,4 @@
-import { useColorModeValue } from '@chakra-ui/color-mode'
+import { useColorModeValue } from '@chakra-ui/react'
 
 export const SELECTION_LIGHT = 'gray.300'
 export const SELECTION_DARK = 'gray.600'

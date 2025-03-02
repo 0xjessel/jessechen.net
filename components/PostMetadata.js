@@ -1,4 +1,4 @@
-import { Container, Text } from "@chakra-ui/layout";
+import { Container, Text } from "@chakra-ui/react";
 import { FiClock } from 'react-icons/fi'
 import Tags from './Tags'
 

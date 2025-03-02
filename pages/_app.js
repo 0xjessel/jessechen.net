@@ -3,8 +3,8 @@ import { AppTheme } from "../styles/appTheme"
 import { PrismGlobal } from '../styles/prism'
 import AppSEO from "../utils/AppSEO"
 
-import "@fontsource/noto-serif/700.css"
-import "@fontsource/mukta/400.css"
+import "@fontsource/noto-serif"
+import "@fontsource/mukta"
 
 export default function App({ Component, pageProps }) {
   return (
