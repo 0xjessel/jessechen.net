@@ -9,12 +9,12 @@ The upgrade process has been organized into three groups, ordered from least to 
 ### Group 3: Utility Tools
 
 - ✅ remark-slug v7 → rehype-slug (latest)
-- ❌ eslint v8 → v9 (conflicted with eslint-config-next v14)
+- ✅ eslint v8 → v9 (requires eslint-config-next v15)
 
 ### Group 2: UI Libraries
 
-- @chakra-ui/react v2 → v3
-- framer-motion v11 → v12
+- ❌ @chakra-ui/react v2 → v3 (attempted but reverted due to compatibility issues)
+- ❌ framer-motion v11 → v12 (reverted along with Chakra UI)
 
 ### Group 1: Next.js Ecosystem
 
@@ -41,13 +41,57 @@ The Next.js ecosystem migration was completed successfully. Key steps included:
 
 Detailed documentation of the migration process is available in [llm-docs/next15-migration.mdx](llm-docs/next15-migration.mdx).
 
+### Group 2: UI Libraries Migration Attempt
+
+The attempt to upgrade Chakra UI from v2 to v3 and framer-motion from v11 to v12 encountered significant compatibility issues, leading to a rollback. Key findings:
+
+1. **Package Updates Attempted**:
+
+   - Attempted to upgrade @chakra-ui/react from v2.10.6 to v3.8.1
+   - Attempted to upgrade framer-motion from v11.18.2 to v12
+
+2. **Encountered Issues**:
+
+   - Multiple theme-related errors emerged after upgrading to Chakra UI v3:
+
+     - `TypeError: extendBaseTheme is not a function`
+     - `TypeError: defineStyleConfig is not a function`
+     - `TypeError: Cannot read properties of undefined (reading '_config')`
+
+   - These errors indicated significant breaking changes in Chakra UI's theming API between v2 and v3
+
+3. **Resolution**:
+
+   - Rolled back to @chakra-ui/react@2.8.2 and framer-motion@11.3.28
+   - Used the `--legacy-peer-deps` flag to resolve dependency conflicts with React 19
+   - Restored the original theme configuration using v2 APIs like `extendTheme` and `mode` functions
+
+4. **Conclusion**:
+   - Upgrading to Chakra UI v3 would require a significant refactoring of the theme configuration
+   - The cost-benefit analysis favored staying on Chakra UI v2 for the time being
+
+### Group 3: Utility Tools Migration
+
+The ESLint upgrade from v8 to v9 was completed successfully after first updating Next.js and eslint-config-next to v15. Key steps included:
+
+1. **Package Updates**:
+
+   - Upgraded Next.js from v14.2.5 to v15.2.0
+   - Upgraded eslint-config-next from v14.2.5 to v15.2.0
+   - Upgraded ESLint from v8.57.1 to v9.21.0
+
+2. **Findings**:
+   - ESLint v9 is not compatible with eslint-config-next v14.x
+   - The update to Next.js v15 and eslint-config-next v15 needed to be completed first
+   - After updating to eslint-config-next v15, the ESLint v9 upgrade worked without issues
+
 ## Findings and Insights
 
 ### Dependency Interdependencies
 
 One of the key challenges with updating packages is managing interdependencies. Notable examples:
 
-1. **ESLint and eslint-config-next**: Attempting to update ESLint to v9 while keeping eslint-config-next at v14 led to dependency conflicts. This indicates that major version updates often need to be coordinated across related packages.
+1. **ESLint and eslint-config-next**: ESLint v9 is only compatible with eslint-config-next v15+. Attempting to use ESLint v9 with eslint-config-next v14 results in dependency conflicts.
 
 2. **Next.js Peer Dependencies**: Next.js v15 has the following peer dependencies:
 
@@ -65,6 +109,7 @@ One of the key challenges with updating packages is managing interdependencies. 
    This shows that Next.js v15 is compatible with both React v18 and v19, giving flexibility for the upgrade path.
 
 3. **Chakra UI Peer Dependencies**: Chakra UI v3 requires:
+
    ```json
    {
      "react": ">=18",
@@ -72,7 +117,10 @@ One of the key challenges with updating packages is managing interdependencies. 
      "@emotion/react": ">=11"
    }
    ```
+
    This confirms compatibility with both React v18 and v19.
+
+4. **React 19 and Chakra UI v2 Compatibility**: While Chakra UI v2 wasn't officially designed for React 19, it can be made to work by using the `--legacy-peer-deps` flag during installation. This bypasses the strict peer dependency checks in npm.
 
 ### Package Deprecations
 
@@ -81,6 +129,13 @@ Some packages have been deprecated in favor of newer alternatives:
 1. **remark-slug → rehype-slug**: The package remark-slug v8 was deprecated with a recommendation to use rehype-slug instead. This required code changes to:
    - Import the new package
    - Move the plugin from remarkPlugins to rehypePlugins in the MDX serialization
+
+### Breaking API Changes
+
+1. **Chakra UI v3 Theming API**: The upgrade attempt revealed significant changes to Chakra UI's theming API:
+   - Functions like `extendTheme` have been replaced or modified
+   - The theme tools module appears to have been restructured
+   - The way theme components are configured has changed substantially
 
 ## Challenges and Solutions
 
@@ -93,7 +148,11 @@ Major version updates often include breaking changes. For example:
    - Solution: Wait to update ESLint along with eslint-config-next.
 
 2. **Deprecated Packages**: When remark-slug was updated, we discovered it was deprecated.
+
    - Solution: Replace with the recommended alternative (rehype-slug) and update the code accordingly.
+
+3. **Chakra UI v3**: Major breaking changes in the theming API caused multiple errors.
+   - Solution: Rolled back to Chakra UI v2 as the benefits of upgrading didn't justify the extensive refactoring required.
 
 ### Next.js 15 Migration Challenges
 
@@ -107,6 +166,11 @@ Major version updates often include breaking changes. For example:
 
 3. **Peer Dependencies**: When upgrading to Next.js 15, peer dependency warnings appeared.
    - Solution: These warnings were acceptable since Next.js 15 supports both React 18 and React 19.
+
+### React 19 and UI Library Compatibility
+
+1. **Chakra UI v2 with React 19**: When downgrading from Chakra UI v3 back to v2, we encountered peer dependency conflicts with React 19.
+   - Solution: Used the `--legacy-peer-deps` flag to bypass strict peer dependency checks, allowing Chakra UI v2 to work with React 19.
 
 ## Best Practices for NPM Updates
 
@@ -124,10 +188,26 @@ From our experience updating this codebase, we've identified these best practice
 
 6. **Consult Migration Guides**: Review official migration guides for major version updates to understand potential breaking changes.
 
-## Next Steps
+7. **Have a Rollback Plan**: Before making major updates, ensure you can roll back if necessary. Document the working versions so you can return to them if needed.
 
-The remaining updates are grouped by risk level:
+8. **Use Flags Judiciously**: Flags like `--legacy-peer-deps` can be useful for resolving immediate dependency issues, but be aware that they bypass important compatibility checks.
 
-1. **Group 2** (UI Libraries): Update Chakra UI and Framer Motion.
+## Current Status and Recommendations
 
-With Group 1 (Next.js Ecosystem) successfully updated, we can now proceed to updating the UI libraries in Group 2 if desired.
+After completing multiple package upgrades and attempting others, the current recommendations are:
+
+1. **Completed Upgrades**:
+
+   - ✅ Next.js ecosystem (Next.js, eslint-config-next, React) upgraded to latest versions
+   - ✅ ESLint upgraded from v8 to v9
+   - ✅ remark-slug replaced with rehype-slug
+
+2. **Postponed Upgrades**:
+
+   - ❌ Chakra UI upgrade from v2 to v3 is postponed due to significant theming API changes
+   - ❌ framer-motion upgrade is postponed to maintain compatibility with Chakra UI v2
+
+3. **Future Considerations**:
+   - Consider planning a dedicated effort to refactor the theme configuration to be compatible with Chakra UI v3
+   - Monitor for any security issues in the current versions that might necessitate upgrades
+   - Consider exploring alternative UI libraries if Chakra UI v2 becomes unsupported or problematic
