@@ -21,7 +21,7 @@
     "@mdx-js/react": "^3.0.1",
     "@typescript-eslint/parser": "^8.1.0",
     "cloudinary": "^2.4.0",
-    "framer-motion": "^11.3.28",
+    "framer-motion": "^12.4.7",
     "globby": "^14.0.2",
     "gray-matter": "^4.0.3",
     "mdx-prism": "^0.3.4",
