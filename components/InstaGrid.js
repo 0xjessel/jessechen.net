@@ -42,6 +42,8 @@ export default function InstaGrid({ medias, ...props }) {
                 width="181"
                 alt="Instagram photo"
                 style={{ objectFit: 'cover' }}
+                sizes="(max-width: 640px) 181px, 181px"
+                quality={90}
               />
             </AspectRatio>
             {isVideo ? <Icon as={FaPlay} boxSize="6" /> : null}

@@ -1,6 +1,6 @@
 ---
 description: Rules for JavaScript code style, patterns, and best practices
-globs:  "**/*.{js,jsx,ts,tsx}", "!node_modules/**","!.next/**","!out/**"
+globs: "**/*.{js,jsx,ts,tsx}", "!node_modules/**","!.next/**","!out/**"
 ---
 # JavaScript Style Rules
 
@@ -13,6 +13,7 @@ These rules apply to all JavaScript and files in the codebase.
 - Group related utilities in dedicated directories
 
 ## Component Structure
+- Use trailing commas in multiline arrays, objects, and parameter lists
 - Use functional components with hooks
 - Export components as default when they are the main export
 - Destructure props in function parameters
