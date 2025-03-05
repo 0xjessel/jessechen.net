@@ -12,12 +12,6 @@ These rules apply to all React components in the `components/` directory.
 - Components should be functionally pure when possible
 - Export components as named exports
 
-## TypeScript Implementation
-- Props must be properly typed with TypeScript interfaces
-- Use proper type imports from dependencies
-- Avoid using `any` type
-- Define proper return types for components
-
 ## Documentation
 - Include JSDoc comments for component documentation
 ```typescript

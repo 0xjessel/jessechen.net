@@ -31,18 +31,6 @@ export default function Page() {
 }
 ```
 
-## TypeScript Implementation
-- Implement proper TypeScript types for page props
-```typescript
-interface PageProps {
-  // Define prop types
-}
-
-export default function Page({ prop1, prop2 }: PageProps) {
-  // Page implementation
-}
-```
-
 ## Static Generation
 - Use getStaticProps/getStaticPaths for MDX content
 - Implement proper ISR when needed
