@@ -1,7 +1,6 @@
 import { AspectRatio, Icon, LinkOverlay, SimpleGrid } from "@chakra-ui/react";
 import { FaPlay } from "react-icons/fa"
-import NImage from 'next/image'
-import cloudinaryLoader from "../utils/cloudinaryLoader";
+import { CldImage } from 'next-cloudinary'
 
 export default function InstaGrid({ medias, ...props }) {
   if (!medias) {
@@ -35,15 +34,13 @@ export default function InstaGrid({ medias, ...props }) {
               : {}
             }>
             <AspectRatio ratio="1">
-              <NImage
-                loader={cloudinaryLoader}
+              <CldImage
                 src={media.public_id}
-                height="181"
-                width="181"
+                width={181}
+                height={181}
                 alt="Instagram photo"
                 style={{ objectFit: 'cover' }}
                 sizes="(max-width: 640px) 181px, 181px"
-                quality={90}
               />
             </AspectRatio>
             {isVideo ? <Icon as={FaPlay} boxSize="6" /> : null}

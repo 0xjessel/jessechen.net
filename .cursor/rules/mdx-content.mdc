@@ -1,8 +1,8 @@
 ---
-description: Rules for handling MDX content files
+description: Rules for modifying MDX content
 globs: posts/**/*.mdx
 ---
- # MDX Content Rules
+# MDX Content Rules
 
 These rules apply to all MDX content files in the `posts/` directory.
 
@@ -32,6 +32,12 @@ coverImage: string
 - Content must be written in MDX format with proper markdown syntax
 - Code blocks must specify language for syntax highlighting
 - Use proper heading hierarchy (h1, h2, etc.)
+
+## Code Examples
+- Code examples in MDX blog posts are for demonstration purposes only
+- Do NOT modify code examples in blog posts during dependency updates or refactoring
+- Code examples may intentionally show older syntax/patterns for educational purposes
+- If a code example needs updating, create a new blog post or add a note below the example
 
 ## Validation
 Before committing any MDX content, ensure:

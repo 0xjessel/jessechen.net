@@ -1,8 +1,7 @@
-import { Box, Heading, Image, LinkBox, LinkOverlay, Text, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Heading, LinkBox, LinkOverlay, Text, useBreakpointValue } from "@chakra-ui/react";
+import { CldImage } from 'next-cloudinary';
 
 export default function FeatureListItem({ feature, ...props }) {
-  const imgSrc = `https://res.cloudinary.com/jessel/image/upload/w_300,f_auto,c_scale/${feature.image}`
-
   const tooSmall = useBreakpointValue({ base: true, sm: true, md: false })
 
   return(
@@ -19,11 +18,15 @@ export default function FeatureListItem({ feature, ...props }) {
         ? { }
         : { transform: `translateY(-4px)`, shadow: `xl` }
       }>
-      <Image
-        objectFit="cover"
-        src={imgSrc}
-        height={['150px', '165px', '150px']}
-        width={['100%', '165px', '100%']}
+      <CldImage
+        src={feature.image}
+        width={300}
+        height={150}
+        style={{
+          objectFit: "cover",
+          height: ['150px', '165px', '150px'],
+          width: ['100%', '165px', '100%'],
+        }}
         alt={`${feature.title} thumbnail`}
       />
       <Box pt="4" px="4" pb="4">

@@ -246,14 +246,43 @@ npm run dev        # Starts at http://localhost:3000
 
 The application requires several environment variables:
 
-- Instagram API credentials
-- Cloudinary configuration
-- Other service integrations
+### Vercel Deployment Info
+
+```env
+# Used for site URL and git commit information
+NEXT_PUBLIC_VERCEL_URL="http://localhost:3000/"
+NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA="commit_sha"
+NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE="commit_message"
+```
+
+### Instagram API Credentials
+
+```env
+# Required for Instagram integration
+IG_USER_ID="user_id"
+IG_ACCESS_TOKEN="access_token"
+```
+
+### Cloudinary Configuration
+
+```env
+# Required for image handling
+CLOUDINARY_CLOUD_NAME="cloud_name"           # Used by Python scripts
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="cloud_name"  # Used by client-side components
+CLOUDINARY_API_KEY="api_key"
+CLOUDINARY_API_SECRET="api_secret"
+```
+
+Note: The application maintains two variables for the Cloudinary cloud name:
+
+- `CLOUDINARY_CLOUD_NAME` is used by Python scripts (ig_fetch.py) for server-side operations
+- `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` is used by client-side components (CldImage)
+  Both variables should contain the same value, and this duplication is maintained for compatibility with existing Python scripts.
 
 Environment files:
 
-- `.env.local` - Local development
-- `.env.default` - Template for required variables
+- `.env.local` - Local development with actual values
+- `.env.default` - Template with example values
 - Production variables set in Vercel dashboard
 
 ## Deployment

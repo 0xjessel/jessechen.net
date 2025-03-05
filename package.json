@@ -26,6 +26,7 @@
     "gray-matter": "^4.0.3",
     "mdx-prism": "^0.3.4",
     "next": "^15.2.0",
+    "next-cloudinary": "^6.16.0",
     "next-mdx-remote": "^5.0.0",
     "next-remote-watch": "2.0.0",
     "next-seo": "^6.5.0",

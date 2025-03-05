@@ -15,17 +15,20 @@ These rules apply to environment configuration and management.
 ## Environment Files
 - Maintain `.env.default` with all required variables
 ```env
-# Required Instagram API credentials
-INSTAGRAM_ACCESS_TOKEN=
-INSTAGRAM_USER_ID=
+# Vercel deployment info
+NEXT_PUBLIC_VERCEL_URL = "http://localhost:3000/"
+NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA = "2610a858daeed2adaa49353ecfa4347889859f12"
+NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE = "Add commit SHA/message to footer"
 
-# Required Cloudinary configuration
-CLOUDINARY_CLOUD_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=
+# Instagram API credentials
+IG_USER_ID = "17841401609650232"
+IG_ACCESS_TOKEN = "il0ve1g"
 
-# Other required configurations
-SITE_URL=https://jessechen.net
+# Cloudinary configuration
+CLOUDINARY_CLOUD_NAME = "jessel"      # Required for Python scripts
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME = "jessel"  # Required for client-side components
+CLOUDINARY_API_KEY = "555"
+CLOUDINARY_API_SECRET = "b1g_s3cr3t"
 ```
 
 ## Documentation
@@ -40,10 +43,15 @@ SITE_URL=https://jessechen.net
 // env.d.ts
 declare namespace NodeJS {
   interface ProcessEnv {
-    INSTAGRAM_ACCESS_TOKEN: string;
-    INSTAGRAM_USER_ID: string;
-    CLOUDINARY_CLOUD_NAME: string;
-    // ... other variables
+    NEXT_PUBLIC_VERCEL_URL: string;
+    NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA: string;
+    NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE: string;
+    IG_USER_ID: string;
+    IG_ACCESS_TOKEN: string;
+    CLOUDINARY_CLOUD_NAME: string;      // Used by Python scripts
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: string;  // Used by client-side code
+    CLOUDINARY_API_KEY: string;
+    CLOUDINARY_API_SECRET: string;
   }
 }
 ```
@@ -53,8 +61,13 @@ declare namespace NodeJS {
 ```typescript
 function validateEnv() {
   const required = [
-    'INSTAGRAM_ACCESS_TOKEN',
-    'INSTAGRAM_USER_ID',
+    'NEXT_PUBLIC_VERCEL_URL',
+    'IG_USER_ID',
+    'IG_ACCESS_TOKEN',
+    'CLOUDINARY_CLOUD_NAME',           // Required for Python scripts
+    'NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME', // Required for client-side code
+    'CLOUDINARY_API_KEY',
+    'CLOUDINARY_API_SECRET',
     // ... other required variables
   ];
   
@@ -66,6 +79,15 @@ function validateEnv() {
 }
 ```
 
+## Special Cases
+
+### Cloudinary Cloud Name
+The application maintains two environment variables for the Cloudinary cloud name:
+- `CLOUDINARY_CLOUD_NAME`: Used by Python scripts (ig_fetch.py) for server-side operations
+- `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`: Used by client-side components (CldImage)
+
+Both variables should contain the same value. This duplication is maintained for compatibility with existing Python scripts.
+
 ## Configuration Management
 - Separate development and production configurations
 - Implement proper fallback values
@@ -76,4 +98,4 @@ function validateEnv() {
 - Ensure proper environment setup in Vercel
 - Maintain separate configurations for different environments
 - Implement proper secret management
-- Document deployment requirements 
+- Document deployment requirements

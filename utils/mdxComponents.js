@@ -2,6 +2,7 @@
 import { AspectRatio, Box, Center, Code, Divider, Heading as CHeading, Kbd, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/react'
 import { Image, useColorModeValue, Link as ChakraLink } from '@chakra-ui/react'
 import Link from 'next/link'
+import { CldImage } from 'next-cloudinary'
 
 import { useLinkColor } from '../styles/colorModes'
 import Callout from '../components/Callout'
@@ -67,6 +68,26 @@ const CustomLink = (props) => {
   );
 }
 
+// Custom image component that handles both Cloudinary and local images
+const CustomImage = (props) => {
+  // Check if the image is from Cloudinary
+  const isCloudinary = props.src && !props.src.startsWith('/');
+  
+  if (isCloudinary) {
+    return (
+      <CldImage
+        {...props}
+        width={800}
+        height={600}
+        style={{ maxWidth: '100%', height: 'auto' }}
+      />
+    );
+  }
+  
+  // For local images
+  return <Image {...props} />;
+}
+
 export const components = {
   h1: (p) => <Heading as="h1" fontSize="2xl" {...p} />,
   h2: (p) => <Heading as="h2" fontSize="xl" {...p} />,
@@ -108,7 +129,7 @@ export const components = {
   hr: (p) => <Divider mb="8" {...p} />,
   kbd: (p) => <Kbd {...p} />,
   // eslint-disable-next-line jsx-a11y/alt-text
-  img: (p) => <Image {...p} />,
+  img: (p) => <CustomImage {...p} />,
   VideoEmbed: (p) => <AspectRatio my="8"><iframe {...p} /></AspectRatio>,
   GIF: (p) => <GIF my="8" {...p} />,
   Caption: (p) => <Center mb="8" mt="-6"><Text as="i" fontSize="sm" {...p} /></Center>,

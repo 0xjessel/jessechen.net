@@ -1,7 +1,12 @@
 module.exports = {
   images: {
-    loader: 'custom',
-    loaderFile: './utils/cloudinaryLoader.js',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',
+      },
+    ],
   },
   webpack: (config, { isServer }) => {
     if (isServer) {
