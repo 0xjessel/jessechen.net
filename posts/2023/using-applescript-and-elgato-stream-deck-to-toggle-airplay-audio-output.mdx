@@ -10,9 +10,71 @@ coverImage: "/images/posts/2023/vc-setup.jpg"
 
 ![my vc setup](/images/posts/2023/vc-setup.jpg)
 
+## Update: A Much Better Approach (March 10, 2025)
+
+After wrestling with AppleScript breaking every time macOS gets updated, I've found a much simpler and more reliable solution using the command-line tool `SwitchAudioSource`. This approach doesn't depend on UI scripting, so it's far less fragile and continues to work across macOS updates.
+
+### Installing SwitchAudioSource
+
+First, install the tool via Homebrew:
+
+```bash
+brew install switchaudio-osx
+```
+
+### The Toggle Script
+
+Here's a simple bash script that toggles between your MacBook speakers and AirPods:
+
+```bash
+#!/bin/bash
+
+# Script to toggle audio output between MacBook Pro speakers and JCHEN AirPods Pro
+# Requires SwitchAudioSource: brew install switchaudio-osx
+
+# Get current audio output device
+CURRENT_DEVICE=$(SwitchAudioSource -c)
+
+# Define device names based on your system
+MACBOOK_SPEAKERS="MacBook Pro Speakers"
+AIRPODS="JCHEN AirPods Pro"
+
+# Toggle between devices
+if [[ "$CURRENT_DEVICE" == "$MACBOOK_SPEAKERS" ]]; then
+  # Currently using MacBook speakers, switch to AirPods
+  SwitchAudioSource -s "$AIRPODS"
+  echo "Switched to JCHEN AirPods Pro"
+else
+  # Currently using something else, switch to MacBook speakers
+  SwitchAudioSource -s "$MACBOOK_SPEAKERS"
+  echo "Switched to MacBook Pro Speakers"
+fi
+```
+
+You'll need to customize the `MACBOOK_SPEAKERS` and `AIRPODS` variables to match your actual device names. To get a list of all available audio devices, run:
+
+```bash
+SwitchAudioSource -a
+```
+
+### Adding to Stream Deck
+
+For Stream Deck integration, create a "System: Run Command" action and point it to this script. Make sure to give the script executable permissions (`chmod +x toggle_audio.sh`).
+
+Unlike the AppleScript approach, this script:
+
+- Runs instantly without opening any UI
+- Works with AirPlay devices
+- Persists across macOS updates
+- Can be used outside Stream Deck (keyboard shortcuts, Alfred workflows, etc.)
+
+[See the complete script on GitHub](https://gist.github.com/0xjessel/4968b16dd93bb70d19abe06facafa43b)
+
+<hr style={{ marginBottom: "2rem" }} />
+
 At work, we have a VC Perfectionist group where enthusiasts share their over-the-top video conferencing setup for others to emulate and admire. I have, unfortunately, gone off the deep end and have decided to sink excessive time and money to making the best setup possible.
 
-One of the last nuisances with my VC setup is switching the audio output device between my AirPlay speakers and AirPods. In my case, I use my AirPods when I’m on VC and speakers otherwise. I find myself having to constantly go to the Sound settings to toggle between the two, and have decided it’s time to make this a one-button shortcut.
+One of the last nuisances with my VC setup is switching the audio output device between my AirPlay speakers and AirPods. In my case, I use my AirPods when I'm on VC and speakers otherwise. I find myself having to constantly go to the Sound settings to toggle between the two, and have decided it's time to make this a one-button shortcut.
 
 ### Setting up the AppleScript
 
@@ -67,9 +129,9 @@ end tell
 quit application "System Settings"
 ```
 
-Ventura broke a lot of existing AppleScripts on the Internet that do this, so there’s a bunch of outdated blog posts with code that no longer works. My hope with this post is to bring awareness to a working script you can use going forward (until Apple inevitably breaks it again). The only downside is that it opens the System Settings window briefly, it would be a lot cleaner if it could be done in the background.
+Ventura broke a lot of existing AppleScripts on the Internet that do this, so there's a bunch of outdated blog posts with code that no longer works. My hope with this post is to bring awareness to a working script you can use going forward (until Apple inevitably breaks it again). The only downside is that it opens the System Settings window briefly, it would be a lot cleaner if it could be done in the background.
 
-All credit goes to [u/Son_of_a_Shepherd](https://www.reddit.com/r/applescript/comments/118ivys/updateguide_macos_ventura_system_settings_with/) on reddit and [JayBrown](https://github.com/deweller/switchaudio-osx/issues/9#issuecomment-1496674289) on GitHub, who also cobbled their scripts from other online sources too 😅 we’re all just building barely functional code on top of each other.
+All credit goes to [u/Son_of_a_Shepherd](https://www.reddit.com/r/applescript/comments/118ivys/updateguide_macos_ventura_system_settings_with/) on reddit and [JayBrown](https://github.com/deweller/switchaudio-osx/issues/9#issuecomment-1496674289) on GitHub, who also cobbled their scripts from other online sources too 😅 we're all just building barely functional code on top of each other.
 
 ### Adding to Elgato Stream Deck+
 
