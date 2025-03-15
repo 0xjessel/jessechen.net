@@ -1,7 +1,7 @@
 const SEO_CONFIG_BASE = {
   defaultTitle: "Jesse Chen",
   titleTemplate: "%s | Jesse Chen",
-  description: "Engineering Director. Personal website of Jesse Chen.",
+  description: "Director, Product Management. Personal website of Jesse Chen.",
   twitter: {
     cardType: "summary_large_image",
     site: "@0xjessel",
