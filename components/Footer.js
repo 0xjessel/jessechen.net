@@ -55,7 +55,7 @@ export default function Footer() {
           borderRadius="full"
           padding="2"
           _hover={{ opacity: .7 }}
-          href="https://threads.net/0xjessel" 
+          href="https://www.threads.com/@0xjessel" 
           title="Threads"
           isExternal>
           <RiThreadsLine size="1.1em" />

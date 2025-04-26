@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { useAccentColor } from '../styles/colorModes'
 import dynamic from "next/dynamic";
+import { FaThreads, FaGithub } from 'react-icons/fa';
 
 const HeroImage = dynamic(
   () => {
@@ -30,7 +31,7 @@ export default function Index(props) {
         additionalLinkTags: [
           {
             rel: 'me',
-            href: 'https://www.threads.net/@0xjessel'
+            href: 'https://www.threads.com/@0xjessel'
           }
         ]
       }}>
