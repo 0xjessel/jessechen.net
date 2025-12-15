@@ -8,6 +8,7 @@ module.exports = {
       },
     ],
   },
+  turbopack: {},
   webpack: (config, { isServer }) => {
     if (isServer) {
       import('./scripts/generate-sitemap.mjs')
