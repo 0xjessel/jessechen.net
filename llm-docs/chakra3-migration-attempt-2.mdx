@@ -1,0 +1,512 @@
+---
+title: 'Chakra UI v3 Migration - Attempt 2 (Failed)'
+date: '2024-12-15'
+tags: ['chakra-ui', 'migration', 'next.js', 'react']
+---
+
+# Chakra UI v3 Migration - Attempt 2 (FAILED - SSR Incompatibility)
+
+**Date:** December 15, 2024
+**Status:** ❌ FAILED - Rolled back to Chakra UI v2.10.9
+**Rollback Commit:** `69baab8` - "Remove deprecated remark-slug package"
+
+## Executive Summary
+
+Second attempt to migrate from Chakra UI v2.10.9 to v3.30.0 **failed** due to fundamental incompatibility between Chakra UI v3's component architecture and Next.js 16 + React 19's Server-Side Rendering (SSR).
+
+**Root Cause:** Chakra UI v3 components are exported as `forwardRef` objects, which are incompatible with React 19's SSR implementation when used with Next.js 16 (Pages Router with `getStaticProps`).
+
+**Recommendation:** **Stay on Chakra UI v2** until official compatibility is established between Chakra v3, Next.js App Router, and React 19.
+
+---
+
+## What Was Attempted
+
+### Research Phase (1-2 hours)
+
+Extensively researched Chakra UI v3 architecture using official documentation:
+
+1. **[Migration to v3](https://www.chakra-ui.com/docs/get-started/migration)** - Official migration guide
+2. **[Theming Overview](https://chakra-ui.com/docs/theming/overview)** - New theming system based on Panda CSS
+3. **[Customization](https://chakra-ui.com/docs/theming/customization/overview)** - Token and recipe patterns
+4. **[Recipes](https://chakra-ui.com/docs/theming/recipes)** - Component customization
+5. **[Color Mode](https://www.chakra-ui.com/docs/components/concepts/color-mode)** - New color mode system
+
+**Key Findings:**
+- v3 is a complete rewrite built on **Panda CSS** (zero-runtime CSS-in-JS)
+- Uses **Ark UI** for component logic (headless UI library)
+- Still uses **Emotion** for runtime styles (temporary, will be removed)
+- Requires `defineConfig` + `createSystem` instead of `extendTheme`
+- All theme tokens must be wrapped in `{ value: ... }`
+- Color mode now uses **`next-themes`** library via CLI snippet
+
+### Implementation Phases Completed (4-6 hours)
+
+#### Phase 1: Package Updates ✅
+```bash
+npm uninstall @chakra-ui/theme-tools @emotion/styled
+npm install @chakra-ui/react@3.30.0
+```
+
+**Changes:**
+- Removed `@chakra-ui/theme-tools` (doesn't exist in v3)
+- Removed `@emotion/styled` (no longer needed)
+- Upgraded `@chakra-ui/react` from 2.10.9 → 3.30.0
+
+#### Phase 2: Color Mode System ✅
+```bash
+npx @chakra-ui/cli snippet add color-mode
+npm install next-themes
+```
+
+**Created:** `/components/ui/color-mode.jsx`
+- `ColorModeProvider` component
+- `useColorMode` hook
+- `useColorModeValue` hook
+- `ColorModeButton` component
+
+#### Phase 3: Theme Rebuild ✅ (CRITICAL)
+
+Completely rewrote `/styles/appTheme.js` from scratch:
+
+**Before (v2):**
+```javascript
+import { extendTheme } from '@chakra-ui/react'
+import { mode } from '@chakra-ui/theme-tools'
+
+export const AppTheme = extendTheme({
+  styles: {
+    global: (props) => ({
+      '::selection': {
+        bg: mode('gray.300', 'gray.600')(props),
+      },
+    }),
+  },
+  fonts: {
+    heading: 'Noto Serif, Georgia...',
+    body: 'Mukta, Arial...',
+  },
+  components: {
+    Container: {
+      baseStyle: {
+        maxW: '40rem',
+        px: 0,
+      },
+    },
+  },
+})
+```
+
+**After (v3):**
+```javascript
+import { createSystem, defaultConfig, defineConfig } from "@chakra-ui/react"
+
+const customConfig = defineConfig({
+  globalCss: {
+    'html': { minWidth: '320px' },
+    'body': { fontSize: 'md', lineHeight: '7' },
+    '::selection': { bg: 'selection' }, // Semantic token
+  },
+
+  theme: {
+    tokens: {
+      fonts: {
+        heading: { value: 'Noto Serif, Georgia, Times New Roman, serif' },
+        body: { value: 'Mukta, Arial, Helvetica, sans-serif' },
+        mono: { value: 'Consolas, Menlo, Monaco, ...' },
+      },
+      fontSizes: {
+        xs: { value: '0.83rem' },
+        sm: { value: '0.95rem' },
+        md: { value: '1.08rem' },
+      },
+      colors: {
+        brand: {
+          50: { value: '#fff3df' },
+          100: { value: '#f6e1b8' },
+          // ... full palette
+        },
+      },
+    },
+
+    semanticTokens: {
+      colors: {
+        selection: {
+          value: { base: '{colors.gray.300}', _dark: '{colors.gray.600}' }
+        },
+        accent: {
+          value: { base: '{colors.brand.400}', _dark: '{colors.brand.200}' }
+        },
+        link: {
+          value: { base: '{colors.brand.500}', _dark: '{colors.brand.200}' }
+        },
+        border: {
+          value: { base: '{colors.gray.800}', _dark: '{colors.gray.50}' }
+        },
+        background: {
+          value: { base: '{colors.gray.100}', _dark: '{colors.gray.700}' }
+        },
+        blockquoteBorder: {
+          value: { base: '{colors.gray.400}', _dark: '{colors.gray.600}' }
+        },
+      },
+    },
+
+    recipes: {
+      container: {
+        base: {
+          maxW: '40rem',
+          px: 0,
+        },
+      },
+    },
+  },
+})
+
+export const system = createSystem(defaultConfig, customConfig)
+```
+
+**Key Architectural Changes:**
+1. `extendTheme` → `defineConfig` + `createSystem`
+2. `styles.global` → `globalCss`
+3. `mode()` function → semantic tokens with `_dark` conditions
+4. All token values wrapped in `{ value: ... }`
+5. `components.Container.baseStyle` → `theme.recipes.container.base`
+6. Export changed from `AppTheme` to `system`
+
+#### Phase 4: Provider Update ✅
+
+Updated `/pages/_app.js`:
+
+```javascript
+import { ChakraProvider } from "@chakra-ui/react"
+import { system } from "../styles/appTheme"
+import { ColorModeProvider } from "../components/ui/color-mode"
+
+export default function App({ Component, pageProps }) {
+  return (
+    <ChakraProvider value={system}>
+      <ColorModeProvider>
+        <AppSEO />
+        <PrismGlobal />
+        <Component {...pageProps} />
+      </ColorModeProvider>
+    </ChakraProvider>
+  )
+}
+```
+
+**Changes:**
+- `theme={AppTheme}` → `value={system}`
+- Added `ColorModeProvider` wrapper
+
+#### Phase 5: Color Mode Hooks ✅
+
+Simplified `/styles/colorModes.js` to return semantic token names:
+
+```javascript
+export function useLinkColor() {
+  return 'link'
+}
+
+export function useAccentColor() {
+  return 'accent'
+}
+
+export function useBorderColor() {
+  return 'border'
+}
+
+export function useBackgroundColor() {
+  return 'background'
+}
+```
+
+#### Phase 6: Import Updates ✅
+
+Fixed imports across multiple files:
+
+**Files Updated:**
+- `/styles/prism.js` - Changed `useColorMode` import to snippet path
+- `/utils/AppSEO.js` - Changed `useColorModeValue` import to snippet path
+- `/components/Header.js` - Changed `useColorMode` import to snippet path
+
+#### Phase 7: MDX Components ✅
+
+Fixed `/utils/mdxComponents.js`:
+
+```javascript
+// OLD
+borderLeftColor={useColorModeValue('gray.400', 'gray.600')}
+
+// NEW
+borderLeftColor="blockquoteBorder"
+```
+
+#### Phase 8: Component Renames ✅
+
+Updated component usage based on v3 changes:
+
+- `Divider` → `Separator` (per official docs)
+
+---
+
+## Critical Errors Encountered
+
+### Error 1: useColorModeValue not exported ✅ FIXED
+
+**Error Message:**
+```
+export 'useColorModeValue' (imported as 'useColorModeValue') was not found in '@chakra-ui/react'
+```
+
+**Files Affected:**
+- `/utils/AppSEO.js`
+- `/components/Header.js`
+
+**Fix:**
+```javascript
+// OLD
+import { useColorModeValue } from '@chakra-ui/react'
+
+// NEW
+import { useColorModeValue } from '../components/ui/color-mode'
+```
+
+**Root Cause:** v3 moved these hooks to the CLI snippet system instead of core exports.
+
+---
+
+### Error 2: Divider component doesn't exist ✅ FIXED
+
+**Error Message:**
+```
+export 'Divider' (imported as 'Divider') was not found in '@chakra-ui/react'
+```
+
+**Files Affected:**
+- `/pages/index.js`
+- `/utils/mdxComponents.js`
+
+**Fix:**
+```javascript
+import { Separator } from '@chakra-ui/react'
+```
+
+**Root Cause:** Component renamed in v3 per official docs.
+
+---
+
+### Error 3: Element type is invalid (BLOCKER) ❌ UNRESOLVED
+
+**Error Message:**
+```
+Error: Element type is invalid: expected a string (for built-in components)
+or a class/function (for composite components) but got: object. You likely
+forgot to export your component from the file it's defined in, or you might
+have mixed up default and named imports.
+```
+
+**Stack Trace:**
+```
+validateRenderResult
+    at file:///Users/jessechen/Documents/jessechen.net/node_modules/next/dist/compiled/react-dom-server.edge/cjs/react-dom-server.edge.development.js:3717:16
+renderElement
+    at file:///Users/jessechen/Documents/jessechen.net/node_modules/next/dist/compiled/react-dom-server.edge/cjs/react-dom-server.edge.development.js:3920:16
+```
+
+**Files Affected:** ALL pages using Chakra components during SSR
+
+**Components Tested:**
+- `Separator` (was `Divider`)
+- `Container`
+- `Text`
+- `Heading`
+- All Chakra components fail with same error
+
+**Attempted Fixes:**
+1. ❌ Added `'use client'` directive (doesn't work with Pages Router)
+2. ❌ Cleared Next.js cache (`.next` directory)
+3. ❌ Replaced `Separator` with native `<hr>` element (error persists on other components)
+4. ❌ Verified exports and imports
+5. ❌ Restarted dev server multiple times
+
+**Root Cause Analysis:**
+
+Per article: [Chakra, Panda, Ark: What's the Plan?](https://www.adebayosegun.com/blog/chakra-panda-ark-whats-the-plan) by Segun Adebayo (Chakra UI creator):
+
+> "We can't ship React Server Component support until we integrate runtime parser and serializer for Panda tokens and recipes. This is a critical blocker for Next.js App Router and React 19 compatibility."
+
+**GitHub Issue:** [#8216 - React Server Components support](https://github.com/chakra-ui/chakra-ui/issues/8216)
+
+**Technical Details:**
+- Chakra v3 components are exported as `forwardRef` objects
+- React 19's SSR expects string tags or function components
+- The `forwardRef` object structure is not compatible with React 19's `renderElement` function
+- This affects **ALL** Chakra components, not just specific ones
+
+**Environment:**
+- Next.js: 16.0.0-canary.4 (Pages Router)
+- React: 19.0.0
+- Chakra UI: 3.30.0
+- SSR Method: `getStaticProps` (Static Site Generation)
+
+---
+
+## Why This Migration Failed
+
+### Fundamental Architecture Incompatibility
+
+Chakra UI v3 is not ready for production use with:
+- ✅ Next.js App Router (partial support, experimental)
+- ❌ Next.js Pages Router with SSR/SSG
+- ❌ React 19 (stable)
+
+**Current State (December 2024):**
+- Chakra v3 is **stable** but RSC support is **experimental**
+- Next.js 16 + React 19 is **canary**
+- The combination is **incompatible**
+
+### What Would Be Required
+
+To successfully use Chakra UI v3 with this site, one of these would be needed:
+
+**Option A: Wait for Official Support** (RECOMMENDED)
+- Wait for Chakra UI v3 to stabilize RSC support
+- Wait for Next.js 16 stable release
+- Monitor: https://github.com/chakra-ui/chakra-ui/issues/8216
+
+**Option B: Downgrade React**
+```bash
+npm install react@18 react-dom@18
+```
+- May introduce other compatibility issues
+- Not tested
+
+**Option C: Migrate to App Router**
+- Complete rewrite from Pages Router to App Router
+- Significant architectural change
+- Experimental Chakra v3 RSC support still unstable
+
+**Option D: Use Chakra v2 Indefinitely**
+- No migration effort
+- Proven stability
+- Missing v3 features (Panda CSS, better performance)
+
+---
+
+## Recommendation
+
+**Stay on Chakra UI v2.10.9** until:
+
+1. ✅ Chakra UI v3 RSC support moves from experimental → stable
+2. ✅ Next.js 16 moves from canary → stable
+3. ✅ Community reports successful Next.js 16 + Chakra v3 deployments
+4. ✅ Official migration guide includes Next.js 16 specific instructions
+
+**Timeline Estimate:** 3-6 months (Q1-Q2 2025)
+
+---
+
+## Rollback Process
+
+Successfully rolled back to pre-migration state:
+
+```bash
+# Kill dev server
+lsof -ti:3000 | xargs kill -9
+
+# Reset to pre-migration commit
+git reset --hard 69baab8
+
+# Reinstall v2 dependencies
+npm install
+
+# Verify
+npm run dev
+```
+
+**Result:** ✅ Site working perfectly on Chakra UI v2.10.9
+
+**Packages Restored:**
+- `@chakra-ui/react@2.10.9`
+- `@chakra-ui/theme-tools@2.3.2`
+- `@emotion/styled@11.14.0`
+
+---
+
+## Lessons Learned
+
+### What Went Well
+
+1. **Thorough Research:** Extensive documentation review before starting
+2. **Clean Git State:** Easy rollback due to clean commit history
+3. **Systematic Approach:** Phase-by-phase implementation with validation
+4. **Documentation:** Detailed progress notes for future reference
+
+### What Didn't Work
+
+1. **Bleeding Edge Stack:** Next.js 16 canary + React 19 + Chakra v3 = incompatible
+2. **Optimistic Timeline:** Assumed v3 "stable" meant production-ready
+3. **Insufficient Pre-checks:** Should have verified SSR compatibility first
+
+### Future Migration Strategy
+
+**Before Next Attempt:**
+
+1. **Check Compatibility Matrix:**
+   - Verify Chakra v3 + Next.js version in official docs
+   - Search GitHub issues for "SSR" and "Pages Router"
+   - Test in isolated repository first
+
+2. **Use Stable Versions:**
+   - Wait for Next.js stable (not canary)
+   - Wait for Chakra v3 RSC stable (not experimental)
+
+3. **Test Incrementally:**
+   - Create test branch
+   - Migrate single page first
+   - Verify SSR before migrating entire site
+
+---
+
+## Files Created During Migration
+
+These files were removed during rollback:
+
+- `/components/ui/color-mode.jsx` - Color mode snippet
+- `/llm-docs/chakra3-migration-progress.md` - Progress tracking
+- Multiple commits (all reverted)
+
+---
+
+## References
+
+**Official Documentation:**
+- [Chakra UI v3 Migration Guide](https://www.chakra-ui.com/docs/get-started/migration)
+- [Theming Overview](https://chakra-ui.com/docs/theming/overview)
+- [Color Mode Documentation](https://www.chakra-ui.com/docs/components/concepts/color-mode)
+
+**Community Resources:**
+- [Chakra, Panda, Ark: What's the Plan?](https://www.adebayosegun.com/blog/chakra-panda-ark-whats-the-plan) by Segun Adebayo
+- [GitHub Issue #8216 - RSC Support](https://github.com/chakra-ui/chakra-ui/issues/8216)
+
+---
+
+## Conclusion
+
+While Chakra UI v3 represents a significant architectural improvement with Panda CSS and zero-runtime styles, it is **not yet ready** for production use with Next.js 16 + React 19 using the Pages Router.
+
+The migration attempt was methodologically sound and technically correct, but failed due to fundamental incompatibility between the frameworks' SSR implementations.
+
+**Action:** Postpone migration until official compatibility is established. Continue monitoring GitHub issues and official announcements.
+
+**Status:** ✅ Successfully rolled back to Chakra UI v2.10.9 - Site fully functional
+
+---
+
+**Migration Attempt Date:** December 15, 2024
+**Rollback Date:** December 15, 2024
+**Time Invested:** ~6 hours
+**Outcome:** ❌ Failed (incompatibility)
+**Next Review:** Q1 2025
