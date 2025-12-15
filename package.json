@@ -37,8 +37,7 @@
     "reading-time": "^1.5.0",
     "rehype": "^13.0.2",
     "rehype-slug": "^6.0.0",
-    "remark-breaks": "^4.0.0",
-    "remark-slug": "^8.0.0"
+    "remark-breaks": "^4.0.0"
   },
   "license": "MIT",
   "devDependencies": {
